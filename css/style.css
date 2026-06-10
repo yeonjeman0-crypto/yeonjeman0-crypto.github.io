@@ -4411,3 +4411,265 @@ body.lang-en strong {
         padding-right: 0.9rem !important;
     }
 }
+
+/* ============================================================
+   v28 — Mobile layout hardening
+   ============================================================ */
+
+@media (max-width: 640px) {
+    :root {
+        --page-pad: clamp(0.95rem, 4vw, 1.15rem);
+        --nav-h: 68px;
+    }
+
+    .nav__inner {
+        gap: 0.55rem !important;
+        padding-inline: var(--page-pad) !important;
+    }
+
+    .nav__logo {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .nav__logo img {
+        height: 34px !important;
+        width: auto;
+        max-width: min(180px, calc(100vw - 150px));
+        object-fit: contain;
+    }
+
+    .nav__lang {
+        flex: 0 0 auto;
+        padding: 0.42rem 0.62rem !important;
+        gap: 0.28rem !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0.04em !important;
+        white-space: nowrap;
+    }
+
+    .nav__burger {
+        flex: 0 0 38px;
+        width: 38px !important;
+        height: 38px !important;
+        padding: 8px 7px !important;
+    }
+
+    .nav.is-open .nav__menu--tree {
+        max-height: calc(100dvh - var(--nav-h));
+        padding: 0.75rem var(--page-pad) 1rem !important;
+        background: #fff !important;
+        box-shadow: 0 18px 40px -24px rgba(6, 30, 38, 0.45);
+        gap: 0.55rem !important;
+        overflow-y: auto;
+    }
+
+    .nav.is-open .nav__item {
+        background: #f3f8f9;
+        border: 1px solid rgba(22, 123, 133, 0.08);
+        border-radius: 18px;
+        overflow: hidden;
+    }
+
+    .nav.is-open .nav__top {
+        min-height: 48px;
+        padding: 0.85rem 1rem !important;
+        background: transparent !important;
+    }
+
+    .nav.is-open .nav__dropdown {
+        background: #fff !important;
+        border-top: 1px solid rgba(22, 123, 133, 0.08);
+        padding: 0.7rem !important;
+    }
+
+    .hero__inner {
+        padding-inline: var(--page-pad) !important;
+        padding-top: calc(var(--nav-h) + 1.5rem) !important;
+        padding-bottom: 1.35rem !important;
+    }
+
+    .hero__eyebrow {
+        max-width: 100%;
+        padding: 0.5rem 0.9rem !important;
+        font-size: 0.72rem !important;
+        letter-spacing: 0.09em !important;
+        white-space: normal;
+    }
+
+    .hero__title {
+        font-size: clamp(2.05rem, 10vw, 3rem) !important;
+        line-height: 1.08 !important;
+    }
+
+    .hero__lead {
+        margin-bottom: 1.2rem !important;
+        padding: 0.9rem 1rem !important;
+        font-size: 0.94rem !important;
+    }
+
+    .hero__cta {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.7rem !important;
+        width: 100%;
+    }
+
+    .hero__cta .btn {
+        justify-content: center;
+        min-width: 0;
+        padding: 0.85rem 0.75rem !important;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .hero__dock {
+        margin-top: 1.45rem !important;
+    }
+
+    .hero__scroll {
+        display: none !important;
+    }
+
+    .back-top {
+        right: 0.85rem !important;
+        bottom: 0.85rem !important;
+        width: 42px !important;
+        height: 42px !important;
+        box-shadow: 0 10px 22px -10px rgba(255, 116, 56, 0.55);
+    }
+}
+
+@media (max-width: 370px) {
+    .nav__logo img {
+        height: 32px !important;
+        max-width: min(152px, calc(100vw - 142px));
+    }
+
+    .nav__lang {
+        padding: 0.36rem 0.5rem !important;
+        font-size: 0.68rem !important;
+    }
+
+    .hero__cta {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .fleet__table-wrap {
+        overflow-x: visible !important;
+        margin-top: 2.2rem !important;
+    }
+
+    .vessel-table {
+        display: block;
+        width: 100% !important;
+        min-width: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        overflow: visible !important;
+    }
+
+    .vessel-table thead {
+        display: none;
+    }
+
+    .vessel-table tbody {
+        display: grid;
+        gap: 0.85rem;
+    }
+
+    .vessel-table tr {
+        display: block;
+        padding: 0.95rem 1rem;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 16px 32px -24px rgba(6, 30, 38, 0.32);
+    }
+
+    .vessel-table tbody tr:nth-child(even) td,
+    .vessel-table tr:hover td {
+        background: transparent !important;
+    }
+
+    .vessel-table td {
+        display: flex;
+        width: 100% !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.48rem 0 !important;
+        border-bottom: 1px dashed rgba(15, 43, 67, 0.10);
+        text-align: right !important;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    .vessel-table td:last-child {
+        border-bottom: 0;
+    }
+
+    .vessel-table td::before {
+        flex: 0 0 auto;
+        color: var(--gray);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .vessel-table td:nth-child(1) {
+        display: block;
+        padding-bottom: 0.75rem !important;
+        border-bottom: 1px solid rgba(15, 43, 67, 0.10);
+        text-align: left !important;
+    }
+
+    .vessel-table td:nth-child(1)::before { display: none; }
+    .vessel-table td:nth-child(2)::before { content: '선주사'; }
+    .vessel-table td:nth-child(3)::before { content: '선종'; }
+    .vessel-table td:nth-child(4)::before { content: '국적'; }
+    .vessel-table td:nth-child(5)::before { content: 'DWT'; }
+    .vessel-table td:nth-child(6)::before { content: '건조'; }
+    .vessel-table td:nth-child(7)::before { content: '선급'; }
+
+    body.lang-en .vessel-table td:nth-child(2)::before { content: 'Owner'; }
+    body.lang-en .vessel-table td:nth-child(3)::before { content: 'Type'; }
+    body.lang-en .vessel-table td:nth-child(4)::before { content: 'Flag'; }
+    body.lang-en .vessel-table td:nth-child(6)::before { content: 'Built'; }
+    body.lang-en .vessel-table td:nth-child(7)::before { content: 'Class'; }
+
+    .vessel-table td:nth-child(1) strong {
+        display: block;
+        font-size: 1.05rem;
+        line-height: 1.35;
+    }
+
+    .vessel-table td:nth-child(2) {
+        color: var(--ink);
+        font-weight: 700;
+        word-break: keep-all;
+    }
+
+    .vessel-table td:nth-child(3) .type-badge {
+        margin: 0;
+    }
+
+    .vessel-table td:nth-child(4),
+    .vessel-table td:nth-child(5),
+    .vessel-table td:nth-child(6),
+    .vessel-table td:nth-child(7) {
+        font-size: 0.84rem;
+    }
+
+    .flag-cell {
+        justify-content: flex-end;
+        min-width: 0;
+    }
+}
