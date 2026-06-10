@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "2nd Officer",
+    "department": "deck",
+    "location": "Worldwide",
+    "description": "PCC/PCTC 경력 우대 항해사 채용",
+    "employment": "정규직",
+    "status": "open",
+    "posted_at": "2026-04-01"
+  },
+  {
+    "id": 2,
+    "title": "Chief Engineer",
+    "department": "engineer",
+    "location": "Worldwide",
+    "description": "벌크선 C/E 채용 (KR 면허)",
+    "employment": "정규직",
+    "status": "open",
+    "posted_at": "2026-04-01"
+  },
+  {
+    "id": 3,
+    "title": "Superintendent",
+    "department": "shore",
+    "location": "Seoul",
+    "description": "안전품질팀(SQT) 감독",
+    "employment": "정규직",
+    "status": "open",
+    "posted_at": "2026-04-01"
+  },
+  {
+    "id": 4,
+    "title": "Marine Technical Manager",
+    "department": "shore",
+    "location": "Seoul",
+    "description": "공무팀(MTT) 기술 관리",
+    "employment": "정규직",
+    "status": "open",
+    "posted_at": "2026-04-01"
+  }
+]

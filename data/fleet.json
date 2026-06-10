@@ -1,0 +1,80 @@
+{
+  "summary": {
+    "total": 12,
+    "bulk": 5,
+    "pctc": 7,
+    "ratioBulk": 42,
+    "ratioPctc": 58
+  },
+  "categories": [
+    {
+      "id": "bulk",
+      "name": { "ko": "벌크선 관리", "en": "Bulk Carrier Management" },
+      "image": "fleet/bulk_carrier.webp",
+      "description": {
+        "ko": "대형 Cape급 벌크선부터 Handy급 벌크선까지, 선종별 운항 특성과 화물 특성을 고려한 안정적인 선박관리 서비스를 제공합니다.",
+        "en": "From large Cape-class to Handy-class bulk carriers, we provide stable ship management services tailored to each vessel's operational and cargo characteristics."
+      },
+      "features": {
+        "ko": [
+          "선적·양하 작업 리스크 사전 검토",
+          "항만별 입출항 제한사항 및 운항 조건 검토",
+          "Cargo hold, Hatch cover, Ballast system 관리",
+          "선체 구조 및 화물 손상 예방",
+          "Port stay 최적화 및 운항 효율 관리",
+          "PSC, RightShip, Class inspection 대응"
+        ],
+        "en": [
+          "Pre-assessment of loading & discharging risks",
+          "Port-specific entry/exit and operational restriction reviews",
+          "Cargo hold, hatch cover & ballast system management",
+          "Hull structure & cargo damage prevention",
+          "Port stay optimization & operational efficiency",
+          "PSC, RightShip & Class inspection readiness"
+        ]
+      }
+    },
+    {
+      "id": "pctc",
+      "name": { "ko": "자동차운반선 관리", "en": "PCC / PCTC Management" },
+      "image": "fleet/car_carrier.webp",
+      "description": {
+        "ko": "자동차운반선의 화물 특성, 램프 운용, 고박 안전, 전기차 화재 리스크를 반영한 전문 관리체계를 운영합니다.",
+        "en": "We operate a specialized management system for car carriers, addressing cargo characteristics, ramp operation, lashing safety, and EV fire risks."
+      },
+      "features": {
+        "ko": [
+          "차량 및 중량화물 적재 안전관리",
+          "Electric Vehicle 화재 대응절차 관리",
+          "Rampway, Deck, Lashing point 손상 예방",
+          "특수화물 선적 전 Risk Assessment 지원",
+          "Deck height, Ramp SWL, Cargo flow 사전 검토",
+          "PSC, Flag, Class 및 Vetting 대응 선박관리"
+        ],
+        "en": [
+          "Vehicle & heavy cargo loading safety",
+          "Electric Vehicle fire response procedures",
+          "Rampway, deck & lashing point damage prevention",
+          "Pre-loading Risk Assessment for special cargo",
+          "Deck height, Ramp SWL & cargo flow pre-review",
+          "PSC, Flag, Class & Vetting compliance management"
+        ]
+      }
+    }
+  ],
+  "vessels": [
+    { "name": "AH SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 21503, "built": "1999-01", "class": "DNV" },
+    { "name": "GMT ASTRO", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 16101, "built": "1986-05", "class": "DNV" },
+    { "name": "HAE SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 17183, "built": "1993-09", "class": "DNV" },
+    { "name": "SANG SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 16178, "built": "1994-03", "class": "DNV" },
+    { "name": "SOO SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 13680, "built": "1998-12", "class": "DNV" },
+    { "name": "YOUNG SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 14274, "built": "1992-03", "class": "NK" },
+    { "name": "G POSEIDON", "owner": "GMT", "type": "PCTC", "flag": "PANAMA", "dwt": 28365, "built": "2010-06", "class": "DNV" },
+    { "name": "SJ BUSAN", "owner": "SAMJOO MARITIME", "type": "BULK", "flag": "KOREA", "dwt": 55940, "built": "2010-02", "class": "KR" },
+    { "name": "SJ COLOMBO", "owner": "SAMJOO MARITIME", "type": "BULK", "flag": "KOREA", "dwt": 55989, "built": "2010-02", "class": "KR" },
+    { "name": "SJ ASIA", "owner": "SAMJOO MARITIME", "type": "BULK", "flag": "KOREA", "dwt": 174674, "built": "2005-07", "class": "KR" },
+    { "name": "DAEBO GLADSTONE", "owner": "DAEBO L&S", "type": "BULK", "flag": "PANAMA", "dwt": 81399, "built": "2013-01", "class": "KR" },
+    { "name": "BT TREVIA", "owner": "DAEBO L&S", "type": "BULK", "flag": "PANAMA", "dwt": 63582, "built": "2016-11", "class": "KR" }
+  ],
+  "owners": ["SAMJOO MARITIME", "DAEBO L&S", "GMT"]
+}

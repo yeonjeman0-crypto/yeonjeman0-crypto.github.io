@@ -1,0 +1,7 @@
+[
+  { "code": "DOC-DNV", "name": "DOC (DNV)", "labelKo": "ISM Code 적합증서 — DNV 발행", "labelEn": "Document of Compliance — issued by DNV", "icon": "file-shield", "category": "doc" },
+  { "code": "DOC-KR",  "name": "DOC (KR)",  "labelKo": "ISM Code 적합증서 — KR 발행",  "labelEn": "Document of Compliance — issued by KR",  "icon": "file-shield", "category": "doc" },
+  { "code": "ISO9001",  "name": "ISO 9001:2015",  "labelKo": "품질경영시스템",       "labelEn": "Quality Management System",     "icon": "award",     "category": "iso" },
+  { "code": "ISO14001", "name": "ISO 14001:2015", "labelKo": "환경경영시스템",       "labelEn": "Environmental Management System", "icon": "leaf",      "category": "iso" },
+  { "code": "ISO45001", "name": "ISO 45001:2018", "labelKo": "안전보건경영시스템", "labelEn": "Occupational Health & Safety",   "icon": "hard-hat",  "category": "iso" }
+]

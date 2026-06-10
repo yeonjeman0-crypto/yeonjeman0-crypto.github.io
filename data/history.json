@@ -1,0 +1,75 @@
+[
+  {
+    "year": "2026.04",
+    "title": { "ko": "SAMJOO MARITIME 자회사 편입", "en": "Incorporated as Subsidiary of SAMJOO MARITIME" },
+    "desc": {
+      "ko": "2026년 4월 15일부로 SAMJOO SM CO., LTD. 및 DORIKO LIMITED가 SAMJOO MARITIME의 자회사로 편입",
+      "en": "Effective April 15, 2026, SAMJOO SM CO., LTD. and DORIKO LIMITED incorporated as subsidiaries of SAMJOO MARITIME"
+    },
+    "highlight": true
+  },
+  {
+    "year": "2023-2024",
+    "title": { "ko": "ESG 경영 체계 완성", "en": "ESG Management Framework Established" },
+    "desc": {
+      "ko": "ESG 프레임워크 구축 완료, PSC 검사 맞춤형 프로그램 개발, 선종별 특화 안전교육 시행",
+      "en": "Completed ESG framework, developed PSC tailored programs, implemented vessel-specific safety training"
+    }
+  },
+  {
+    "year": "2020-2021",
+    "title": { "ko": "혁신 기술 도입 및 사업 확장", "en": "Technology Innovation & Business Expansion" },
+    "desc": {
+      "ko": "로봇 선체 청소 시스템(HULLWIPER) 도입, 중고 벌크선 및 PCTC 관리 서비스 확대",
+      "en": "Introduced HULLWIPER robotic hull cleaning system, expanded second-hand bulker and PCTC management services"
+    }
+  },
+  {
+    "year": "2015",
+    "title": { "ko": "자체 선박관리 소프트웨어 개발", "en": "Proprietary Ship Management Software Developed" },
+    "desc": {
+      "ko": "독자적 선박관리 소프트웨어 'VAS' 개발 및 시스템화 완료",
+      "en": "Completed development and systematization of proprietary ship management software 'VAS'"
+    }
+  },
+  {
+    "year": "2009",
+    "title": { "ko": "대규모 신조선 프로젝트 수행", "en": "Large-scale Newbuilding Project" },
+    "desc": {
+      "ko": "13,000 DWT급 케미컬 탱커 8척 신조 감리 및 인수 관리",
+      "en": "Supervised construction and delivery of eight 13,000 DWT chemical tankers"
+    }
+  },
+  {
+    "year": "2005-2008",
+    "title": { "ko": "선박 복구 및 운항 관리", "en": "Vessel Recovery Operations" },
+    "desc": {
+      "ko": "화재·침수 피해 선박의 성공적인 복구 및 운항 관리 수행",
+      "en": "Successfully restored and managed fire/flood damaged vessels"
+    }
+  },
+  {
+    "year": "2004",
+    "title": { "ko": "선박 개조 프로젝트", "en": "Vessel Conversion Projects" },
+    "desc": {
+      "ko": "PCC 및 벌크선의 시멘트 운반선 특수 개조 작업 성공적 수행",
+      "en": "Successfully converted PCCs and bulkers into specialized cement carriers"
+    }
+  },
+  {
+    "year": "2002",
+    "title": { "ko": "전문 경력의 시작", "en": "Beginning of Expertise" },
+    "desc": {
+      "ko": "케미컬 탱커 신조선 감독 프로젝트를 통한 선박관리 전문성 구축",
+      "en": "Established ship management expertise through chemical tanker newbuilding supervision"
+    }
+  },
+  {
+    "year": "2000",
+    "title": { "ko": "선박관리 전문 역량 구축", "en": "Foundation of Ship Management Expertise" },
+    "desc": {
+      "ko": "선박관리 전문 기업으로 출범, 해운업계 전문 서비스 기반 구축",
+      "en": "Launched as a specialized ship management company"
+    }
+  }
+]
