@@ -199,7 +199,7 @@ window.SAMJOO_DATA = {
     "vessels": [
       {
         "name": "AH SHIN",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "PCC",
         "flag": "PANAMA",
         "dwt": 21503,
@@ -208,7 +208,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "GMT ASTRO",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "PCC",
         "flag": "PANAMA",
         "dwt": 16101,
@@ -217,7 +217,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "HAE SHIN",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "PCC",
         "flag": "PANAMA",
         "dwt": 17183,
@@ -226,7 +226,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "SANG SHIN",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "PCC",
         "flag": "PANAMA",
         "dwt": 16178,
@@ -235,7 +235,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "SOO SHIN",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "PCC",
         "flag": "PANAMA",
         "dwt": 13680,
@@ -244,7 +244,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "YOUNG SHIN",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "PCC",
         "flag": "PANAMA",
         "dwt": 14274,
@@ -262,7 +262,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "SJ BUSAN",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "BULK",
         "flag": "KOREA",
         "dwt": 55940,
@@ -271,7 +271,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "SJ COLOMBO",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "BULK",
         "flag": "KOREA",
         "dwt": 55989,
@@ -280,7 +280,7 @@ window.SAMJOO_DATA = {
       },
       {
         "name": "SJ ASIA",
-        "owner": "SAMJOO MARITIME",
+        "owner": "SAMJOO",
         "type": "BULK",
         "flag": "KOREA",
         "dwt": 174674,
@@ -307,7 +307,7 @@ window.SAMJOO_DATA = {
       }
     ],
     "owners": [
-      "SAMJOO MARITIME",
+      "SAMJOO",
       "DAEBO L&S",
       "GMT"
     ]

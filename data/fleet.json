@@ -63,18 +63,18 @@
     }
   ],
   "vessels": [
-    { "name": "AH SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 21503, "built": "1999-01", "class": "DNV" },
-    { "name": "GMT ASTRO", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 16101, "built": "1986-05", "class": "DNV" },
-    { "name": "HAE SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 17183, "built": "1993-09", "class": "DNV" },
-    { "name": "SANG SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 16178, "built": "1994-03", "class": "DNV" },
-    { "name": "SOO SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 13680, "built": "1998-12", "class": "DNV" },
-    { "name": "YOUNG SHIN", "owner": "SAMJOO MARITIME", "type": "PCC", "flag": "PANAMA", "dwt": 14274, "built": "1992-03", "class": "NK" },
+    { "name": "AH SHIN", "owner": "SAMJOO", "type": "PCC", "flag": "PANAMA", "dwt": 21503, "built": "1999-01", "class": "DNV" },
+    { "name": "GMT ASTRO", "owner": "SAMJOO", "type": "PCC", "flag": "PANAMA", "dwt": 16101, "built": "1986-05", "class": "DNV" },
+    { "name": "HAE SHIN", "owner": "SAMJOO", "type": "PCC", "flag": "PANAMA", "dwt": 17183, "built": "1993-09", "class": "DNV" },
+    { "name": "SANG SHIN", "owner": "SAMJOO", "type": "PCC", "flag": "PANAMA", "dwt": 16178, "built": "1994-03", "class": "DNV" },
+    { "name": "SOO SHIN", "owner": "SAMJOO", "type": "PCC", "flag": "PANAMA", "dwt": 13680, "built": "1998-12", "class": "DNV" },
+    { "name": "YOUNG SHIN", "owner": "SAMJOO", "type": "PCC", "flag": "PANAMA", "dwt": 14274, "built": "1992-03", "class": "NK" },
     { "name": "G POSEIDON", "owner": "GMT", "type": "PCTC", "flag": "PANAMA", "dwt": 28365, "built": "2010-06", "class": "DNV" },
-    { "name": "SJ BUSAN", "owner": "SAMJOO MARITIME", "type": "BULK", "flag": "KOREA", "dwt": 55940, "built": "2010-02", "class": "KR" },
-    { "name": "SJ COLOMBO", "owner": "SAMJOO MARITIME", "type": "BULK", "flag": "KOREA", "dwt": 55989, "built": "2010-02", "class": "KR" },
-    { "name": "SJ ASIA", "owner": "SAMJOO MARITIME", "type": "BULK", "flag": "KOREA", "dwt": 174674, "built": "2005-07", "class": "KR" },
+    { "name": "SJ BUSAN", "owner": "SAMJOO", "type": "BULK", "flag": "KOREA", "dwt": 55940, "built": "2010-02", "class": "KR" },
+    { "name": "SJ COLOMBO", "owner": "SAMJOO", "type": "BULK", "flag": "KOREA", "dwt": 55989, "built": "2010-02", "class": "KR" },
+    { "name": "SJ ASIA", "owner": "SAMJOO", "type": "BULK", "flag": "KOREA", "dwt": 174674, "built": "2005-07", "class": "KR" },
     { "name": "DAEBO GLADSTONE", "owner": "DAEBO L&S", "type": "BULK", "flag": "PANAMA", "dwt": 81399, "built": "2013-01", "class": "KR" },
     { "name": "BT TREVIA", "owner": "DAEBO L&S", "type": "BULK", "flag": "PANAMA", "dwt": 63582, "built": "2016-11", "class": "KR" }
   ],
-  "owners": ["SAMJOO MARITIME", "DAEBO L&S", "GMT"]
+  "owners": ["SAMJOO", "DAEBO L&S", "GMT"]
 }
