@@ -450,7 +450,7 @@ function setupReveal() {
     targets.forEach(t => io.observe(t));
 }
 
-// Count-up for numeric stats (.kpi__num, .stats-dark__num, .gnet__stats strong)
+// Count-up for numeric stats (.kpi__num, .stats-dark__num, .fleet__sum-card strong)
 function setupCountUp() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const parse = (txt) => {
@@ -474,7 +474,7 @@ function setupCountUp() {
     const io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
     }, { threshold: 0.4 });
-    document.querySelectorAll('.kpi__num, .stats-dark__num, .gnet__stats strong, .fleet__sum-card strong').forEach(el => io.observe(el));
+    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong').forEach(el => io.observe(el));
 }
 
 async function init() {
