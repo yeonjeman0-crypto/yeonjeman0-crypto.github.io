@@ -58,9 +58,10 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/redesign.css">
     <style>
         /* 인라인 로딩 — 외부 CSS 의존 없음 */
         #loading { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg,#0F2B43,#0D5965,#167B85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity .5s ease, visibility .5s ease; }
@@ -442,20 +443,25 @@
             <div class="fleet__cats" id="fleetCats"></div>
             <div class="fleet__table-wrap">
                 <h3 data-i18n="fleet.list">관리 선박 목록</h3>
-                <table class="vessel-table">
-                    <thead>
-                        <tr>
-                            <th data-i18n="v.name">선박명</th>
-                            <th data-i18n="v.owner">선주사</th>
-                            <th data-i18n="v.type">선종</th>
-                            <th data-i18n="v.flag">국적</th>
-                            <th data-i18n="v.dwt">DWT</th>
-                            <th data-i18n="v.built">건조년월</th>
-                            <th data-i18n="v.class">선급</th>
-                        </tr>
-                    </thead>
-                    <tbody id="vesselBody"></tbody>
-                </table>
+                <div class="vfleet" id="vesselBody"></div>
+            </div>
+
+            <!-- Newbuilding -->
+            <div class="nbuild" id="newbuilding">
+                <div class="nbuild__media" style="background-image:url('images/fleet/bulk_newbuilding_crane.png')" aria-hidden="true">
+                    <span class="nbuild__badge"><span class="nbuild__dot"></span>NEWBUILDING</span>
+                </div>
+                <div class="nbuild__body">
+                    <span class="nbuild__eyebrow">— Fleet Expansion</span>
+                    <h3 class="nbuild__title">신조 벌크선 3척 건조 진행 중</h3>
+                    <p class="nbuild__desc">현재 신조 벌크선 3척의 건조를 진행하고 있습니다. 건조 초기 단계부터 감리와 기술관리를 직접 수행하여, 인도 즉시 안전관리와 운항관리 체계를 갖춘 선박으로 선대에 편입될 수 있도록 준비하고 있습니다.</p>
+                    <div class="nbuild__specs">
+                        <div><span>선종</span><strong>BULK CARRIER</strong></div>
+                        <div><span>척수</span><strong>3척</strong></div>
+                        <div><span>관리</span><strong>신조 감리 수행</strong></div>
+                        <div><span>인도 예정</span><strong>2026년</strong></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Owners -->
@@ -463,6 +469,37 @@
                 <h3 data-i18n="owners.title">선주사</h3>
                 <p data-i18n="owners.lead">다양한 선주사와 함께 우수한 선박 관리 서비스를 제공합니다.</p>
                 <div class="owners__grid" id="ownersGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLEET IN OPERATION -->
+    <section class="section gnet" id="network">
+        <div class="container">
+            <div class="section__head">
+                <span class="eyebrow">— Fleet</span>
+                <h2>운항 현황</h2>
+                <p class="lead">현재 벌크선과 자동차운반선 12척을 안전·기술·품질 기준에 따라 관리하고 있습니다.</p>
+            </div>
+            <div class="gnet__panel">
+                <div class="gnet__sea" aria-hidden="true">
+                    <i class="fas fa-ship gnet__ship"></i>
+                    <i class="fas fa-ship gnet__ship"></i>
+                    <i class="fas fa-ship gnet__ship"></i>
+                    <i class="fas fa-ship gnet__ship"></i>
+                    <i class="fas fa-ship gnet__ship"></i>
+                    <i class="fas fa-ship gnet__ship"></i>
+                    <div class="gnet__waves">
+                        <div class="gnet__wave gnet__wave--back"></div>
+                        <div class="gnet__wave gnet__wave--front"></div>
+                    </div>
+                </div>
+                <div class="gnet__stats">
+                    <div><strong>12</strong><span>관리 선박</span></div>
+                    <div><strong>5</strong><span>벌크선</span></div>
+                    <div><strong>7</strong><span>자동차운반선</span></div>
+                    <div><strong class="gnet__no-count">DNV·KR·NK</strong><span>선급</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -475,6 +512,16 @@
                 <h2 data-i18n="services.title">주요 서비스</h2>
             </div>
             <div class="services" id="servicesGrid"></div>
+        </div>
+    </section>
+
+    <!-- STATEMENT (full-bleed) -->
+    <section class="bleed" id="statement" style="background-image:url('images/hero/hero_custom_03.webp')">
+        <div class="bleed__veil"></div>
+        <div class="container bleed__inner">
+            <span class="bleed__eyebrow">— Our Commitment</span>
+            <p class="bleed__quote">선박의 안전과 운항 신뢰성은<br>타협할 수 없는 우리의 약속입니다.</p>
+            <p class="bleed__by">SAMJOO SM CO., LTD. / DORIKO LIMITED</p>
         </div>
     </section>
 

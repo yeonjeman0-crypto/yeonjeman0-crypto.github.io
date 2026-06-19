@@ -121,26 +121,27 @@ function renderFleet() {
         return code ? `<img src="https://flagcdn.com/24x18/${code}.png" srcset="https://flagcdn.com/48x36/${code}.png 2x" alt="${f}" class="flag-icon">` : '';
     };
     document.getElementById('vesselBody').innerHTML = state.fleet.vessels.map(v => `
-        <tr>
-            <td><strong>${v.name}</strong></td>
-            <td>${v.owner}</td>
-            <td><span class="type-badge ${v.type}">${v.type}</span></td>
-            <td><span class="flag-cell">${flagImg(v.flag)}<span>${v.flag}</span></span></td>
-            <td>${v.dwt.toLocaleString()}</td>
-            <td>${v.built}</td>
-            <td>${v.class}</td>
-        </tr>
+        <article class="vcard vcard--${v.type.toLowerCase()}" tabindex="0">
+            <div class="vcard__top">
+                <span class="type-badge ${v.type}">${v.type}</span>
+                <span class="flag-cell">${flagImg(v.flag)}<span>${v.flag}</span></span>
+            </div>
+            <h4 class="vcard__name">${v.name}</h4>
+            <div class="vcard__owner">${v.owner}</div>
+            <div class="vcard__specs">
+                <div><span>DWT</span><strong>${v.dwt.toLocaleString()}</strong></div>
+                <div><span>${state.lang === 'ko' ? '건조' : 'Built'}</span><strong>${v.built}</strong></div>
+                <div><span>${state.lang === 'ko' ? '선급' : 'Class'}</span><strong>${v.class}</strong></div>
+            </div>
+        </article>
     `).join('');
 
-    // Owners
+    // Owners — continuous marquee (track duplicated for seamless loop)
     const ownersEl = document.getElementById('ownersGrid');
     if (ownersEl && state.fleet.owners) {
-        ownersEl.innerHTML = state.fleet.owners.map(o => `
-            <div class="owner">
-                <div class="owner__icon"><i class="fas fa-ship"></i></div>
-                <h4>${o}</h4>
-            </div>
-        `).join('');
+        const chip = o => `<div class="omarquee__item"><i class="fas fa-ship"></i><span>${o}</span></div>`;
+        const row = state.fleet.owners.concat(state.fleet.owners).map(chip).join('');
+        ownersEl.innerHTML = `<div class="omarquee"><div class="omarquee__track">${row}</div></div>`;
     }
 }
 
@@ -165,38 +166,41 @@ function renderServices() {
 function renderOrg() {
     if (!state.org) return;
     const root = document.getElementById('orgChart');
-    // h4 (eyebrow) — 항상 영문 고정 (디자인: 작은 대문자 태그)
-    const divLabelEn = { smd: 'Ship Management', bsd: 'Business Support' };
-    // 팀 박스의 부서 태그 — 현재 언어로
-    const divLabel = {
-        smd: { ko: '선박관리본부', en: 'Ship Mgmt' },
-        bsd: { ko: '경영지원실',   en: 'Biz Support' }
-    };
+    const divLabelEn = { smd: 'Ship Management Division', bsd: 'Business Support Department' };
+    const teamWord = state.lang === 'ko' ? '팀' : 'teams';
+
+    const divLis = state.org.divisions.map(d => {
+        const teams = state.org.teams.filter(t => t.division === d.id);
+        const teamLis = teams.map(t => `
+                        <li>
+                            <div class="tnode tnode--team">
+                                <span class="tnode__code">${t.id}</span>
+                                <span class="tnode__name">${L(t.name)}</span>
+                                <span class="tnode__loc"><i class="fas fa-location-dot"></i>${L(t.location)}</span>
+                            </div>
+                        </li>`).join('');
+        return `
+                <li>
+                    <div class="tnode tnode--div tnode--div-${d.id}">
+                        <span class="tnode__tag">${divLabelEn[d.id]}</span>
+                        <span class="tnode__name">${L(d.name)}</span>
+                        <span class="tnode__meta">${teams.length} ${teamWord}</span>
+                    </div>
+                    <ul>${teamLis}</ul>
+                </li>`;
+    }).join('');
 
     root.innerHTML = `
-        <div class="org__row org__row--ceo">
-            <div class="org__box org__box--ceo">
-                <h4>Chief Executive Officer</h4>
-                <p>${L(state.org.ceo.title)}</p>
-            </div>
-        </div>
-        <div class="org__row org__row--divisions">
-            ${state.org.divisions.map(d => `
-                <div class="org__box org__box--division">
-                    <h4>${divLabelEn[d.id]}</h4>
-                    <p>${L(d.name)}</p>
-                </div>
-            `).join('')}
-        </div>
-        <div class="org__row org__row--teams">
-            ${state.org.teams.map(t => `
-                <div class="org__box org__box--team">
-                    <span class="org__division-tag">${L(divLabel[t.division])}</span>
-                    <span class="org__code">${t.id}</span>
-                    <p>${L(t.name)}</p>
-                    <span class="org__loc">${L(t.location)}</span>
-                </div>
-            `).join('')}
+        <div class="orgtree">
+            <ul>
+                <li>
+                    <div class="tnode tnode--ceo">
+                        <span class="tnode__tag">Chief Executive Officer</span>
+                        <span class="tnode__name">${L(state.org.ceo.title)}</span>
+                    </div>
+                    <ul>${divLis}</ul>
+                </li>
+            </ul>
         </div>
     `;
 }
@@ -210,16 +214,20 @@ function renderHistory() {
         .replace(/SAMJOO SM(?!\w)/g,    '<span class="nowrap">SAMJOO SM</span>')
         .replace(/DORIKO LIMITED/g,     '<span class="nowrap">DORIKO LIMITED</span>')
         .replace(/DORIKO LTD\.?/g,      '<span class="nowrap">DORIKO LTD.</span>');
-    document.getElementById('timeline').innerHTML = state.history.map(h => `
-        <div class="timeline__item ${h.highlight ? 'is-highlight' : ''}">
-            <div class="timeline__year">${h.year}</div>
-            <div class="timeline__content">
-                ${h.highlight ? '<span class="timeline__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
-                <h3>${protectBrand(L(h.title))}</h3>
-                <p>${protectBrand(L(h.desc))}</p>
+    const items = state.history.map(h => `
+        <li class="tl__item ${h.highlight ? 'is-highlight' : ''}">
+            <span class="tl__dot"></span>
+            <div class="tl__card">
+                <div class="tl__head">
+                    <span class="tl__year">${h.year}</span>
+                    ${h.highlight ? '<span class="tl__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
+                </div>
+                <h3 class="tl__title">${protectBrand(L(h.title))}</h3>
+                <p class="tl__desc">${protectBrand(L(h.desc))}</p>
             </div>
-        </div>
+        </li>
     `).join('');
+    document.getElementById('timeline').innerHTML = `<ol class="tl">${items}</ol>`;
 }
 
 function renderCerts() {
@@ -442,6 +450,33 @@ function setupReveal() {
     targets.forEach(t => io.observe(t));
 }
 
+// Count-up for numeric stats (.kpi__num, .stats-dark__num, .gnet__stats strong)
+function setupCountUp() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const parse = (txt) => {
+        const m = String(txt).match(/^(\D*)(\d+)(\D*)$/); // single integer with optional prefix/suffix
+        return m ? { pre: m[1], num: parseInt(m[2], 10), suf: m[3], digits: m[2].length } : null;
+    };
+    const run = (el) => {
+        const parts = parse(el.textContent);
+        if (!parts || el.dataset.counted) return;
+        el.dataset.counted = '1';
+        const dur = 1100, t0 = performance.now();
+        const tick = (now) => {
+            const p = Math.min(1, (now - t0) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const val = Math.round(parts.num * eased);
+            el.textContent = parts.pre + val + parts.suf;
+            if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.kpi__num, .stats-dark__num, .gnet__stats strong, .fleet__sum-card strong').forEach(el => io.observe(el));
+}
+
 async function init() {
     // 페이지 진입 시 항상 최상단으로 (브라우저의 스크롤 복원 + 해시 점프 차단)
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -475,6 +510,7 @@ async function init() {
     setLanguage(savedLang);
     setupMailpick();
     setupReveal();
+    setupCountUp();
     hideLoading();
     // 데이터 렌더 + 로딩 오버레이 종료 후에도 한 번 더 최상단 강제 (이미지/폰트 reflow 대응)
     requestAnimationFrame(() => window.scrollTo(0, 0));

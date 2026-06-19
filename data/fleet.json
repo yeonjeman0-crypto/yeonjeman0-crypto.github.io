@@ -10,7 +10,7 @@
     {
       "id": "bulk",
       "name": { "ko": "벌크선 관리", "en": "Bulk Carrier Management" },
-      "image": "fleet/bulk_carrier.webp",
+      "image": "fleet/bulk_capesize.png",
       "description": {
         "ko": "대형 Cape급 벌크선부터 Handy급 벌크선까지, 선종별 운항 특성과 화물 특성을 고려한 안정적인 선박관리 서비스를 제공합니다.",
         "en": "From large Cape-class to Handy-class bulk carriers, we provide stable ship management services tailored to each vessel's operational and cargo characteristics."
@@ -37,7 +37,7 @@
     {
       "id": "pctc",
       "name": { "ko": "자동차운반선 관리", "en": "PCC / PCTC Management" },
-      "image": "fleet/car_carrier.webp",
+      "image": "fleet/car_carrier_green.png",
       "description": {
         "ko": "자동차운반선의 화물 특성, 램프 운용, 고박 안전, 전기차 화재 리스크를 반영한 전문 관리체계를 운영합니다.",
         "en": "We operate a specialized management system for car carriers, addressing cargo characteristics, ramp operation, lashing safety, and EV fire risks."
@@ -64,15 +64,15 @@
   ],
   "vessels": [
     { "name": "AH SHIN", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 21503, "built": "1999-01", "class": "DNV" },
-    { "name": "GMT ASTRO", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 16101, "built": "1986-05", "class": "DNV" },
     { "name": "HAE SHIN", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 17183, "built": "1993-09", "class": "DNV" },
     { "name": "SANG SHIN", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 16178, "built": "1994-03", "class": "DNV" },
     { "name": "SOO SHIN", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 13680, "built": "1998-12", "class": "DNV" },
     { "name": "YOUNG SHIN", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 14274, "built": "1992-03", "class": "NK" },
+    { "name": "GMT ASTRO", "owner": "SAMJOO MARITIME CO., LTD.", "type": "PCC", "flag": "PANAMA", "dwt": 16101, "built": "1986-05", "class": "DNV" },
     { "name": "G POSEIDON", "owner": "GMT", "type": "PCTC", "flag": "PANAMA", "dwt": 28365, "built": "2010-06", "class": "DNV" },
+    { "name": "SJ ASIA", "owner": "SAMJOO MARITIME CO., LTD.", "type": "BULK", "flag": "KOREA", "dwt": 174674, "built": "2005-07", "class": "KR" },
     { "name": "SJ BUSAN", "owner": "SAMJOO MARINE CO., LTD.", "type": "BULK", "flag": "KOREA", "dwt": 55940, "built": "2010-02", "class": "KR" },
     { "name": "SJ COLOMBO", "owner": "SAMJOO MARITIME CO., LTD.", "type": "BULK", "flag": "KOREA", "dwt": 55989, "built": "2010-02", "class": "KR" },
-    { "name": "SJ ASIA", "owner": "SAMJOO MARITIME CO., LTD.", "type": "BULK", "flag": "KOREA", "dwt": 174674, "built": "2005-07", "class": "KR" },
     { "name": "DAEBO GLADSTONE", "owner": "DAEBO L&S", "type": "BULK", "flag": "PANAMA", "dwt": 81399, "built": "2013-01", "class": "KR" },
     { "name": "BT TREVIA", "owner": "DAEBO L&S", "type": "BULK", "flag": "PANAMA", "dwt": 63582, "built": "2016-11", "class": "KR" }
   ],
