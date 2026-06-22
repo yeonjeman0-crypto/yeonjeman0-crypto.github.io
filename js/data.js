@@ -98,6 +98,7 @@ window.SAMJOO_DATA = {
           "ko": "서울특별시 중구 서소문로 89, 순화빌딩 9층",
           "en": "Soonhwa Bldg. 9F, 89 Seosomun-ro, Jung-gu, Seoul, Korea"
         },
+        "mapQuery": "서울 중구 서소문로 89 순화빌딩",
         "tel": "+82-2-2021-7400",
         "fax": "+82-2-757-5642",
         "emails": ["samjoosm@samjoosm.com", "smt@doriko.com"],
@@ -121,6 +122,7 @@ window.SAMJOO_DATA = {
           "en": "DK Building 6F, 6-12 Jungang-daero 180beon-gil, Dong-gu, Busan"
         },
         "moveDate": "2026-06-29",
+        "mapQuery": "부산 중구 중앙대로 102 팬오션빌딩",
         "tel": "+82-51-441-8911",
         "fax": "+82-51-441-8912",
         "emails": ["samjoosm@samjoosm.com", "smt@doriko.com"],

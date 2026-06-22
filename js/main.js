@@ -317,7 +317,7 @@ function renderDirections() {
         } else {
             addrHtml = `<p class="direction__addr"><i class="fas fa-map-marker-alt"></i>${addr}</p>`;
         }
-        const q = encodeURIComponent(addr);
+        const q = encodeURIComponent(o.mapQuery || addr);
         const embed = `https://www.google.com/maps?q=${q}&hl=${state.lang}&z=17&output=embed`;
         const link  = `https://www.google.com/maps/search/?api=1&query=${q}`;
         const emails = o.emails || (o.email ? [o.email] : []);
