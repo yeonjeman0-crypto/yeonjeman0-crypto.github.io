@@ -60,15 +60,20 @@ function bindStaticData() {
 function renderKPI() {
     if (!state.company?.kpi) return;
     const icons = ['fa-ship', 'fa-layer-group', 'fa-shield-alt', 'fa-certificate', 'fa-anchor'];
-    const html = state.company.kpi.map((k, i) => `
+    const html = state.company.kpi.map((k, i) => {
+        const num = /^\d+$/.test(k.value)
+            ? `<span data-count="${k.value}">${k.value}</span>`
+            : k.value;
+        return `
         <div class="kpi__card">
             <div class="kpi__icon"><i class="fas ${icons[i] || 'fa-anchor'}"></i></div>
-            <div class="kpi__num">${k.value}</div>
+            <div class="kpi__num">${num}</div>
             <div class="kpi__label">${state.lang === 'ko' ? k.labelKo : k.labelEn}</div>
             <div class="kpi__desc">${state.lang === 'ko' ? k.desc : k.descEn}</div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
     document.getElementById('kpiGrid').innerHTML = html;
+    observeCounts();
 }
 
 function renderCeoMessage() {
@@ -83,20 +88,51 @@ function renderCeoMessage() {
 function renderFleet() {
     if (!state.fleet) return;
     const s = state.fleet.summary;
-    document.getElementById('fleetSummary').innerHTML = `
+    const ko = state.lang === 'ko';
+    // 선대 구성 도넛 (실데이터: 벌크 vs PCTC) — 둘레 r=52
+    const C = 2 * Math.PI * 52;
+    const pctcLen = (s.pctc / s.total) * C;
+    const bulkLen = (s.bulk / s.total) * C;
+    const bulkRot = -90 + (s.pctc / s.total) * 360; // pctc 다음부터 시작
+    const donut = `
+        <div class="fleet-donut" aria-label="${ko ? '선대 구성' : 'Fleet composition'}">
+            <div class="fleet-donut__chart">
+                <svg class="fleet-donut__svg" viewBox="0 0 140 140" role="img"
+                     aria-label="${ko ? '벌크선' : 'Bulk'} ${s.bulk}, ${ko ? '자동차운반선' : 'PCTC'} ${s.pctc}">
+                    <circle class="fleet-donut__track" cx="70" cy="70" r="52"></circle>
+                    <circle class="fleet-donut__seg fleet-donut__seg--pctc" cx="70" cy="70" r="52"
+                        style="--len:${pctcLen.toFixed(2)};--gap:${(C - pctcLen).toFixed(2)};--rot:-90deg"></circle>
+                    <circle class="fleet-donut__seg fleet-donut__seg--bulk" cx="70" cy="70" r="52"
+                        style="--len:${bulkLen.toFixed(2)};--gap:${(C - bulkLen).toFixed(2)};--rot:${bulkRot.toFixed(2)}deg"></circle>
+                </svg>
+                <div class="fleet-donut__center">
+                    <strong data-count="${s.total}">${s.total}</strong>
+                    <span>${ko ? '척' : 'vessels'}</span>
+                </div>
+            </div>
+            <ul class="fleet-donut__legend">
+                <li data-pillar="bulk"><span class="fleet-donut__dot"></span>${ko ? '벌크선' : 'Bulk'} <b>${s.bulk}</b><em>${s.ratioBulk}%</em></li>
+                <li data-pillar="pctc"><span class="fleet-donut__dot"></span>${ko ? '자동차운반선' : 'PCTC'} <b>${s.pctc}</b><em>${s.ratioPctc}%</em></li>
+            </ul>
+        </div>`;
+    document.getElementById('fleetSummary').innerHTML = donut + `
+        <div class="fleet__sum-cards">
         <div class="fleet__sum-card">
             <div class="fleet__sum-icon"><i class="fas fa-anchor"></i></div>
-            <div><strong>${s.total}</strong><span>${state.lang === 'ko' ? '총 관리 선박' : 'Total Vessels'}</span></div>
+            <div><strong data-count="${s.total}">${s.total}</strong><span>${ko ? '총 관리 선박' : 'Total Vessels'}</span></div>
         </div>
         <div class="fleet__sum-card">
             <div class="fleet__sum-icon"><i class="fas fa-ship"></i></div>
-            <div><strong>${s.bulk}</strong><span>${state.lang === 'ko' ? '벌크선' : 'Bulk Carriers'} · ${s.ratioBulk}%</span></div>
+            <div><strong data-count="${s.bulk}">${s.bulk}</strong><span>${ko ? '벌크선' : 'Bulk Carriers'} · ${s.ratioBulk}%</span></div>
         </div>
         <div class="fleet__sum-card">
             <div class="fleet__sum-icon"><i class="fas fa-car"></i></div>
-            <div><strong>${s.pctc}</strong><span>${state.lang === 'ko' ? '자동차운반선' : 'PCTCs'} · ${s.ratioPctc}%</span></div>
+            <div><strong data-count="${s.pctc}">${s.pctc}</strong><span>${ko ? '자동차운반선' : 'PCTCs'} · ${s.ratioPctc}%</span></div>
+        </div>
         </div>
     `;
+    observeDonut();
+    observeCounts();
 
     const operatorByCat = { bulk: 'SAMJOO SM', pctc: 'DORIKO' };
     document.getElementById('fleetCats').innerHTML = state.fleet.categories.map(c => {
@@ -121,27 +157,26 @@ function renderFleet() {
         return code ? `<img src="https://flagcdn.com/24x18/${code}.png" srcset="https://flagcdn.com/48x36/${code}.png 2x" alt="${f}" class="flag-icon">` : '';
     };
     document.getElementById('vesselBody').innerHTML = state.fleet.vessels.map(v => `
-        <article class="vcard vcard--${v.type.toLowerCase()}" tabindex="0">
-            <div class="vcard__top">
-                <span class="type-badge ${v.type}">${v.type}</span>
-                <span class="flag-cell">${flagImg(v.flag)}<span>${v.flag}</span></span>
-            </div>
-            <h4 class="vcard__name">${v.name}</h4>
-            <div class="vcard__owner">${v.owner}</div>
-            <div class="vcard__specs">
-                <div><span>DWT</span><strong>${v.dwt.toLocaleString()}</strong></div>
-                <div><span>${state.lang === 'ko' ? '건조' : 'Built'}</span><strong>${v.built}</strong></div>
-                <div><span>${state.lang === 'ko' ? '선급' : 'Class'}</span><strong>${v.class}</strong></div>
-            </div>
-        </article>
+        <tr>
+            <td><strong>${v.name}</strong></td>
+            <td>${v.owner}</td>
+            <td><span class="type-badge ${v.type}">${v.type}</span></td>
+            <td><span class="flag-cell">${flagImg(v.flag)}<span>${v.flag}</span></span></td>
+            <td>${v.dwt.toLocaleString()}</td>
+            <td>${v.built}</td>
+            <td>${v.class}</td>
+        </tr>
     `).join('');
 
-    // Owners — continuous marquee (track duplicated for seamless loop)
+    // Owners
     const ownersEl = document.getElementById('ownersGrid');
     if (ownersEl && state.fleet.owners) {
-        const chip = o => `<div class="omarquee__item"><i class="fas fa-ship"></i><span>${o}</span></div>`;
-        const row = state.fleet.owners.concat(state.fleet.owners).map(chip).join('');
-        ownersEl.innerHTML = `<div class="omarquee"><div class="omarquee__track">${row}</div></div>`;
+        ownersEl.innerHTML = state.fleet.owners.map(o => `
+            <div class="owner">
+                <div class="owner__icon"><i class="fas fa-ship"></i></div>
+                <h4>${o}</h4>
+            </div>
+        `).join('');
     }
 }
 
@@ -166,41 +201,38 @@ function renderServices() {
 function renderOrg() {
     if (!state.org) return;
     const root = document.getElementById('orgChart');
-    const divLabelEn = { smd: 'Ship Management Division', bsd: 'Business Support Department' };
-    const teamWord = state.lang === 'ko' ? '팀' : 'teams';
-
-    const divLis = state.org.divisions.map(d => {
-        const teams = state.org.teams.filter(t => t.division === d.id);
-        const teamLis = teams.map(t => `
-                        <li>
-                            <div class="tnode tnode--team">
-                                <span class="tnode__code">${t.id}</span>
-                                <span class="tnode__name">${L(t.name)}</span>
-                                <span class="tnode__loc"><i class="fas fa-location-dot"></i>${L(t.location)}</span>
-                            </div>
-                        </li>`).join('');
-        return `
-                <li>
-                    <div class="tnode tnode--div tnode--div-${d.id}">
-                        <span class="tnode__tag">${divLabelEn[d.id]}</span>
-                        <span class="tnode__name">${L(d.name)}</span>
-                        <span class="tnode__meta">${teams.length} ${teamWord}</span>
-                    </div>
-                    <ul>${teamLis}</ul>
-                </li>`;
-    }).join('');
+    // h4 (eyebrow) — 항상 영문 고정 (디자인: 작은 대문자 태그)
+    const divLabelEn = { smd: 'Ship Management', bsd: 'Business Support' };
+    // 팀 박스의 부서 태그 — 현재 언어로
+    const divLabel = {
+        smd: { ko: '선박관리본부', en: 'Ship Mgmt' },
+        bsd: { ko: '경영지원실',   en: 'Biz Support' }
+    };
 
     root.innerHTML = `
-        <div class="orgtree">
-            <ul>
-                <li>
-                    <div class="tnode tnode--ceo">
-                        <span class="tnode__tag">Chief Executive Officer</span>
-                        <span class="tnode__name">${L(state.org.ceo.title)}</span>
-                    </div>
-                    <ul>${divLis}</ul>
-                </li>
-            </ul>
+        <div class="org__row org__row--ceo">
+            <div class="org__box org__box--ceo">
+                <h4>Chief Executive Officer</h4>
+                <p>${L(state.org.ceo.title)}</p>
+            </div>
+        </div>
+        <div class="org__row org__row--divisions">
+            ${state.org.divisions.map(d => `
+                <div class="org__box org__box--division">
+                    <h4>${divLabelEn[d.id]}</h4>
+                    <p>${L(d.name)}</p>
+                </div>
+            `).join('')}
+        </div>
+        <div class="org__row org__row--teams">
+            ${state.org.teams.map(t => `
+                <div class="org__box org__box--team">
+                    <span class="org__division-tag">${L(divLabel[t.division])}</span>
+                    <span class="org__code">${t.id}</span>
+                    <p>${L(t.name)}</p>
+                    <span class="org__loc">${L(t.location)}</span>
+                </div>
+            `).join('')}
         </div>
     `;
 }
@@ -214,20 +246,16 @@ function renderHistory() {
         .replace(/SAMJOO SM(?!\w)/g,    '<span class="nowrap">SAMJOO SM</span>')
         .replace(/DORIKO LIMITED/g,     '<span class="nowrap">DORIKO LIMITED</span>')
         .replace(/DORIKO LTD\.?/g,      '<span class="nowrap">DORIKO LTD.</span>');
-    const items = state.history.map(h => `
-        <li class="tl__item ${h.highlight ? 'is-highlight' : ''}">
-            <span class="tl__dot"></span>
-            <div class="tl__card">
-                <div class="tl__head">
-                    <span class="tl__year">${h.year}</span>
-                    ${h.highlight ? '<span class="tl__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
-                </div>
-                <h3 class="tl__title">${protectBrand(L(h.title))}</h3>
-                <p class="tl__desc">${protectBrand(L(h.desc))}</p>
+    document.getElementById('timeline').innerHTML = state.history.map(h => `
+        <div class="timeline__item ${h.highlight ? 'is-highlight' : ''}">
+            <div class="timeline__year">${h.year}</div>
+            <div class="timeline__content">
+                ${h.highlight ? '<span class="timeline__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
+                <h3>${protectBrand(L(h.title))}</h3>
+                <p>${protectBrand(L(h.desc))}</p>
             </div>
-        </li>
+        </div>
     `).join('');
-    document.getElementById('timeline').innerHTML = `<ol class="tl">${items}</ol>`;
 }
 
 function renderCerts() {
@@ -331,6 +359,8 @@ function renderAllI18nDependent() {
     renderCerts();
     renderDirections();
     if (typeof window.refreshMailpick === 'function') window.refreshMailpick();
+    // 재렌더된 노드들을 reveal 관찰자에 다시 등록 (언어 전환 시 사라짐 방지)
+    setupReveal();
 }
 
 // ============================================================
@@ -437,44 +467,93 @@ function setupNavScrollShadow() {
 }
 
 
-function setupReveal() {
-    const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item');
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('in-view');
-                io.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    targets.forEach(t => io.observe(t));
+// ============================================================
+// Data infographics — count-up, fleet donut, timeline progress
+// ============================================================
+function prefersReduced() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-// Count-up for numeric stats (.kpi__num, .stats-dark__num, .fleet__sum-card strong)
-function setupCountUp() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const parse = (txt) => {
-        const m = String(txt).match(/^(\D*)(\d+)(\D*)$/); // single integer with optional prefix/suffix
-        return m ? { pre: m[1], num: parseInt(m[2], 10), suf: m[3], digits: m[2].length } : null;
-    };
-    const run = (el) => {
-        const parts = parse(el.textContent);
-        if (!parts || el.dataset.counted) return;
-        el.dataset.counted = '1';
-        const dur = 1100, t0 = performance.now();
-        const tick = (now) => {
-            const p = Math.min(1, (now - t0) / dur);
-            const eased = 1 - Math.pow(1 - p, 3);
-            const val = Math.round(parts.num * eased);
-            el.textContent = parts.pre + val + parts.suf;
-            if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    };
+function animateCount(el) {
+    const to = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(to)) return;
+    if (prefersReduced()) { el.textContent = to.toLocaleString(); return; }
+    const dur = 1100;
+    const start = performance.now();
+    function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * eased).toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = to.toLocaleString();
+    }
+    requestAnimationFrame(tick);
+}
+
+let _countIO;
+function observeCounts() {
+    if (!_countIO) {
+        _countIO = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { animateCount(e.target); _countIO.unobserve(e.target); }
+            });
+        }, { threshold: 0.6 });
+    }
+    document.querySelectorAll('[data-count]:not([data-counted])').forEach(el => {
+        el.setAttribute('data-counted', '');
+        if (!prefersReduced()) el.textContent = '0';
+        _countIO.observe(el);
+    });
+}
+
+function observeDonut() {
+    const d = document.querySelector('.fleet-donut');
+    if (!d) return;
+    if (prefersReduced()) { d.classList.add('is-drawn'); return; }
     const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
-    }, { threshold: 0.4 });
-    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong').forEach(el => io.observe(el));
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); }
+        });
+    }, { threshold: 0.35 });
+    io.observe(d);
+}
+
+function setupTimelineProgress() {
+    const tl = document.getElementById('timeline');
+    if (!tl) return;
+    const update = () => {
+        const r = tl.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const passed = (vh * 0.65) - r.top;
+        const p = Math.max(0, Math.min(1, passed / Math.max(r.height, 1)));
+        tl.style.setProperty('--tl-progress', (p * 100).toFixed(1) + '%');
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+}
+
+const REVEAL_SELECTOR = '.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item, .careers-portal, .esg-card, .safety-card, .direction';
+let _revealIO;
+function setupReveal() {
+    // 재렌더(언어 전환 등)로 새로 생성된 노드도 매번 다시 관찰한다.
+    // 새 노드가 관찰되지 않으면 opacity:0 상태로 영영 안 보이는 버그가 생긴다.
+    if (!_revealIO) {
+        _revealIO = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in-view');
+                    _revealIO.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }
+    document.querySelectorAll(REVEAL_SELECTOR).forEach(t => {
+        if (!t.hasAttribute('data-revealed')) {
+            t.setAttribute('data-revealed', '');
+            _revealIO.observe(t);
+        }
+    });
 }
 
 async function init() {
@@ -510,7 +589,8 @@ async function init() {
     setLanguage(savedLang);
     setupMailpick();
     setupReveal();
-    setupCountUp();
+    setupTimelineProgress();
+    observeCounts();
     hideLoading();
     // 데이터 렌더 + 로딩 오버레이 종료 후에도 한 번 더 최상단 강제 (이미지/폰트 reflow 대응)
     requestAnimationFrame(() => window.scrollTo(0, 0));

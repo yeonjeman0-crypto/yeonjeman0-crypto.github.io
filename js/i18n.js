@@ -31,6 +31,11 @@ window.I18N = {
         'safety.s2d': '육상 사업장과 선박관리 업무에서 필요한 안전보건 의무사항을 점검하고 예방 활동을 관리합니다.',
         'safety.s3': '교육훈련',
         'safety.s3d': 'STCW 기준에 부합하는 체계적인 교육 프로그램과 시뮬레이터 훈련을 통해 선원의 전문 역량 향상과 안전 의식 제고를 지원합니다.',
+        'safety.flow.title': 'ISM 기반 안전관리 사이클',
+        'safety.flow.1': '점검', 'safety.flow.1d': '선박·육상 리스크 사전 점검',
+        'safety.flow.2': '보고', 'safety.flow.2d': '비상·결함 보고 체계',
+        'safety.flow.3': '시정', 'safety.flow.3d': '시정·예방 조치',
+        'safety.flow.4': '개선', 'safety.flow.4d': '지속 개선 (Continual Improvement)',
 
         'hero.eyebrow': 'FIELD-DRIVEN OPERATIONS',
         'hero.line1': '운항으로 증명하는', 'hero.line2': '책임 있는 선박관리',
@@ -124,6 +129,11 @@ window.I18N = {
         'safety.s2d': 'Checking safety and health obligations for shore workplaces and ship management operations.',
         'safety.s3': 'Training',
         'safety.s3d': 'STCW-compliant training programs and simulator drills enhance crew expertise and safety awareness.',
+        'safety.flow.title': 'ISM-based Safety Management Cycle',
+        'safety.flow.1': 'Check', 'safety.flow.1d': 'Pre-check of ship & shore risks',
+        'safety.flow.2': 'Report', 'safety.flow.2d': 'Emergency & deficiency reporting',
+        'safety.flow.3': 'Correct', 'safety.flow.3d': 'Corrective & preventive actions',
+        'safety.flow.4': 'Improve', 'safety.flow.4d': 'Continual improvement',
 
         'hero.eyebrow': 'FIELD-DRIVEN OPERATIONS',
         'hero.line1': 'Responsible Ship Management,', 'hero.line2': 'Proven by Operation',
