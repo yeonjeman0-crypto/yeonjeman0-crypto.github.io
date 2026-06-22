@@ -97,6 +97,17 @@ window.I18N = {
         'directions.openMap': '큰 지도로 보기',
         'directions.route': '네이버 길찾기',
 
+        'welfare.eyebrow': '— Crew Welfare',
+        'welfare.title': '선원 복지 · 디지털 연결',
+        'welfare.lead': '바다 위에서도 끊김 없는 연결로 선원의 삶의 질을 높입니다.',
+        'welfare.unit': '척 · 전 선대 설치',
+        'welfare.desc': '전 선대에 Starlink 고속 위성통신을 설치해, 원양에서도 육상과 동일한 연결 환경을 제공합니다.',
+        'welfare.badge': '100% 선대 연결',
+        'welfare.p1': '가족과 실시간 소통', 'welfare.p1d': '영상통화·메신저로 가족과 언제나 연결됩니다.',
+        'welfare.p2': '고속 인터넷', 'welfare.p2d': '육상 수준의 고속 인터넷으로 정보·여가를 누립니다.',
+        'welfare.p3': '원격 의료·기술 지원', 'welfare.p3d': '원격 의료 상담과 실시간 기술 지원이 가능합니다.',
+        'welfare.p4': '정신건강 · 삶의 질', 'welfare.p4d': '연결을 통해 고립감을 줄이고 삶의 질을 높입니다.',
+
         'footer.desc': '안전운항, 기술관리, 선원관리, 품질경영을 기반으로 선박관리 서비스를 제공합니다.',
         'footer.menu': '주요 메뉴', 'footer.company': '회사정보', 'footer.contact': '연락처'
     },
@@ -194,6 +205,17 @@ window.I18N = {
         'directions.lead': 'Locations of our Seoul Headquarters and Busan Office.',
         'directions.openMap': 'Open in Maps',
         'directions.route': 'Naver Route',
+
+        'welfare.eyebrow': '— Crew Welfare',
+        'welfare.title': 'Crew Welfare & Connectivity',
+        'welfare.lead': 'Keeping crews connected at sea to improve their quality of life.',
+        'welfare.unit': 'vessels · entire fleet',
+        'welfare.desc': 'Starlink high-speed satellite internet is installed across the entire fleet, giving the same connectivity at sea as ashore.',
+        'welfare.badge': '100% fleet connected',
+        'welfare.p1': 'Real-time family contact', 'welfare.p1d': 'Video calls and messaging keep crew connected with family.',
+        'welfare.p2': 'High-speed internet', 'welfare.p2d': 'Shore-grade internet for information and leisure.',
+        'welfare.p3': 'Telemedicine & remote support', 'welfare.p3d': 'Remote medical consultation and real-time technical support.',
+        'welfare.p4': 'Mental health & well-being', 'welfare.p4d': 'Connectivity reduces isolation and improves quality of life.',
 
         'footer.desc': 'Ship management services based on safe operation, technical management, crew management, and quality systems.',
         'footer.menu': 'Menu', 'footer.company': 'Company', 'footer.contact': 'Contact'

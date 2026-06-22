@@ -497,7 +497,7 @@ function observeDonut() {
 }
 
 function setupReveal() {
-    const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item, .safety-cycle__step');
+    const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item, .safety-cycle__step, .welfare__point');
     const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
@@ -533,7 +533,7 @@ function setupCountUp() {
     const io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
     }, { threshold: 0.4 });
-    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong, .fleet-donut__center strong').forEach(el => io.observe(el));
+    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong, .fleet-donut__center strong, .welfare__stat strong').forEach(el => io.observe(el));
 }
 
 async function init() {
