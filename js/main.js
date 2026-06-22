@@ -106,8 +106,14 @@ function renderFleet() {
                 </div>
             </div>
             <ul class="fleet-donut__legend">
-                <li data-pillar="bulk"><span class="fleet-donut__dot"></span>${ko ? '벌크선' : 'Bulk'} <b>${s.bulk}</b><em>${s.ratioBulk}%</em></li>
-                <li data-pillar="pctc"><span class="fleet-donut__dot"></span>${ko ? '자동차운반선' : 'PCTC'} <b>${s.pctc}</b><em>${s.ratioPctc}%</em></li>
+                <li data-pillar="bulk">
+                    <span class="fleet-donut__lk"><span class="fleet-donut__dot"></span>${ko ? '벌크선' : 'Bulk'}</span>
+                    <span class="fleet-donut__lv"><b>${s.bulk}</b><em>${s.ratioBulk}%</em></span>
+                </li>
+                <li data-pillar="pctc">
+                    <span class="fleet-donut__lk"><span class="fleet-donut__dot"></span>${ko ? '자동차운반선' : 'PCTC'}</span>
+                    <span class="fleet-donut__lv"><b>${s.pctc}</b><em>${s.ratioPctc}%</em></span>
+                </li>
             </ul>
         </div>`;
     document.getElementById('fleetSummary').innerHTML = donut + `

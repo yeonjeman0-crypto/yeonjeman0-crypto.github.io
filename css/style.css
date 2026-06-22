@@ -4945,9 +4945,12 @@ body.lang-en strong {
 .fleet-donut__center span { font-size: 0.82rem; color: var(--gray); margin-top: 0.15rem; }
 .fleet-donut__legend {
     list-style: none; padding: 0; margin: 0;
-    display: flex; gap: 1.3rem; flex-wrap: wrap; justify-content: center;
+    display: flex; flex-direction: column; gap: 0.55rem;
+    width: 100%; max-width: 240px;
 }
-.fleet-donut__legend li { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--gray); }
+.fleet-donut__legend li { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.85rem; color: var(--gray); }
+.fleet-donut__lk { display: flex; align-items: center; gap: 0.45rem; white-space: nowrap; }
+.fleet-donut__lv { flex-shrink: 0; display: inline-flex; align-items: baseline; gap: 0.3rem; font-variant-numeric: tabular-nums; }
 .fleet-donut__legend b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
 .fleet-donut__legend em { font-style: normal; color: var(--gray-light); font-size: 0.76rem; margin-left: 0.15rem; }
 .fleet-donut__dot { width: 11px; height: 11px; border-radius: 3px; }
@@ -4964,7 +4967,13 @@ body.lang-en strong {
 
 /* ---------- 안전 관리 사이클 (PDCA) ---------- */
 .safety-cycle { margin-top: 3rem; }
-.safety-cycle__title { text-align: center; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 1.8rem; }
+.safety-cycle__title { text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--ink); margin-bottom: 1.8rem; }
+.safety-cycle__title-en {
+    display: block; margin-top: 0.4rem;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    font-size: 0.72rem; font-weight: 500; color: var(--teal);
+}
 .safety-cycle__flow {
     list-style: none; padding: 0; margin: 0;
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
@@ -4988,6 +4997,13 @@ body.lang-en strong {
 }
 .safety-cycle__step:hover .safety-cycle__icon { transform: translateY(-2px) scale(1.06); }
 .safety-cycle__step strong { font-size: 1.05rem; color: var(--ink); }
+.safety-cycle__en {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    font-size: 0.7rem; font-weight: 600; color: var(--teal);
+    margin-top: -0.2rem;
+}
+.safety-cycle__desc { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
 .safety-cycle__step span:last-child { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
 .safety-cycle__step:not(:last-child)::after {
     content: '\f061'; /* fa-arrow-right */
@@ -5004,39 +5020,8 @@ body.lang-en strong {
     .safety-cycle__flow { grid-template-columns: 1fr; }
 }
 
-/* ---------- ESG 통합 프레임워크 ---------- */
-.esg-framework {
-    display: flex; align-items: center; justify-content: center;
-    gap: 0; flex-wrap: nowrap;
-    max-width: 1000px; margin: 0 auto 2.8rem;
-}
-.esg-framework__node {
-    flex: 1 1 0; min-width: 0;
-    background: #fff; border: 1px solid var(--border); border-radius: 16px;
-    padding: 1.5rem 1.2rem; text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out), border-color 0.45s var(--ease-out);
-}
-.esg-framework__node:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-.esg-framework__mark {
-    width: 48px; height: 48px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 1.25rem; color: #fff;
-}
-.esg-framework__node[data-pillar="e"] .esg-framework__mark { background: linear-gradient(135deg, #059669, #10B981); }
-.esg-framework__node[data-pillar="s"] .esg-framework__mark { background: linear-gradient(135deg, var(--ocean), #4A9CB8); }
-.esg-framework__node[data-pillar="g"] .esg-framework__mark { background: linear-gradient(135deg, #3D4F5C, #64748B); }
-.esg-framework__node strong { font-size: 1rem; color: var(--ink); }
-.esg-framework__tags { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--teal); }
-.esg-framework__link { flex: 0 0 auto; width: 36px; height: 2px; background: linear-gradient(90deg, var(--teal-light), var(--coral)); }
-@media (max-width: 720px) {
-    .esg-framework { flex-direction: column; max-width: 420px; }
-    .esg-framework__node { width: 100%; }
-    .esg-framework__link { width: 2px; height: 22px; }
-}
-
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
     .fleet-donut__seg { transition: none; stroke-dashoffset: 0; }
-    .safety-cycle__step, .esg-framework__node, .safety-cycle__icon { transition: none; }
+    .safety-cycle__step, .safety-cycle__icon { transition: none; }
 }
