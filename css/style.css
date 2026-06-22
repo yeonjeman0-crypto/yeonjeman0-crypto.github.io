@@ -4885,3 +4885,158 @@ body.lang-en strong {
         margin-bottom: 0.55rem !important;
     }
 }
+
+/* ============================================================
+   DATA INFOGRAPHICS (grafted from v2 · 실데이터 기반 · 한/영 대응)
+   선대 도넛 차트 · 안전 PDCA 사이클 · ESG 프레임워크
+   조직도/연혁 등 기존 디자인은 건드리지 않는 순수 추가 블록.
+   ============================================================ */
+:root {
+    --shadow-xs: 0 1px 2px rgba(15, 36, 41, 0.04);
+    --shadow-sm: 0 2px 6px -2px rgba(15, 36, 41, 0.08), 0 1px 2px rgba(15, 36, 41, 0.05);
+    --shadow-md: 0 10px 24px -12px rgba(15, 36, 41, 0.14), 0 2px 6px -2px rgba(15, 36, 41, 0.08);
+    --shadow-lg: 0 28px 56px -24px rgba(15, 36, 41, 0.22), 0 8px 20px -12px rgba(15, 36, 41, 0.12);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---------- 선대 구성 도넛 + 요약 레이아웃 ---------- */
+.fleet__summary {
+    grid-template-columns: minmax(240px, 300px) 1fr !important;
+    align-items: stretch;
+    gap: 1.5rem !important;
+}
+.fleet__sum-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.fleet-donut {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem 1.4rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.1rem;
+    box-shadow: var(--shadow-sm);
+}
+.fleet-donut__chart { position: relative; width: 168px; height: 168px; }
+.fleet-donut__svg { width: 100%; height: 100%; }
+.fleet-donut__track { fill: none; stroke: var(--bg-alt); stroke-width: 14; }
+.fleet-donut__seg {
+    fill: none;
+    stroke-width: 14;
+    stroke-linecap: butt;
+    stroke-dasharray: var(--len) var(--gap);
+    stroke-dashoffset: var(--len);
+    transform: rotate(var(--rot));
+    transform-origin: 70px 70px;
+    transition: stroke-dashoffset 1.1s var(--ease-out);
+}
+.fleet-donut__seg--pctc { stroke: var(--teal); }
+.fleet-donut__seg--bulk { stroke: var(--coral); }
+.fleet-donut.is-drawn .fleet-donut__seg { stroke-dashoffset: 0; }
+.fleet-donut__center {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    pointer-events: none;
+}
+.fleet-donut__center strong {
+    font-size: 2.5rem; font-weight: 800; line-height: 1;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.fleet-donut__center span { font-size: 0.82rem; color: var(--gray); margin-top: 0.15rem; }
+.fleet-donut__legend {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; gap: 1.3rem; flex-wrap: wrap; justify-content: center;
+}
+.fleet-donut__legend li { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--gray); }
+.fleet-donut__legend b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.fleet-donut__legend em { font-style: normal; color: var(--gray-light); font-size: 0.76rem; margin-left: 0.15rem; }
+.fleet-donut__dot { width: 11px; height: 11px; border-radius: 3px; }
+.fleet-donut__legend li[data-pillar="bulk"] .fleet-donut__dot { background: var(--coral); }
+.fleet-donut__legend li[data-pillar="pctc"] .fleet-donut__dot { background: var(--teal); }
+
+@media (max-width: 900px) {
+    .fleet__summary { grid-template-columns: 1fr !important; }
+    .fleet__sum-cards { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+    .fleet__sum-cards { grid-template-columns: 1fr; }
+}
+
+/* ---------- 안전 관리 사이클 (PDCA) ---------- */
+.safety-cycle { margin-top: 3rem; }
+.safety-cycle__title { text-align: center; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 1.8rem; }
+.safety-cycle__flow {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    position: relative;
+}
+.safety-cycle__step {
+    position: relative;
+    background: #fff; border: 1px solid var(--border); border-radius: 16px;
+    padding: 1.7rem 1.2rem; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out), border-color 0.45s var(--ease-out);
+}
+.safety-cycle__step:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--teal); }
+.safety-cycle__num { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.12em; color: var(--coral); font-weight: 600; }
+.safety-cycle__icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1.3rem;
+    background: linear-gradient(135deg, var(--teal), var(--teal-deep));
+    transition: transform 0.45s var(--ease-spring);
+}
+.safety-cycle__step:hover .safety-cycle__icon { transform: translateY(-2px) scale(1.06); }
+.safety-cycle__step strong { font-size: 1.05rem; color: var(--ink); }
+.safety-cycle__step span:last-child { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+.safety-cycle__step:not(:last-child)::after {
+    content: '\f061'; /* fa-arrow-right */
+    font-family: 'Font Awesome 6 Free'; font-weight: 900;
+    position: absolute; right: -0.78rem; top: 50%; transform: translateY(-50%);
+    color: var(--teal-light); font-size: 0.95rem; z-index: 2;
+    background: var(--bg-alt); padding: 0.2rem 0;
+}
+@media (max-width: 768px) {
+    .safety-cycle__flow { grid-template-columns: 1fr 1fr; }
+    .safety-cycle__step:not(:last-child)::after { display: none; }
+}
+@media (max-width: 460px) {
+    .safety-cycle__flow { grid-template-columns: 1fr; }
+}
+
+/* ---------- ESG 통합 프레임워크 ---------- */
+.esg-framework {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; flex-wrap: nowrap;
+    max-width: 1000px; margin: 0 auto 2.8rem;
+}
+.esg-framework__node {
+    flex: 1 1 0; min-width: 0;
+    background: #fff; border: 1px solid var(--border); border-radius: 16px;
+    padding: 1.5rem 1.2rem; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out), border-color 0.45s var(--ease-out);
+}
+.esg-framework__node:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.esg-framework__mark {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.25rem; color: #fff;
+}
+.esg-framework__node[data-pillar="e"] .esg-framework__mark { background: linear-gradient(135deg, #059669, #10B981); }
+.esg-framework__node[data-pillar="s"] .esg-framework__mark { background: linear-gradient(135deg, var(--ocean), #4A9CB8); }
+.esg-framework__node[data-pillar="g"] .esg-framework__mark { background: linear-gradient(135deg, #3D4F5C, #64748B); }
+.esg-framework__node strong { font-size: 1rem; color: var(--ink); }
+.esg-framework__tags { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--teal); }
+.esg-framework__link { flex: 0 0 auto; width: 36px; height: 2px; background: linear-gradient(90deg, var(--teal-light), var(--coral)); }
+@media (max-width: 720px) {
+    .esg-framework { flex-direction: column; max-width: 420px; }
+    .esg-framework__node { width: 100%; }
+    .esg-framework__link { width: 2px; height: 22px; }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .fleet-donut__seg { transition: none; stroke-dashoffset: 0; }
+    .safety-cycle__step, .esg-framework__node, .safety-cycle__icon { transition: none; }
+}

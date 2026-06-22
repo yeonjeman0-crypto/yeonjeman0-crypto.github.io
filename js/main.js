@@ -83,20 +83,50 @@ function renderCeoMessage() {
 function renderFleet() {
     if (!state.fleet) return;
     const s = state.fleet.summary;
-    document.getElementById('fleetSummary').innerHTML = `
+    const ko = state.lang === 'ko';
+    // 선대 구성 도넛 (실데이터: 벌크 vs PCTC) — 둘레 r=52
+    const C = 2 * Math.PI * 52;
+    const pctcLen = (s.pctc / s.total) * C;
+    const bulkLen = (s.bulk / s.total) * C;
+    const bulkRot = -90 + (s.pctc / s.total) * 360; // pctc 다음부터 시작
+    const donut = `
+        <div class="fleet-donut" aria-label="${ko ? '선대 구성' : 'Fleet composition'}">
+            <div class="fleet-donut__chart">
+                <svg class="fleet-donut__svg" viewBox="0 0 140 140" role="img"
+                     aria-label="${ko ? '벌크선' : 'Bulk'} ${s.bulk}, ${ko ? '자동차운반선' : 'PCTC'} ${s.pctc}">
+                    <circle class="fleet-donut__track" cx="70" cy="70" r="52"></circle>
+                    <circle class="fleet-donut__seg fleet-donut__seg--pctc" cx="70" cy="70" r="52"
+                        style="--len:${pctcLen.toFixed(2)};--gap:${(C - pctcLen).toFixed(2)};--rot:-90deg"></circle>
+                    <circle class="fleet-donut__seg fleet-donut__seg--bulk" cx="70" cy="70" r="52"
+                        style="--len:${bulkLen.toFixed(2)};--gap:${(C - bulkLen).toFixed(2)};--rot:${bulkRot.toFixed(2)}deg"></circle>
+                </svg>
+                <div class="fleet-donut__center">
+                    <strong>${s.total}</strong>
+                    <span>${ko ? '척' : 'vessels'}</span>
+                </div>
+            </div>
+            <ul class="fleet-donut__legend">
+                <li data-pillar="bulk"><span class="fleet-donut__dot"></span>${ko ? '벌크선' : 'Bulk'} <b>${s.bulk}</b><em>${s.ratioBulk}%</em></li>
+                <li data-pillar="pctc"><span class="fleet-donut__dot"></span>${ko ? '자동차운반선' : 'PCTC'} <b>${s.pctc}</b><em>${s.ratioPctc}%</em></li>
+            </ul>
+        </div>`;
+    document.getElementById('fleetSummary').innerHTML = donut + `
+        <div class="fleet__sum-cards">
         <div class="fleet__sum-card">
             <div class="fleet__sum-icon"><i class="fas fa-anchor"></i></div>
-            <div><strong>${s.total}</strong><span>${state.lang === 'ko' ? '총 관리 선박' : 'Total Vessels'}</span></div>
+            <div><strong>${s.total}</strong><span>${ko ? '총 관리 선박' : 'Total Vessels'}</span></div>
         </div>
         <div class="fleet__sum-card">
             <div class="fleet__sum-icon"><i class="fas fa-ship"></i></div>
-            <div><strong>${s.bulk}</strong><span>${state.lang === 'ko' ? '벌크선' : 'Bulk Carriers'} · ${s.ratioBulk}%</span></div>
+            <div><strong>${s.bulk}</strong><span>${ko ? '벌크선' : 'Bulk Carriers'} · ${s.ratioBulk}%</span></div>
         </div>
         <div class="fleet__sum-card">
             <div class="fleet__sum-icon"><i class="fas fa-car"></i></div>
-            <div><strong>${s.pctc}</strong><span>${state.lang === 'ko' ? '자동차운반선' : 'PCTCs'} · ${s.ratioPctc}%</span></div>
+            <div><strong>${s.pctc}</strong><span>${ko ? '자동차운반선' : 'PCTCs'} · ${s.ratioPctc}%</span></div>
+        </div>
         </div>
     `;
+    observeDonut();
 
     const operatorByCat = { bulk: 'SAMJOO SM', pctc: 'DORIKO' };
     document.getElementById('fleetCats').innerHTML = state.fleet.categories.map(c => {
@@ -437,6 +467,17 @@ function setupNavScrollShadow() {
 }
 
 
+// 선대 도넛: 스크롤 진입 시 호(arc) 드로잉 애니메이션
+function observeDonut() {
+    const d = document.querySelector('.fleet-donut');
+    if (!d) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.add('is-drawn'); return; }
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); } });
+    }, { threshold: 0.35 });
+    io.observe(d);
+}
+
 function setupReveal() {
     const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item');
     const io = new IntersectionObserver((entries) => {
@@ -474,7 +515,7 @@ function setupCountUp() {
     const io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
     }, { threshold: 0.4 });
-    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong').forEach(el => io.observe(el));
+    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong, .fleet-donut__center strong').forEach(el => io.observe(el));
 }
 
 async function init() {
