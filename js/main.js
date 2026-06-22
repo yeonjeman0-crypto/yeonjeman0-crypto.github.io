@@ -84,23 +84,35 @@ function renderFleet() {
     if (!state.fleet) return;
     const s = state.fleet.summary;
     const ko = state.lang === 'ko';
-    // 선대 구성 도넛 (실데이터: 벌크 vs PCTC) — 둘레 r=52
+    // 선대 구성 도넛 (실데이터: 벌크 vs PCTC) — 둘레 r=52, 두 조각 사이 6px 갭
     const C = 2 * Math.PI * 52;
-    const pctcLen = (s.pctc / s.total) * C;
-    const bulkLen = (s.bulk / s.total) * C;
-    const bulkRot = -90 + (s.pctc / s.total) * 360; // pctc 다음부터 시작
+    const GAP = 6;
+    const gapDeg = (GAP / C) * 360;
+    const pctcLen = (s.pctc / s.total) * C - GAP;
+    const bulkLen = (s.bulk / s.total) * C - GAP;
+    const pctcRot = -90 + gapDeg / 2;
+    const bulkRot = -90 + (s.pctc / s.total) * 360 + gapDeg / 2; // pctc 다음부터 시작
     const donut = `
         <div class="fleet-donut" aria-label="${ko ? '선대 구성' : 'Fleet composition'}">
             <div class="fleet-donut__chart">
                 <svg class="fleet-donut__svg" viewBox="0 0 140 140" role="img"
                      aria-label="${ko ? '벌크선' : 'Bulk'} ${s.bulk}, ${ko ? '자동차운반선' : 'PCTC'} ${s.pctc}">
+                    <defs>
+                        <linearGradient id="segPctc" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0"></stop><stop offset="1"></stop>
+                        </linearGradient>
+                        <linearGradient id="segBulk" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0"></stop><stop offset="1"></stop>
+                        </linearGradient>
+                    </defs>
                     <circle class="fleet-donut__track" cx="70" cy="70" r="52"></circle>
                     <circle class="fleet-donut__seg fleet-donut__seg--pctc" cx="70" cy="70" r="52"
-                        style="--len:${pctcLen.toFixed(2)};--gap:${(C - pctcLen).toFixed(2)};--rot:-90deg"></circle>
+                        style="--len:${pctcLen.toFixed(2)};--gap:${(C - pctcLen).toFixed(2)};--rot:${pctcRot.toFixed(2)}deg"></circle>
                     <circle class="fleet-donut__seg fleet-donut__seg--bulk" cx="70" cy="70" r="52"
                         style="--len:${bulkLen.toFixed(2)};--gap:${(C - bulkLen).toFixed(2)};--rot:${bulkRot.toFixed(2)}deg"></circle>
                 </svg>
                 <div class="fleet-donut__center">
+                    <small class="fleet-donut__eyebrow">FLEET</small>
                     <strong>${s.total}</strong>
                     <span>${ko ? '척' : 'vessels'}</span>
                 </div>
@@ -485,7 +497,7 @@ function observeDonut() {
 }
 
 function setupReveal() {
-    const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item');
+    const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item, .safety-cycle__step');
     const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (e.isIntersecting) {
@@ -511,7 +523,7 @@ function setupCountUp() {
         const dur = 1100, t0 = performance.now();
         const tick = (now) => {
             const p = Math.min(1, (now - t0) / dur);
-            const eased = 1 - Math.pow(1 - p, 3);
+            const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
             const val = Math.round(parts.num * eased);
             el.textContent = parts.pre + val + parts.suf;
             if (p < 1) requestAnimationFrame(tick);
