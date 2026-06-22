@@ -875,7 +875,6 @@ body { letter-spacing: -0.003em; }
         opacity: 1 !important;
         transform: none !important;
     }
-    .omarquee__track { animation: none !important; }
     .nbuild__dot { animation: none !important; }
     .bleed { background-attachment: scroll !important; }
 }
