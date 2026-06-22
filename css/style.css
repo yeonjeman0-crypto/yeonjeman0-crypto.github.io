@@ -3459,6 +3459,15 @@ body.lang-en strong {
     color: var(--coral);
     margin-right: 0.45rem;
 }
+.direction__addr-tag {
+    display: inline-block; vertical-align: middle; white-space: nowrap;
+    font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--gray); background: var(--bg-alt); border: 1px solid var(--hairline, rgba(15,43,67,0.1));
+    border-radius: 6px; padding: 0.08rem 0.42rem; margin-right: 0.45rem;
+}
+.direction__addr-tag--new { color: #fff; background: var(--coral); border-color: transparent; }
+.direction__addr--new { color: var(--ink, #0F2429) !important; }
+.direction__addr--new i { color: var(--teal) !important; }
 .direction__hours {
     margin-top: 0.6rem !important;
     padding-top: 0.6rem;

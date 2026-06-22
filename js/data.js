@@ -116,6 +116,11 @@ window.SAMJOO_DATA = {
           "ko": "부산광역시 중구 중앙대로 102, 6층 607호 (중앙동, 팬오션빌딩)",
           "en": "607, 6F, Panocean Bldg, 102, Jungang-daero, Jung-gu, Busan, Republic of Korea"
         },
+        "formerAddress": {
+          "ko": "부산광역시 동구 중앙대로180번길 6-12, DK빌딩 6층",
+          "en": "DK Building 6F, 6-12 Jungang-daero 180beon-gil, Dong-gu, Busan"
+        },
+        "moveDate": "2026-06-29",
         "tel": "+82-51-441-8911",
         "fax": "+82-51-441-8912",
         "emails": ["samjoosm@samjoosm.com", "smt@doriko.com"],

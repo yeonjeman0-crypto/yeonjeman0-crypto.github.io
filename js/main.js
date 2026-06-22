@@ -301,6 +301,22 @@ function renderDirections() {
     const routeLabel = dict['directions.route']    || '네이버 길찾기';
     grid.innerHTML = state.company.offices.map(o => {
         const addr = L(o.address);
+        // 이전 예정 사무소: moveDate 전까지 현재 주소 병기, 지나면 자동으로 신규 주소만 표시
+        const isKo = state.lang === 'ko';
+        const moveD = o.moveDate ? new Date(o.moveDate + 'T00:00:00+09:00') : null;
+        const relocating = moveD && o.formerAddress && (new Date() < moveD);
+        let addrHtml;
+        if (relocating) {
+            const curTag = isKo ? '현재 주소' : 'Current address';
+            const newTag = isKo
+                ? `${moveD.getFullYear()}년 ${moveD.getMonth() + 1}월 ${moveD.getDate()}일부 신규 주소`
+                : `New address — from ${moveD.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+            addrHtml =
+                `<p class="direction__addr"><i class="fas fa-map-marker-alt"></i><span class="direction__addr-tag">${curTag}</span>${L(o.formerAddress)}</p>` +
+                `<p class="direction__addr direction__addr--new"><i class="fas fa-truck-moving"></i><span class="direction__addr-tag direction__addr-tag--new">${newTag}</span>${addr}</p>`;
+        } else {
+            addrHtml = `<p class="direction__addr"><i class="fas fa-map-marker-alt"></i>${addr}</p>`;
+        }
         const q = encodeURIComponent(addr);
         const embed = `https://www.google.com/maps?q=${q}&hl=${state.lang}&z=17&output=embed`;
         const link  = `https://www.google.com/maps/search/?api=1&query=${q}`;
@@ -318,7 +334,7 @@ function renderDirections() {
             </div>
             <div class="direction__info">
                 <h3>${L(o.name)}</h3>
-                <p class="direction__addr"><i class="fas fa-map-marker-alt"></i>${addr}</p>
+                ${addrHtml}
                 <p class="direction__row"><strong>Tel</strong> <a href="tel:${o.tel}">${o.tel}</a></p>
                 <p class="direction__row"><strong>Fax</strong> <span>${o.fax}</span></p>
                 ${emailRows}
