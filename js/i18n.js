@@ -5,7 +5,7 @@ window.I18N = {
     ko: {
         'nav.group.company': '회사', 'nav.group.business': '사업', 'nav.group.shqe': '안전·인증', 'nav.group.connect': '채용·문의',
         'nav.about': '회사소개', 'nav.why': '핵심 역량', 'nav.fleet': '선대현황', 'nav.services': '주요 서비스',
-        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '채용정보', 'nav.contact': '문의', 'nav.directions': '오시는 길',
+        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.welfare': '선원 복지', 'nav.careers': '채용정보', 'nav.contact': '문의', 'nav.directions': '오시는 길',
         'nav.ceo': '대표이사 인사말', 'nav.org': '조직도', 'nav.history': '연혁', 'nav.cert': '규약 준수 및 인증', 'nav.commitment': '운영 관리 체계',
 
         'why.eyebrow': '— Core Strengths', 'why.title': '핵심 역량',
@@ -36,6 +36,8 @@ window.I18N = {
         'safety.flow.2': '보고', 'safety.flow.2d': '비상·결함 보고 체계',
         'safety.flow.3': '시정', 'safety.flow.3d': '시정·예방 조치',
         'safety.flow.4': '개선', 'safety.flow.4d': '지속 개선 (Continual Improvement)',
+        'safety.flow.titlealt': 'ISM-based Safety Management Cycle',
+        'safety.flow.1alt': 'Check', 'safety.flow.2alt': 'Report', 'safety.flow.3alt': 'Correct', 'safety.flow.4alt': 'Improve',
 
         'hero.eyebrow': 'FIELD-DRIVEN OPERATIONS',
         'hero.line1': '운항으로 증명하는', 'hero.line2': '책임 있는 선박관리',
@@ -114,7 +116,7 @@ window.I18N = {
     en: {
         'nav.group.company': 'Company', 'nav.group.business': 'Business', 'nav.group.shqe': 'Safety · Cert.', 'nav.group.connect': 'Careers · Contact',
         'nav.about': 'About', 'nav.why': 'Core Strengths', 'nav.fleet': 'Fleet', 'nav.services': 'Our Services',
-        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Careers', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
+        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.welfare': 'Crew Welfare', 'nav.careers': 'Careers', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
         'nav.ceo': 'CEO Message', 'nav.org': 'Organization', 'nav.history': 'History', 'nav.cert': 'Compliance & Certifications', 'nav.commitment': 'Operation Framework',
 
         'why.eyebrow': '— Core Strengths', 'why.title': 'Core Strengths',
@@ -145,6 +147,8 @@ window.I18N = {
         'safety.flow.2': 'Report', 'safety.flow.2d': 'Emergency & deficiency reporting',
         'safety.flow.3': 'Correct', 'safety.flow.3d': 'Corrective & preventive actions',
         'safety.flow.4': 'Improve', 'safety.flow.4d': 'Continual improvement',
+        'safety.flow.titlealt': 'ISM 기반 안전관리 사이클',
+        'safety.flow.1alt': '점검', 'safety.flow.2alt': '보고', 'safety.flow.3alt': '시정', 'safety.flow.4alt': '개선',
 
         'hero.eyebrow': 'FIELD-DRIVEN OPERATIONS',
         'hero.line1': 'Responsible Ship Management,', 'hero.line2': 'Proven by Operation',
