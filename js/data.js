@@ -141,7 +141,7 @@ window.SAMJOO_DATA = {
           "ko": "벌크선 관리",
           "en": "Bulk Carrier Management"
         },
-        "image": "fleet/bulk_carrier.webp",
+        "image": "fleet/bulk_capesize.png",
         "description": {
           "ko": "대형 Cape급 벌크선부터 Handy급 벌크선까지, 선종별 운항 특성과 화물 특성을 고려한 안정적인 선박관리 서비스를 제공합니다.",
           "en": "From large Cape-class to Handy-class bulk carriers, we provide stable ship management services tailored to each vessel's operational and cargo characteristics."
@@ -171,7 +171,7 @@ window.SAMJOO_DATA = {
           "ko": "자동차운반선 관리",
           "en": "PCC / PCTC Management"
         },
-        "image": "fleet/car_carrier.webp",
+        "image": "fleet/car_carrier_green.png",
         "description": {
           "ko": "자동차운반선의 화물 특성, 램프 운용, 고박 안전, 전기차 화재 리스크를 반영한 전문 관리체계를 운영합니다.",
           "en": "We operate a specialized management system for car carriers, addressing cargo characteristics, ramp operation, lashing safety, and EV fire risks."
@@ -204,15 +204,6 @@ window.SAMJOO_DATA = {
         "flag": "PANAMA",
         "dwt": 21503,
         "built": "1999-01",
-        "class": "DNV"
-      },
-      {
-        "name": "GMT ASTRO",
-        "owner": "SAMJOO MARITIME CO., LTD.",
-        "type": "PCC",
-        "flag": "PANAMA",
-        "dwt": 16101,
-        "built": "1986-05",
         "class": "DNV"
       },
       {
@@ -252,6 +243,15 @@ window.SAMJOO_DATA = {
         "class": "NK"
       },
       {
+        "name": "GMT ASTRO",
+        "owner": "SAMJOO MARITIME CO., LTD.",
+        "type": "PCC",
+        "flag": "PANAMA",
+        "dwt": 16101,
+        "built": "1986-05",
+        "class": "DNV"
+      },
+      {
         "name": "G POSEIDON",
         "owner": "GMT",
         "type": "PCTC",
@@ -259,6 +259,15 @@ window.SAMJOO_DATA = {
         "dwt": 28365,
         "built": "2010-06",
         "class": "DNV"
+      },
+      {
+        "name": "SJ ASIA",
+        "owner": "SAMJOO MARITIME CO., LTD.",
+        "type": "BULK",
+        "flag": "KOREA",
+        "dwt": 174674,
+        "built": "2005-07",
+        "class": "KR"
       },
       {
         "name": "SJ BUSAN",
@@ -276,15 +285,6 @@ window.SAMJOO_DATA = {
         "flag": "KOREA",
         "dwt": 55989,
         "built": "2010-02",
-        "class": "KR"
-      },
-      {
-        "name": "SJ ASIA",
-        "owner": "SAMJOO MARITIME CO., LTD.",
-        "type": "BULK",
-        "flag": "KOREA",
-        "dwt": 174674,
-        "built": "2005-07",
         "class": "KR"
       },
       {
@@ -456,18 +456,6 @@ window.SAMJOO_DATA = {
     ],
     "teams": [
       {
-        "id": "CMT",
-        "name": {
-          "ko": "해상인사팀",
-          "en": "Crew Management Team"
-        },
-        "division": "smd",
-        "location": {
-          "ko": "부산 사무소",
-          "en": "Busan Office"
-        }
-      },
-      {
         "id": "SQT",
         "name": {
           "ko": "안전품질팀",
@@ -489,6 +477,18 @@ window.SAMJOO_DATA = {
         "location": {
           "ko": "서울 본사",
           "en": "Seoul Headquarters"
+        }
+      },
+      {
+        "id": "CMT",
+        "name": {
+          "ko": "해상인사팀",
+          "en": "Crew Management Team"
+        },
+        "division": "smd",
+        "location": {
+          "ko": "부산 사무소",
+          "en": "Busan Office"
         }
       },
       {
