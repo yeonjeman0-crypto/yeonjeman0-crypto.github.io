@@ -217,11 +217,40 @@ function renderOrg() {
     const root = document.getElementById('orgChart');
     // h4 (eyebrow) — 항상 영문 고정 (디자인: 작은 대문자 태그)
     const divLabelEn = { smd: 'Ship Management', bsd: 'Business Support' };
-    // 팀 박스의 부서 태그 — 현재 언어로
-    const divLabel = {
-        smd: { ko: '선박관리본부', en: 'Ship Mgmt' },
-        bsd: { ko: '경영지원실',   en: 'Biz Support' }
-    };
+
+    // 본부별 소속 팀으로 가지 분기 (SMD 3팀 / BSD 1팀)
+    const GAP = 1.1; // rem — CSS 그리드 gap과 일치해야 함
+    const branches = state.org.divisions.map(d => ({
+        div: d,
+        teams: state.org.teams.filter(t => t.division === d.id)
+    }));
+    const totalFr = branches.reduce((a, b) => a + Math.max(b.teams.length, 1), 0);
+    const frs = branches.map(b => Math.max(b.teams.length, 1));
+    // CEO 가로선 — 첫/끝 가지(본부) 중심을 정확히 연결
+    const lineL = `calc((100% - ${GAP * (branches.length - 1)}rem) * ${(frs[0] / 2 / totalFr).toFixed(4)})`;
+    const lineR = `calc((100% - ${GAP * (branches.length - 1)}rem) * ${(frs[frs.length - 1] / 2 / totalFr).toFixed(4)})`;
+
+    const branchHtml = branches.map(b => {
+        const n = b.teams.length;
+        const teamsStyle = n > 1
+            ? `grid-template-columns:repeat(${n},1fr);--rail-inset:calc((100% - ${((n - 1) * GAP).toFixed(1)}rem) / ${2 * n})`
+            : `grid-template-columns:minmax(0,236px);justify-content:center`;
+        return `
+        <div class="org__branch">
+            <div class="org__box org__box--division">
+                <h4>${divLabelEn[b.div.id]}</h4>
+                <p>${L(b.div.name)}</p>
+            </div>
+            <div class="org__teams" data-teams="${n}" style="${teamsStyle}">
+                ${b.teams.map(t => `
+                <div class="org__box org__box--team">
+                    <span class="org__code">${t.id}</span>
+                    <p>${L(t.name)}</p>
+                    <span class="org__loc">${L(t.location)}</span>
+                </div>`).join('')}
+            </div>
+        </div>`;
+    }).join('');
 
     root.innerHTML = `
         <div class="org__row org__row--ceo">
@@ -230,23 +259,8 @@ function renderOrg() {
                 <p>${L(state.org.ceo.title)}</p>
             </div>
         </div>
-        <div class="org__row org__row--divisions">
-            ${state.org.divisions.map(d => `
-                <div class="org__box org__box--division">
-                    <h4>${divLabelEn[d.id]}</h4>
-                    <p>${L(d.name)}</p>
-                </div>
-            `).join('')}
-        </div>
-        <div class="org__row org__row--teams">
-            ${state.org.teams.map(t => `
-                <div class="org__box org__box--team">
-                    <span class="org__division-tag">${L(divLabel[t.division])}</span>
-                    <span class="org__code">${t.id}</span>
-                    <p>${L(t.name)}</p>
-                    <span class="org__loc">${L(t.location)}</span>
-                </div>
-            `).join('')}
+        <div class="org__branches" style="grid-template-columns:${frs.map(f => f + 'fr').join(' ')};--line-l:${lineL};--line-r:${lineR}">
+            ${branchHtml}
         </div>
     `;
 }

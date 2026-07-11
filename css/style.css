@@ -1665,25 +1665,36 @@ body.lang-en .hero__title span { white-space: normal; }
     height: 1.4rem;
     background: var(--org-line);
 }
-.org__row--divisions {
-    gap: 3.5rem;
-    padding-top: 1.4rem;
-    padding-bottom: 1.4rem;
-    width: fit-content;
+/* 본부별 가지 분기 — SMD(3팀) / BSD(1팀), 컬럼폭·연결선 오프셋은 JS 인라인 계산 */
+.org__branches {
+    position: relative;
+    display: grid;
+    gap: 1.1rem;
+    width: 100%;
+    max-width: 1040px;
     margin: 0 auto;
+    padding-top: 1.4rem;
+    align-items: start;
 }
-/* 가로선 — 두 본부 박스(고정폭 250px)의 정확한 중심을 연결 */
-.org__row--divisions::before {
+/* CEO 가로선 — 두 본부(가지) 중심 연결 */
+.org__branches::before {
     content: '';
     position: absolute;
     top: 0;
-    left: calc((100% - 3.5rem) / 4);
-    right: calc((100% - 3.5rem) / 4);
+    left: var(--line-l, 25%);
+    right: var(--line-r, 25%);
     height: 1px;
     background: var(--org-line);
 }
-/* 본부 위 스텁 — 가로선에서 박스 상단까지 */
-.org__box--division::before {
+.org__branch {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+/* 가로선 → 본부 박스 스텁 */
+.org__branch::before {
     content: '';
     position: absolute;
     top: -1.4rem;
@@ -1693,7 +1704,8 @@ body.lang-en .hero__title span { white-space: normal; }
     height: 1.4rem;
     background: var(--org-line);
 }
-/* 본부 아래 스텁 — 박스 하단에서 팀 레일까지 */
+.org__box--division { width: min(250px, 100%); min-width: 0; max-width: none; }
+/* 본부 → 소속 팀 스텁 */
 .org__box--division::after {
     content: '';
     position: absolute;
@@ -1704,26 +1716,24 @@ body.lang-en .hero__title span { white-space: normal; }
     height: 1.4rem;
     background: var(--org-line);
 }
-.org__row--teams {
+.org__teams {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 1.1rem;
     width: 100%;
-    max-width: 1040px;
-    margin: 0 auto;
-    position: relative;
-    padding-top: 1.4rem;
+    padding-top: 2.8rem;
 }
-/* 팀 레일 — 균등 4컬럼(1fr)의 첫/끝 셀 중심을 정확히 연결 */
-.org__row--teams::before {
+/* 팀 레일 — 소속 팀이 2개 이상일 때만, 첫/끝 팀 중심 연결 */
+.org__teams::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: calc((100% - 3.3rem) / 8);
-    right: calc((100% - 3.3rem) / 8);
+    top: 1.4rem;
+    left: var(--rail-inset, 16.7%);
+    right: var(--rail-inset, 16.7%);
     height: 1px;
     background: var(--org-line);
 }
+.org__teams[data-teams="1"]::before { display: none; }
 .org__box--team::before {
     content: '';
     position: absolute;
@@ -2531,17 +2541,17 @@ body.lang-en .hero__title span { white-space: normal; }
     .mailpick { grid-template-columns: 1fr; }
     .stats-dark__grid { grid-template-columns: 1fr; border-bottom: 0; }
     .stats-dark__card { border-left: 0; padding-left: 0.2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
-    .org__row--teams { grid-template-columns: repeat(2, 1fr); padding-top: 0; }
-    .org__row--divisions { gap: 1.2rem; }
-    .org__row--divisions::before { display: none; }
-    .org__box--division::before,
+    /* 조직도 — 가지 세로 스택, 연결선 숨김 */
+    .org__branches { grid-template-columns: 1fr !important; gap: 1.8rem; padding-top: 0.6rem; }
+    .org__branches::before,
+    .org__branch::before,
     .org__box--division::after,
-    .org__row--teams::before,
+    .org__teams::before,
     .org__box--team::before { display: none; }
     .org__row--ceo::after { display: none; }
     .org__row--ceo { padding-bottom: 1.2rem; }
-    .org__row--divisions { padding-top: 0; padding-bottom: 1.2rem; width: 100%; }
-    .org__box--division { width: auto; min-width: 210px; }
+    .org__teams { grid-template-columns: repeat(2, 1fr) !important; justify-content: stretch !important; padding-top: 0.9rem; }
+    .org__box--division { width: 100%; }
 }
 
 @media (min-width: 641px) and (max-width: 1000px) {
@@ -2608,7 +2618,7 @@ body.lang-en .hero__title span { white-space: normal; }
     .kpi__card:first-child { border-top: 0; }
     .kpi__idx { margin-bottom: 0.7rem; }
 
-    .org__row--teams { grid-template-columns: 1fr; }
+    .org__teams { grid-template-columns: 1fr !important; }
     .org__box { width: 100%; max-width: none; }
 
     .back-top { right: 0.9rem; bottom: 0.9rem; width: 42px; height: 42px; }
