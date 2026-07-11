@@ -191,19 +191,25 @@ function renderFleet() {
 
 function renderServices() {
     if (!state.services) return;
-    // 에디토리얼 행 — 일러스트 제거, 타이포·데이터 중심
-    document.getElementById('servicesGrid').innerHTML = state.services.map((s, i) => `
+    // 에디토리얼 행 + 도판(FIG.) 프레임 일러스트
+    document.getElementById('servicesGrid').innerHTML = state.services.map((s, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        return `
         <div class="service">
             <div class="service__index">
-                <span class="service__num">${String(i + 1).padStart(2, '0')}</span>
+                <span class="service__num">${num}</span>
             </div>
+            <figure class="service__media">
+                <img src="images/${s.image}" alt="${L(s.name)}" loading="lazy">
+                <figcaption>FIG. ${num}</figcaption>
+            </figure>
             <div class="service__body">
                 <h3>${L(s.name)}</h3>
                 <p>${L(s.description)}</p>
             </div>
             <ul class="service__features">${L(s.features).map(f => `<li>${f}</li>`).join('')}</ul>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
 }
 
 function renderOrg() {
