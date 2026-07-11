@@ -471,6 +471,33 @@ function setupTickerPause() {
     tick.addEventListener('click', () => tick.classList.toggle('is-paused'));
 }
 
+// 티커 구동 — CSS 애니메이션 대신 JS 직접 구동.
+// (감속모션 OS설정·구버전 CSS 캐시 등 어떤 환경에서도 확실히 움직이게)
+function setupTickerMotion() {
+    const ticker = document.querySelector('.ticker');
+    const track = document.getElementById('vesselTicker');
+    if (!ticker || !track) return;
+    track.style.animation = 'none'; // 캐시된 구버전 CSS의 keyframe까지 무력화
+    let x = 0;
+    let last = null;
+    let hover = false;
+    const SPEED = 60; // px/s
+    ticker.addEventListener('mouseenter', () => { hover = true; });
+    ticker.addEventListener('mouseleave', () => { hover = false; });
+    function frame(now) {
+        if (last === null) last = now;
+        if (!hover && !ticker.classList.contains('is-paused')) {
+            x -= SPEED * (now - last) / 1000;
+            const half = track.scrollWidth / 2;
+            if (half > 0 && -x >= half) x += half; // 절반(1세트) 지나면 이어붙여 무한루프
+            track.style.transform = 'translateX(' + x + 'px)';
+        }
+        last = now;
+        requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+}
+
 function setupBackTop() {
     const btn = document.getElementById('backTop');
     window.addEventListener('scroll', () => {
@@ -611,6 +638,7 @@ async function init() {
     setupCeoToggle();
     setupBackTop();
     setupTickerPause();
+    setupTickerMotion();
 
     const savedLang = localStorage.getItem('samjoo-lang') || 'ko';
     state.lang = savedLang;

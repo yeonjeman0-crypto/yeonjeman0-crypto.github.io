@@ -691,10 +691,8 @@ body.lang-en .hero__title span { white-space: normal; }
     flex: 0 0 auto;
     white-space: nowrap;
     will-change: transform;
-    animation: tickerMove 45s linear infinite;
+    /* 모션은 main.js(requestAnimationFrame)가 구동 — 환경 무관하게 항상 동작 */
 }
-.ticker:hover .ticker__track { animation-play-state: paused; }
-@keyframes tickerMove { to { transform: translateX(-50%); } }
 .ticker__group { display: inline-flex; align-items: center; }
 .ticker__item {
     display: inline-flex;
@@ -708,7 +706,6 @@ body.lang-en .hero__title span { white-space: normal; }
 .ticker__item b { color: #fff; font-weight: 600; }
 .ticker__item em { font-style: normal; color: var(--teal-light); font-size: 0.68rem; }
 .ticker__item i { font-style: normal; color: rgba(255, 255, 255, 0.72); font-size: 0.68rem; }
-.ticker.is-paused .ticker__track { animation-play-state: paused; }
 .ticker__sep { color: var(--coral); margin: 0 1.4rem; font-size: 0.6rem; }
 
 /* ------------------------------------------------------------
@@ -2712,7 +2709,6 @@ body.lang-en .hero__title span { white-space: normal; }
     .hero__slide:nth-child(n+2) { opacity: 0; }
     .hero__indicators span::after { animation: none; }
     .hero__scroll .i { animation: none; }
-    .ticker__track { animation: none; }
     .ticker__tag::before { animation: none; }
     .careers-portal__badge::before { animation: none; }
     .loading__logo img { animation: none; }
