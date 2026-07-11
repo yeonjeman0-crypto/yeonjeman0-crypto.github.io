@@ -5,17 +5,17 @@ window.I18N = {
     ko: {
         'nav.group.company': '회사', 'nav.group.business': '사업', 'nav.group.shqe': '안전·인증', 'nav.group.connect': '채용·문의',
         'nav.about': '회사소개', 'nav.why': '핵심 역량', 'nav.fleet': '선대현황', 'nav.services': '주요 서비스',
-        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.welfare': '선원 복지', 'nav.careers': '채용정보', 'nav.contact': '문의', 'nav.directions': '오시는 길',
+        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '채용정보', 'nav.contact': '문의', 'nav.directions': '오시는 길',
         'nav.ceo': '대표이사 인사말', 'nav.org': '조직도', 'nav.history': '연혁', 'nav.cert': '규약 준수 및 인증', 'nav.commitment': '운영 관리 체계',
 
-        'why.eyebrow': '— Core Strengths', 'why.title': '핵심 역량',
+        'why.eyebrow': '03 · Core Strengths', 'why.title': '핵심 역량',
         'why.lead': '안전·기술·선원·품질 중심의 선박관리 역량',
         'why.1': '안전운항 (Safety)', 'why.1d': 'ISM Code 기반의 체계적인 안전관리로 안전운항 기반을 강화합니다.',
         'why.2': '기술관리 (Technical)', 'why.2d': '선급 검사, 정비, 신조선 감리까지 선박 전 생애주기를 기술 지원합니다.',
         'why.3': '선원관리 (Crew)', 'why.3d': 'STCW·MLC 기준에 맞춘 선원 배승과 교육을 체계적으로 관리합니다.',
         'why.4': '품질경영 (Quality)', 'why.4d': 'ISO 9001·14001·45001 통합 인증으로 품질·환경·안전을 일관되게 관리합니다.',
 
-        'commit.eyebrow': '— Operation Framework', 'commit.title': '운영 관리 체계',
+        'commit.eyebrow': '04 · Operation Framework', 'commit.title': '운영 관리 체계',
         'commit.lead': '선박과 육상 조직이 연결된 절차 중심의 선박관리 체계를 운영합니다.',
         'commit.s1': '안전관리 체계', 'commit.s1d': 'ISM Code 기반 선박·육상 안전관리',
         'commit.s2': '비상 대응', 'commit.s2d': '선박과 육상 조직 간 긴급 연락 체계 운영',
@@ -23,7 +23,7 @@ window.I18N = {
 
         'owners.title': '선주사', 'owners.lead': '신뢰받는 선주사들과 함께 안정적인 선박 관리 서비스를 제공합니다.',
 
-        'safety.eyebrow': '— Safety Management', 'safety.title': '안전 관리',
+        'safety.eyebrow': '08 · Safety Management', 'safety.title': '안전 관리',
         'safety.lead': '국제 기준과 내부 절차에 따라 선박 운항과 육상 지원 업무의 안전 리스크를 관리합니다.',
         'safety.s1': 'ISM 안전관리',
         'safety.s1d': 'ISM Code 기반 절차로 선박과 육상 조직 간 보고, 점검, 개선 조치를 체계적으로 관리합니다.',
@@ -36,8 +36,6 @@ window.I18N = {
         'safety.flow.2': '보고', 'safety.flow.2d': '비상·결함 보고 체계',
         'safety.flow.3': '시정', 'safety.flow.3d': '시정·예방 조치',
         'safety.flow.4': '개선', 'safety.flow.4d': '지속 개선 (Continual Improvement)',
-        'safety.flow.titlealt': 'ISM-based Safety Management Cycle',
-        'safety.flow.1alt': 'Check', 'safety.flow.2alt': 'Report', 'safety.flow.3alt': 'Correct', 'safety.flow.4alt': 'Improve',
 
         'hero.eyebrow': 'FIELD-DRIVEN OPERATIONS',
         'hero.line1': '운항으로 증명하는', 'hero.line2': '책임 있는 선박관리',
@@ -45,7 +43,7 @@ window.I18N = {
         'hero.quick.fleet': '관리 선박', 'hero.quick.services': '전문 선박관리',
         'hero.quick.esg': '지속가능 경영', 'hero.quick.safety': '안전품질 체계',
 
-        'about.eyebrow': '— 01 About', 'about.title': '회사소개',
+        'about.eyebrow': '01 · About', 'about.title': '회사소개',
         'about.lead': '선박관리의 본질에 집중하는 전문 기업',
         'about.mission': '미션', 'about.vision': '비전',
         'about.m1': '안정된 선박관리', 'about.m2': '존경 받는 회사', 'about.m3': '장수하는 기업',
@@ -54,18 +52,18 @@ window.I18N = {
         'about.quote.line2': 'SAMJOO SM CO., LTD. / DORIKO LIMITED는 이 네 가지 본질에 집중합니다.',
         'about.quote.by': 'SAMJOO SM CO., LTD. / DORIKO LIMITED',
 
-        'ceo.eyebrow': '— 02 CEO Message', 'ceo.title': '대표이사 인사말',
+        'ceo.eyebrow': '02 · CEO Message', 'ceo.title': '대표이사 인사말',
         'ceo.less': '접기',
 
-        'fleet.eyebrow': '— 03 Fleet', 'fleet.title': '선대현황',
+        'fleet.eyebrow': '05 · Fleet', 'fleet.title': '선대현황',
         'fleet.lead': '벌크선과 자동차운반선 전문 관리 경험', 'fleet.list': '관리 선박 목록',
 
         'v.name': '선박명', 'v.owner': '선주사', 'v.type': '선종', 'v.flag': '국적',
         'v.dwt': 'DWT', 'v.built': '건조', 'v.class': '선급',
 
-        'services.eyebrow': '— 04 Services', 'services.title': '주요 서비스',
+        'services.eyebrow': '06 · Services', 'services.title': '주요 서비스',
 
-        'esg.eyebrow': '— 05 ESG', 'esg.title': '환경·사회·지배구조',
+        'esg.eyebrow': '07 · ESG', 'esg.title': '환경·사회·지배구조',
         'esg.env': '환경관리 (E)', 'esg.soc': '사회적 책임 (S)', 'esg.gov': '투명한 경영 (G)',
         'esg.env.desc': 'IMO 및 MARPOL 등 환경 관련 요구사항을 반영해 운항 효율과 오염방지 관리를 수행합니다.',
         'esg.soc.desc': '선원 복지, 교육, 인권 보호를 중심으로 해상 인력 관리 기준을 운영합니다.',
@@ -74,12 +72,12 @@ window.I18N = {
         'esg.s.m1': '선원 복지', 'esg.s.m2': '교육 기준', 'esg.s.m3': '해상 인력',
         'esg.g.m2': '내부 점검', 'esg.g.m3': '리스크 관리',
 
-        'org.eyebrow': '— 06 Organization', 'org.title': '조직도',
-        'hist.eyebrow': '— 07 History', 'hist.title': '연혁',
-        'cert.eyebrow': '— 08 Compliance & Certifications', 'cert.title': '규약 준수 및 인증',
+        'org.eyebrow': '09 · Organization', 'org.title': '조직도',
+        'hist.eyebrow': '10 · History', 'hist.title': '연혁',
+        'cert.eyebrow': '11 · Compliance & Certifications', 'cert.title': '규약 준수 및 인증',
         'cert.lead': 'ISM Code DOC (DNV·KR) · ISO 통합 인증 · 외부 검사 대응',
 
-        'careers.eyebrow': '— 09 Maritime Crew Recruitment', 'careers.title': '해상직원 채용정보',
+        'careers.eyebrow': '12 · Crew Recruitment', 'careers.title': '해상직원 채용정보',
         'careers.lead': '당사와 함께할 항해사·기관사 등 해상직원을 모집합니다. 아래 채용 플랫폼에서 진행 중인 공고를 확인하세요.',
         'careers.portal.badge': '채용중',
         'careers.portal.viewBtn': '현재 채용중인 공고 확인하기',
@@ -88,27 +86,16 @@ window.I18N = {
         'careers.koswec.title': '선원복지고용센터',
         'careers.koswec.sub': 'KOSWEC · 정부 운영 선원 복지·고용 종합 서비스',
 
-        'contact.eyebrow': '— 10 Contact', 'contact.title': '문의',
+        'contact.eyebrow': '13 · Contact', 'contact.title': '문의',
         'contact.lead': '문의하실 이메일 서비스를 선택하시면 작성 화면으로 연결됩니다.',
         'contact.gmail': 'Gmail로 보내기', 'contact.outlook': 'Outlook으로 보내기', 'contact.naver': '네이버 메일로 보내기',
         'contact.subject.default': '[홈페이지 문의] SAMJOO SM / DORIKO',
         'contact.body.default': '안녕하세요, SAMJOO SM CO., LTD. / DORIKO LIMITED 담당자님께\n\n[문의 내용을 작성해 주세요]\n\n감사합니다.',
 
-        'directions.eyebrow': '— 11 Directions', 'directions.title': '오시는 길',
+        'directions.eyebrow': '14 · Directions', 'directions.title': '오시는 길',
         'directions.lead': '서울 본사와 부산 사무소 위치 안내입니다.',
         'directions.openMap': '큰 지도로 보기',
         'directions.route': '네이버 길찾기',
-
-        'welfare.eyebrow': '— Crew Welfare',
-        'welfare.title': '선원 복지 · 선상 연결성',
-        'welfare.lead': '원양에서도 끊김 없는 연결로 선원의 근무 환경과 삶의 질을 높입니다.',
-        'welfare.unit': '척 · 전 선대 적용 완료',
-        'welfare.desc': '전 선대에 Starlink 저궤도 위성통신을 도입하여, 원양에서도 육상 수준의 통신 환경을 제공합니다.',
-        'welfare.badge': '전 선대 100% 적용',
-        'welfare.p1': '가족과의 상시 소통', 'welfare.p1d': '영상통화와 메신저로 가족과 언제든 연락할 수 있습니다.',
-        'welfare.p2': '고속 데이터 통신', 'welfare.p2d': '육상 수준의 고속 통신으로 정보 검색과 여가 활동을 지원합니다.',
-        'welfare.p3': '원격 의료 자문', 'welfare.p3d': '건강 이상·응급 상황 시 육상 의료진의 원격 자문을 받을 수 있습니다.',
-        'welfare.p4': '정서 안정 · 삶의 질', 'welfare.p4d': '외부와의 연결로 해상 근무의 고립감을 줄이고 정서적 안정을 돕습니다.',
 
         'footer.desc': '안전운항, 기술관리, 선원관리, 품질경영을 기반으로 선박관리 서비스를 제공합니다.',
         'footer.menu': '주요 메뉴', 'footer.company': '회사정보', 'footer.contact': '연락처'
@@ -116,17 +103,17 @@ window.I18N = {
     en: {
         'nav.group.company': 'Company', 'nav.group.business': 'Business', 'nav.group.shqe': 'Safety · Cert.', 'nav.group.connect': 'Careers · Contact',
         'nav.about': 'About', 'nav.why': 'Core Strengths', 'nav.fleet': 'Fleet', 'nav.services': 'Our Services',
-        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.welfare': 'Crew Welfare', 'nav.careers': 'Careers', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
+        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Careers', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
         'nav.ceo': 'CEO Message', 'nav.org': 'Organization', 'nav.history': 'History', 'nav.cert': 'Compliance & Certifications', 'nav.commitment': 'Operation Framework',
 
-        'why.eyebrow': '— Core Strengths', 'why.title': 'Core Strengths',
+        'why.eyebrow': '03 · Core Strengths', 'why.title': 'Core Strengths',
         'why.lead': 'Ship management capability focused on safety, technical, crew, and quality',
         'why.1': 'Safety', 'why.1d': 'Strengthening safe operation through an ISM Code-based safety system.',
         'why.2': 'Technical', 'why.2d': 'Full lifecycle technical support — surveys, maintenance, newbuilding supervision.',
         'why.3': 'Crew', 'why.3d': 'Systematic crew assignment and training aligned with STCW and MLC requirements.',
         'why.4': 'Quality', 'why.4d': 'Integrated ISO 9001 · 14001 · 45001 quality, environmental & safety system.',
 
-        'commit.eyebrow': '— Operation Framework', 'commit.title': 'Operation Management System',
+        'commit.eyebrow': '04 · Operation Framework', 'commit.title': 'Operation Management System',
         'commit.lead': 'A procedure-driven ship management framework connecting vessels and shore teams.',
         'commit.s1': 'Safety System', 'commit.s1d': 'Ship-to-shore safety management based on ISM Code',
         'commit.s2': 'Emergency Response', 'commit.s2d': 'Emergency contact structure between vessel and shore',
@@ -134,7 +121,7 @@ window.I18N = {
 
         'owners.title': 'Ship Owners', 'owners.lead': 'Delivering excellent ship management services together with diverse shipowners.',
 
-        'safety.eyebrow': '— Safety Management', 'safety.title': 'Safety Management',
+        'safety.eyebrow': '08 · Safety Management', 'safety.title': 'Safety Management',
         'safety.lead': 'Managing operational and shore-side safety risks through international standards and internal procedures.',
         'safety.s1': 'ISM Safety Management',
         'safety.s1d': 'Managing vessel-to-shore reporting, inspections, and corrective actions through ISM Code-based procedures.',
@@ -147,8 +134,6 @@ window.I18N = {
         'safety.flow.2': 'Report', 'safety.flow.2d': 'Emergency & deficiency reporting',
         'safety.flow.3': 'Correct', 'safety.flow.3d': 'Corrective & preventive actions',
         'safety.flow.4': 'Improve', 'safety.flow.4d': 'Continual improvement',
-        'safety.flow.titlealt': 'ISM 기반 안전관리 사이클',
-        'safety.flow.1alt': '점검', 'safety.flow.2alt': '보고', 'safety.flow.3alt': '시정', 'safety.flow.4alt': '개선',
 
         'hero.eyebrow': 'FIELD-DRIVEN OPERATIONS',
         'hero.line1': 'Responsible Ship Management,', 'hero.line2': 'Proven by Operation',
@@ -156,7 +141,7 @@ window.I18N = {
         'hero.quick.fleet': 'Managed Vessels', 'hero.quick.services': 'Ship Management',
         'hero.quick.esg': 'Sustainable Management', 'hero.quick.safety': 'Safety & Quality',
 
-        'about.eyebrow': '— 01 About', 'about.title': 'About Us',
+        'about.eyebrow': '01 · About', 'about.title': 'About Us',
         'about.lead': 'A specialist focused on the essence of ship management',
         'about.mission': 'Mission', 'about.vision': 'Vision',
         'about.m1': 'Stable Ship Management', 'about.m2': 'Respected Company', 'about.m3': 'Lasting Enterprise',
@@ -165,18 +150,18 @@ window.I18N = {
         'about.quote.line2': 'SAMJOO SM CO., LTD. / DORIKO LIMITED focus on these four fundamentals.',
         'about.quote.by': 'SAMJOO SM CO., LTD. / DORIKO LIMITED',
 
-        'ceo.eyebrow': '— 02 CEO Message', 'ceo.title': 'Message from CEO',
+        'ceo.eyebrow': '02 · CEO Message', 'ceo.title': 'Message from CEO',
         'ceo.less': 'Show Less',
 
-        'fleet.eyebrow': '— 03 Fleet', 'fleet.title': 'Our Fleet',
+        'fleet.eyebrow': '05 · Fleet', 'fleet.title': 'Our Fleet',
         'fleet.lead': 'Specialized in bulk carriers & PCTCs', 'fleet.list': 'Managed Vessels',
 
         'v.name': 'Vessel', 'v.owner': 'Owner', 'v.type': 'Type', 'v.flag': 'Flag',
         'v.dwt': 'DWT', 'v.built': 'Built', 'v.class': 'Class',
 
-        'services.eyebrow': '— 04 Services', 'services.title': 'Our Services',
+        'services.eyebrow': '06 · Services', 'services.title': 'Our Services',
 
-        'esg.eyebrow': '— 05 ESG', 'esg.title': 'ESG',
+        'esg.eyebrow': '07 · ESG', 'esg.title': 'ESG',
         'esg.env': 'Environment (E)', 'esg.soc': 'Social (S)', 'esg.gov': 'Governance (G)',
         'esg.env.desc': 'Managing operational efficiency and pollution prevention in line with IMO and MARPOL requirements.',
         'esg.soc.desc': 'Operating crew management standards focused on welfare, training, and human rights.',
@@ -185,12 +170,12 @@ window.I18N = {
         'esg.s.m1': 'Crew Welfare', 'esg.s.m2': 'Training Standard', 'esg.s.m3': 'Seafarers',
         'esg.g.m2': 'Internal Checks', 'esg.g.m3': 'Risk Control',
 
-        'org.eyebrow': '— 06 Organization', 'org.title': 'Organization',
-        'hist.eyebrow': '— 07 History', 'hist.title': 'History',
-        'cert.eyebrow': '— 08 Compliance & Certifications', 'cert.title': 'Compliance & Certifications',
+        'org.eyebrow': '09 · Organization', 'org.title': 'Organization',
+        'hist.eyebrow': '10 · History', 'hist.title': 'History',
+        'cert.eyebrow': '11 · Compliance & Certifications', 'cert.title': 'Compliance & Certifications',
         'cert.lead': 'ISM Code DOC (DNV·KR) · Integrated ISO certifications · External inspection readiness',
 
-        'careers.eyebrow': '— 09 Maritime Crew Recruitment', 'careers.title': 'Maritime Crew Recruitment',
+        'careers.eyebrow': '12 · Crew Recruitment', 'careers.title': 'Maritime Crew Recruitment',
         'careers.lead': 'We are recruiting deck officers, engineers, and crew. Check active openings on the platforms below.',
         'careers.portal.badge': 'Hiring',
         'careers.portal.viewBtn': 'View current openings',
@@ -199,27 +184,16 @@ window.I18N = {
         'careers.koswec.title': 'KOSWEC',
         'careers.koswec.sub': 'Korea Seafarer\'s Welfare & Employment Center (Government)',
 
-        'contact.eyebrow': '— 10 Contact', 'contact.title': 'Contact',
+        'contact.eyebrow': '13 · Contact', 'contact.title': 'Contact',
         'contact.lead': 'Choose your email service to compose an inquiry directly.',
         'contact.gmail': 'Open in Gmail', 'contact.outlook': 'Open in Outlook', 'contact.naver': 'Open in Naver Mail',
         'contact.subject.default': '[Website Inquiry] SAMJOO SM / DORIKO',
         'contact.body.default': 'Dear SAMJOO SM CO., LTD. / DORIKO LIMITED Team,\n\n[Please type your inquiry here]\n\nBest regards,',
 
-        'directions.eyebrow': '— 11 Directions', 'directions.title': 'Directions',
+        'directions.eyebrow': '14 · Directions', 'directions.title': 'Directions',
         'directions.lead': 'Locations of our Seoul Headquarters and Busan Office.',
         'directions.openMap': 'Open in Maps',
         'directions.route': 'Naver Route',
-
-        'welfare.eyebrow': '— Crew Welfare',
-        'welfare.title': 'Crew Welfare & Connectivity',
-        'welfare.lead': 'Uninterrupted connectivity at sea that improves crews’ working life and well-being.',
-        'welfare.unit': 'vessels · fleet-wide',
-        'welfare.desc': 'Starlink low-earth-orbit satellite internet is deployed across the entire fleet, providing shore-grade connectivity even on deep-sea voyages.',
-        'welfare.badge': 'Fleet-wide · 100%',
-        'welfare.p1': 'Staying in touch with family', 'welfare.p1d': 'Crew stay in touch with family anytime through video calls and messaging.',
-        'welfare.p2': 'High-speed connectivity', 'welfare.p2d': 'Shore-grade connectivity for information and downtime.',
-        'welfare.p3': 'Remote medical consultation', 'welfare.p3d': 'Access to shore-based medical advice in health or emergency situations.',
-        'welfare.p4': 'Well-being & quality of life', 'welfare.p4d': 'Staying connected eases the isolation of life at sea and supports crew well-being.',
 
         'footer.desc': 'Ship management services based on safe operation, technical management, crew management, and quality systems.',
         'footer.menu': 'Menu', 'footer.company': 'Company', 'footer.contact': 'Contact'

@@ -59,16 +59,31 @@ function bindStaticData() {
 // ============================================================
 function renderKPI() {
     if (!state.company?.kpi) return;
-    const icons = ['fa-ship', 'fa-layer-group', 'fa-shield-alt', 'fa-certificate', 'fa-anchor'];
-    const html = state.company.kpi.map((k, i) => `
+    const html = state.company.kpi.map((k, i) => {
+        const num = /^\d+$/.test(k.value)
+            ? `<span data-count="${k.value}">${k.value}</span>`
+            : k.value;
+        return `
         <div class="kpi__card">
-            <div class="kpi__icon"><i class="fas ${icons[i] || 'fa-anchor'}"></i></div>
-            <div class="kpi__num">${k.value}</div>
+            <span class="kpi__idx">${String(i + 1).padStart(2, '0')}</span>
+            <div class="kpi__num">${num}</div>
             <div class="kpi__label">${state.lang === 'ko' ? k.labelKo : k.labelEn}</div>
             <div class="kpi__desc">${state.lang === 'ko' ? k.desc : k.descEn}</div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
     document.getElementById('kpiGrid').innerHTML = html;
+    observeCounts();
+}
+
+// 선박 명부 티커 — 실제 관리 선박 데이터로 채움
+function renderTicker() {
+    const track = document.getElementById('vesselTicker');
+    if (!track || !state.fleet?.vessels) return;
+    const items = state.fleet.vessels.map(v =>
+        `<span class="ticker__item"><b>${v.name}</b><em>${v.type}</em><i>${v.dwt.toLocaleString()} DWT</i></span>`
+    ).join('<span class="ticker__sep">•</span>');
+    // 무한 스크롤을 위해 2회 반복
+    track.innerHTML = `<span class="ticker__group">${items}<span class="ticker__sep">•</span></span><span class="ticker__group" aria-hidden="true">${items}<span class="ticker__sep">•</span></span>`;
 }
 
 function renderCeoMessage() {
@@ -84,67 +99,50 @@ function renderFleet() {
     if (!state.fleet) return;
     const s = state.fleet.summary;
     const ko = state.lang === 'ko';
-    // 선대 구성 도넛 (실데이터: 벌크 vs PCTC) — 둘레 r=52, 두 조각 사이 6px 갭
+    // 선대 구성 도넛 (실데이터: 벌크 vs PCTC) — 둘레 r=52
     const C = 2 * Math.PI * 52;
-    const GAP = 6;
-    const gapDeg = (GAP / C) * 360;
-    const pctcLen = (s.pctc / s.total) * C - GAP;
-    const bulkLen = (s.bulk / s.total) * C - GAP;
-    const pctcRot = -90 + gapDeg / 2;
-    const bulkRot = -90 + (s.pctc / s.total) * 360 + gapDeg / 2; // pctc 다음부터 시작
+    const pctcLen = (s.pctc / s.total) * C;
+    const bulkLen = (s.bulk / s.total) * C;
+    const bulkRot = -90 + (s.pctc / s.total) * 360; // pctc 다음부터 시작
     const donut = `
         <div class="fleet-donut" aria-label="${ko ? '선대 구성' : 'Fleet composition'}">
             <div class="fleet-donut__chart">
                 <svg class="fleet-donut__svg" viewBox="0 0 140 140" role="img"
                      aria-label="${ko ? '벌크선' : 'Bulk'} ${s.bulk}, ${ko ? '자동차운반선' : 'PCTC'} ${s.pctc}">
-                    <defs>
-                        <linearGradient id="segPctc" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0"></stop><stop offset="1"></stop>
-                        </linearGradient>
-                        <linearGradient id="segBulk" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0"></stop><stop offset="1"></stop>
-                        </linearGradient>
-                    </defs>
                     <circle class="fleet-donut__track" cx="70" cy="70" r="52"></circle>
                     <circle class="fleet-donut__seg fleet-donut__seg--pctc" cx="70" cy="70" r="52"
-                        style="--len:${pctcLen.toFixed(2)};--gap:${(C - pctcLen).toFixed(2)};--rot:${pctcRot.toFixed(2)}deg"></circle>
+                        style="--len:${pctcLen.toFixed(2)};--gap:${(C - pctcLen).toFixed(2)};--rot:-90deg"></circle>
                     <circle class="fleet-donut__seg fleet-donut__seg--bulk" cx="70" cy="70" r="52"
                         style="--len:${bulkLen.toFixed(2)};--gap:${(C - bulkLen).toFixed(2)};--rot:${bulkRot.toFixed(2)}deg"></circle>
                 </svg>
                 <div class="fleet-donut__center">
-                    <small class="fleet-donut__eyebrow">FLEET</small>
-                    <strong>${s.total}</strong>
+                    <strong data-count="${s.total}">${s.total}</strong>
                     <span>${ko ? '척' : 'vessels'}</span>
                 </div>
             </div>
             <ul class="fleet-donut__legend">
-                <li data-pillar="bulk">
-                    <span class="fleet-donut__lk"><span class="fleet-donut__dot"></span>${ko ? '벌크선' : 'Bulk'}</span>
-                    <span class="fleet-donut__lv"><b>${s.bulk}</b><em>${s.ratioBulk}%</em></span>
-                </li>
-                <li data-pillar="pctc">
-                    <span class="fleet-donut__lk"><span class="fleet-donut__dot"></span>${ko ? '자동차운반선' : 'PCTC'}</span>
-                    <span class="fleet-donut__lv"><b>${s.pctc}</b><em>${s.ratioPctc}%</em></span>
-                </li>
+                <li data-pillar="bulk"><span class="fleet-donut__dot"></span>${ko ? '벌크선' : 'Bulk'} <b>${s.bulk}</b><em>${s.ratioBulk}%</em></li>
+                <li data-pillar="pctc"><span class="fleet-donut__dot"></span>${ko ? '자동차운반선' : 'PCTC'} <b>${s.pctc}</b><em>${s.ratioPctc}%</em></li>
             </ul>
         </div>`;
     document.getElementById('fleetSummary').innerHTML = donut + `
         <div class="fleet__sum-cards">
         <div class="fleet__sum-card">
-            <div class="fleet__sum-icon"><i class="fas fa-anchor"></i></div>
-            <div><strong>${s.total}</strong><span>${ko ? '총 관리 선박' : 'Total Vessels'}</span></div>
+            <span class="fleet__sum-k">TOTAL</span>
+            <div><strong data-count="${s.total}">${s.total}</strong><span>${ko ? '총 관리 선박' : 'Total Vessels'}</span></div>
         </div>
         <div class="fleet__sum-card">
-            <div class="fleet__sum-icon"><i class="fas fa-ship"></i></div>
-            <div><strong>${s.bulk}</strong><span>${ko ? '벌크선' : 'Bulk Carriers'} · ${s.ratioBulk}%</span></div>
+            <span class="fleet__sum-k">BULK</span>
+            <div><strong data-count="${s.bulk}">${s.bulk}</strong><span>${ko ? '벌크선' : 'Bulk Carriers'} · ${s.ratioBulk}%</span></div>
         </div>
         <div class="fleet__sum-card">
-            <div class="fleet__sum-icon"><i class="fas fa-car"></i></div>
-            <div><strong>${s.pctc}</strong><span>${ko ? '자동차운반선' : 'PCTCs'} · ${s.ratioPctc}%</span></div>
+            <span class="fleet__sum-k">PCTC</span>
+            <div><strong data-count="${s.pctc}">${s.pctc}</strong><span>${ko ? '자동차운반선' : 'PCTCs'} · ${s.ratioPctc}%</span></div>
         </div>
         </div>
     `;
     observeDonut();
+    observeCounts();
 
     const operatorByCat = { bulk: 'SAMJOO SM', pctc: 'DORIKO' };
     document.getElementById('fleetCats').innerHTML = state.fleet.categories.map(c => {
@@ -169,44 +167,41 @@ function renderFleet() {
         return code ? `<img src="https://flagcdn.com/24x18/${code}.png" srcset="https://flagcdn.com/48x36/${code}.png 2x" alt="${f}" class="flag-icon">` : '';
     };
     document.getElementById('vesselBody').innerHTML = state.fleet.vessels.map(v => `
-        <article class="vcard vcard--${v.type.toLowerCase()}" tabindex="0">
-            <div class="vcard__top">
-                <span class="type-badge ${v.type}">${v.type}</span>
-                <span class="flag-cell">${flagImg(v.flag)}<span>${v.flag}</span></span>
-            </div>
-            <h4 class="vcard__name">${v.name}</h4>
-            <div class="vcard__owner">${v.owner}</div>
-            <div class="vcard__specs">
-                <div><span>DWT</span><strong>${v.dwt.toLocaleString()}</strong></div>
-                <div><span>${state.lang === 'ko' ? '건조' : 'Built'}</span><strong>${v.built}</strong></div>
-                <div><span>${state.lang === 'ko' ? '선급' : 'Class'}</span><strong>${v.class}</strong></div>
-            </div>
-        </article>
+        <tr>
+            <td><strong>${v.name}</strong></td>
+            <td>${v.owner}</td>
+            <td><span class="type-badge ${v.type}">${v.type}</span></td>
+            <td><span class="flag-cell">${flagImg(v.flag)}<span>${v.flag}</span></span></td>
+            <td>${v.dwt.toLocaleString()}</td>
+            <td>${v.built}</td>
+            <td>${v.class}</td>
+        </tr>
     `).join('');
 
-    // Owners — continuous marquee (track duplicated for seamless loop)
+    // Owners — 워드마크 스트립 (아이콘 카드 대신 텍스트 마크)
     const ownersEl = document.getElementById('ownersGrid');
     if (ownersEl && state.fleet.owners) {
-        const chip = o => `<div class="omarquee__item"><i class="fas fa-ship"></i><span>${o}</span></div>`;
-        const row = state.fleet.owners.concat(state.fleet.owners).map(chip).join('');
-        ownersEl.innerHTML = `<div class="omarquee"><div class="omarquee__track">${row}</div></div>`;
+        ownersEl.innerHTML = state.fleet.owners.map(o => `
+            <div class="owner"><h4>${o}</h4></div>
+        `).join('');
     }
+
+    renderTicker();
 }
 
 function renderServices() {
     if (!state.services) return;
+    // 에디토리얼 행 — 일러스트 제거, 타이포·데이터 중심
     document.getElementById('servicesGrid').innerHTML = state.services.map((s, i) => `
         <div class="service">
-            <div class="service__media">
+            <div class="service__index">
                 <span class="service__num">${String(i + 1).padStart(2, '0')}</span>
-                <div class="service__img" style="background-image: url('images/${s.image}')"></div>
             </div>
             <div class="service__body">
-                <span class="service__tag">Service ${String(i + 1).padStart(2, '0')}</span>
                 <h3>${L(s.name)}</h3>
                 <p>${L(s.description)}</p>
-                <ul>${L(s.features).map(f => `<li>${f}</li>`).join('')}</ul>
             </div>
+            <ul class="service__features">${L(s.features).map(f => `<li>${f}</li>`).join('')}</ul>
         </div>
     `).join('');
 }
@@ -214,41 +209,38 @@ function renderServices() {
 function renderOrg() {
     if (!state.org) return;
     const root = document.getElementById('orgChart');
-    const divLabelEn = { smd: 'Ship Management Division', bsd: 'Business Support Department' };
-    const teamWord = state.lang === 'ko' ? '팀' : 'teams';
-
-    const divLis = state.org.divisions.map(d => {
-        const teams = state.org.teams.filter(t => t.division === d.id);
-        const teamLis = teams.map(t => `
-                        <li>
-                            <div class="tnode tnode--team">
-                                <span class="tnode__code">${t.id}</span>
-                                <span class="tnode__name">${L(t.name)}</span>
-                                <span class="tnode__loc"><i class="fas fa-location-dot"></i>${L(t.location)}</span>
-                            </div>
-                        </li>`).join('');
-        return `
-                <li>
-                    <div class="tnode tnode--div tnode--div-${d.id}">
-                        <span class="tnode__tag">${divLabelEn[d.id]}</span>
-                        <span class="tnode__name">${L(d.name)}</span>
-                        <span class="tnode__meta">${teams.length} ${teamWord}</span>
-                    </div>
-                    <ul>${teamLis}</ul>
-                </li>`;
-    }).join('');
+    // h4 (eyebrow) — 항상 영문 고정 (디자인: 작은 대문자 태그)
+    const divLabelEn = { smd: 'Ship Management', bsd: 'Business Support' };
+    // 팀 박스의 부서 태그 — 현재 언어로
+    const divLabel = {
+        smd: { ko: '선박관리본부', en: 'Ship Mgmt' },
+        bsd: { ko: '경영지원실',   en: 'Biz Support' }
+    };
 
     root.innerHTML = `
-        <div class="orgtree">
-            <ul>
-                <li>
-                    <div class="tnode tnode--ceo">
-                        <span class="tnode__tag">Chief Executive Officer</span>
-                        <span class="tnode__name">${L(state.org.ceo.title)}</span>
-                    </div>
-                    <ul>${divLis}</ul>
-                </li>
-            </ul>
+        <div class="org__row org__row--ceo">
+            <div class="org__box org__box--ceo">
+                <h4>Chief Executive Officer</h4>
+                <p>${L(state.org.ceo.title)}</p>
+            </div>
+        </div>
+        <div class="org__row org__row--divisions">
+            ${state.org.divisions.map(d => `
+                <div class="org__box org__box--division">
+                    <h4>${divLabelEn[d.id]}</h4>
+                    <p>${L(d.name)}</p>
+                </div>
+            `).join('')}
+        </div>
+        <div class="org__row org__row--teams">
+            ${state.org.teams.map(t => `
+                <div class="org__box org__box--team">
+                    <span class="org__division-tag">${L(divLabel[t.division])}</span>
+                    <span class="org__code">${t.id}</span>
+                    <p>${L(t.name)}</p>
+                    <span class="org__loc">${L(t.location)}</span>
+                </div>
+            `).join('')}
         </div>
     `;
 }
@@ -262,32 +254,28 @@ function renderHistory() {
         .replace(/SAMJOO SM(?!\w)/g,    '<span class="nowrap">SAMJOO SM</span>')
         .replace(/DORIKO LIMITED/g,     '<span class="nowrap">DORIKO LIMITED</span>')
         .replace(/DORIKO LTD\.?/g,      '<span class="nowrap">DORIKO LTD.</span>');
-    const items = state.history.map(h => `
-        <li class="tl__item ${h.highlight ? 'is-highlight' : ''}">
-            <span class="tl__dot"></span>
-            <div class="tl__card">
-                <div class="tl__head">
-                    <span class="tl__year">${h.year}</span>
-                    ${h.highlight ? '<span class="tl__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
-                </div>
-                <h3 class="tl__title">${protectBrand(L(h.title))}</h3>
-                <p class="tl__desc">${protectBrand(L(h.desc))}</p>
+    document.getElementById('timeline').innerHTML = state.history.map(h => `
+        <div class="timeline__item ${h.highlight ? 'is-highlight' : ''}">
+            <div class="timeline__year">${h.year}</div>
+            <div class="timeline__content">
+                ${h.highlight ? '<span class="timeline__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
+                <h3>${protectBrand(L(h.title))}</h3>
+                <p>${protectBrand(L(h.desc))}</p>
             </div>
-        </li>
+        </div>
     `).join('');
-    document.getElementById('timeline').innerHTML = `<ol class="tl">${items}</ol>`;
 }
 
 function renderCerts() {
     if (!state.certs) return;
-    const dict = window.I18N[state.lang] || window.I18N.ko;
-    const catLabel = (cat) => dict['cert.cat.' + cat] || cat;
-    document.getElementById('certGrid').innerHTML = state.certs.map(c => `
+    // 증서 기록부(ledger) — 선내 증서 목록처럼 행 단위로
+    document.getElementById('certGrid').innerHTML = state.certs.map((c, i) => `
         <div class="cert cert--${c.category}">
-            <span class="cert__cat">${catLabel(c.category)}</span>
-            <div class="cert__icon"><i class="fas fa-${c.icon}"></i></div>
+            <span class="cert__no">${String(i + 1).padStart(2, '0')}</span>
+            <span class="cert__code">${c.code}</span>
             <h3>${c.name}</h3>
             <p>${state.lang === 'ko' ? c.labelKo : c.labelEn}</p>
+            <span class="cert__cat">${c.category.toUpperCase()}</span>
         </div>
     `).join('');
 }
@@ -299,31 +287,20 @@ function renderDirections() {
     const dict = window.I18N?.[state.lang] || {};
     const openLabel  = dict['directions.openMap']  || '큰 지도로 보기';
     const routeLabel = dict['directions.route']    || '네이버 길찾기';
+    // 사무소별 좌표 — 지도 프레임 라벨 (해도 주기 스타일)
+    const coords = {
+        seoul: `37°33'N 126°58'E`,
+        busan: `35°06'N 129°02'E`
+    };
     grid.innerHTML = state.company.offices.map(o => {
         const addr = L(o.address);
-        // 이전 예정 사무소: moveDate 전까지 현재 주소 병기, 지나면 자동으로 신규 주소만 표시
-        const isKo = state.lang === 'ko';
-        const moveD = o.moveDate ? new Date(o.moveDate + 'T00:00:00+09:00') : null;
-        const relocating = moveD && o.formerAddress && (new Date() < moveD);
-        let addrHtml;
-        if (relocating) {
-            const curTag = isKo ? '현재 주소' : 'Current address';
-            const newTag = isKo
-                ? `${moveD.getFullYear()}년 ${moveD.getMonth() + 1}월 ${moveD.getDate()}일부 신규 주소`
-                : `New address — from ${moveD.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`;
-            addrHtml =
-                `<p class="direction__addr"><i class="fas fa-map-marker-alt"></i><span class="direction__addr-tag">${curTag}</span>${L(o.formerAddress)}</p>` +
-                `<p class="direction__addr direction__addr--new"><i class="fas fa-truck-moving"></i><span class="direction__addr-tag direction__addr-tag--new">${newTag}</span>${addr}</p>`;
-        } else {
-            addrHtml = `<p class="direction__addr"><i class="fas fa-map-marker-alt"></i>${addr}</p>`;
-        }
-        const q = encodeURIComponent(o.mapQuery || addr);
+        const q = encodeURIComponent(addr);
         const embed = `https://www.google.com/maps?q=${q}&hl=${state.lang}&z=17&output=embed`;
         const link  = `https://www.google.com/maps/search/?api=1&query=${q}`;
         const emails = o.emails || (o.email ? [o.email] : []);
         const emailRows = emails.map((e, i) => `
             <p class="direction__row">
-                <strong>${i === 0 ? 'Email' : ''}</strong>
+                <strong>${i === 0 ? 'EMAIL' : ''}</strong>
                 <a href="mailto:${e}">${e}</a>
             </p>`).join('');
         return `
@@ -331,25 +308,28 @@ function renderDirections() {
             <div class="direction__map">
                 <iframe src="${embed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                     allowfullscreen title="${L(o.name)} map"></iframe>
+                <span class="direction__coord">${coords[o.id] || ''}</span>
             </div>
             <div class="direction__info">
                 <h3>${L(o.name)}</h3>
-                ${addrHtml}
-                <p class="direction__row"><strong>Tel</strong> <a href="tel:${o.tel}">${o.tel}</a></p>
-                <p class="direction__row"><strong>Fax</strong> <span>${o.fax}</span></p>
+                <p class="direction__addr">${window.icon('pin')}${addr}</p>
+                <p class="direction__row"><strong>TEL</strong> <a href="tel:${o.tel}">${o.tel}</a></p>
+                <p class="direction__row"><strong>FAX</strong> <span>${o.fax}</span></p>
                 ${emailRows}
                 <p class="direction__hours">${L(o.hours)}</p>
-                <a class="direction__route-btn"
-                   href="https://map.naver.com/p/search/${q}"
-                   target="_blank" rel="noopener"
-                   title="${routeLabel}">
-                    <span class="naver-n">N</span>
-                    <span>${routeLabel}</span>
-                    <i class="fas fa-arrow-up-right-from-square"></i>
-                </a>
-                <a class="direction__open" href="${link}" target="_blank" rel="noopener">
-                    ${openLabel}<i class="fas fa-arrow-up-right-from-square"></i>
-                </a>
+                <div class="direction__actions">
+                    <a class="direction__route-btn"
+                       href="https://map.naver.com/p/search/${q}"
+                       target="_blank" rel="noopener"
+                       title="${routeLabel}">
+                        <span class="naver-n">N</span>
+                        <span>${routeLabel}</span>
+                        ${window.icon('arrow-up-right')}
+                    </a>
+                    <a class="direction__open" href="${link}" target="_blank" rel="noopener">
+                        ${openLabel}${window.icon('arrow-up-right')}
+                    </a>
+                </div>
             </div>
         </article>`;
     }).join('');
@@ -395,6 +375,8 @@ function renderAllI18nDependent() {
     renderCerts();
     renderDirections();
     if (typeof window.refreshMailpick === 'function') window.refreshMailpick();
+    // 재렌더된 노드들을 reveal 관찰자에 다시 등록 (언어 전환 시 사라짐 방지)
+    setupReveal();
 }
 
 // ============================================================
@@ -462,6 +444,13 @@ function syncCeoToggle(expanded) {
         : (state.lang === 'ko' ? '전체 인사말 보기' : 'Read Full Message');
 }
 
+function setupTickerPause() {
+    // 터치 사용자용 — 탭으로 티커 일시정지/재개 (hover 미지원 기기 대응)
+    const tick = document.querySelector('.ticker');
+    if (!tick) return;
+    tick.addEventListener('click', () => tick.classList.toggle('is-paused'));
+}
+
 function setupBackTop() {
     const btn = document.getElementById('backTop');
     window.addEventListener('scroll', () => {
@@ -501,55 +490,93 @@ function setupNavScrollShadow() {
 }
 
 
-// 선대 도넛: 스크롤 진입 시 호(arc) 드로잉 애니메이션
+// ============================================================
+// Data infographics — count-up, fleet donut, timeline progress
+// ============================================================
+function prefersReduced() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function animateCount(el) {
+    const to = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(to)) return;
+    if (prefersReduced()) { el.textContent = to.toLocaleString(); return; }
+    const dur = 1100;
+    const start = performance.now();
+    function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * eased).toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = to.toLocaleString();
+    }
+    requestAnimationFrame(tick);
+}
+
+let _countIO;
+function observeCounts() {
+    if (!_countIO) {
+        _countIO = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { animateCount(e.target); _countIO.unobserve(e.target); }
+            });
+        }, { threshold: 0.6 });
+    }
+    document.querySelectorAll('[data-count]:not([data-counted])').forEach(el => {
+        el.setAttribute('data-counted', '');
+        if (!prefersReduced()) el.textContent = '0';
+        _countIO.observe(el);
+    });
+}
+
 function observeDonut() {
     const d = document.querySelector('.fleet-donut');
     if (!d) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.add('is-drawn'); return; }
+    if (prefersReduced()) { d.classList.add('is-drawn'); return; }
     const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); } });
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); }
+        });
     }, { threshold: 0.35 });
     io.observe(d);
 }
 
-function setupReveal() {
-    const targets = document.querySelectorAll('.section, .kpi__card, .card, .news-card, .career-card, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .owner, .cert, .why__item, .safety-cycle__step, .welfare__point');
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('in-view');
-                io.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    targets.forEach(t => io.observe(t));
+function setupTimelineProgress() {
+    const tl = document.getElementById('timeline');
+    if (!tl) return;
+    const update = () => {
+        const r = tl.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const passed = (vh * 0.65) - r.top;
+        const p = Math.max(0, Math.min(1, passed / Math.max(r.height, 1)));
+        tl.style.setProperty('--tl-progress', (p * 100).toFixed(1) + '%');
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
 }
 
-// Count-up for numeric stats (.kpi__num, .stats-dark__num, .fleet__sum-card strong)
-function setupCountUp() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const parse = (txt) => {
-        const m = String(txt).match(/^(\D*)(\d+)(\D*)$/); // single integer with optional prefix/suffix
-        return m ? { pre: m[1], num: parseInt(m[2], 10), suf: m[3], digits: m[2].length } : null;
-    };
-    const run = (el) => {
-        const parts = parse(el.textContent);
-        if (!parts || el.dataset.counted) return;
-        el.dataset.counted = '1';
-        const dur = 1100, t0 = performance.now();
-        const tick = (now) => {
-            const p = Math.min(1, (now - t0) / dur);
-            const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-            const val = Math.round(parts.num * eased);
-            el.textContent = parts.pre + val + parts.suf;
-            if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    };
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
-    }, { threshold: 0.4 });
-    document.querySelectorAll('.kpi__num, .stats-dark__num, .fleet__sum-card strong, .fleet-donut__center strong, .welfare__stat strong').forEach(el => io.observe(el));
+const REVEAL_SELECTOR = '.section, .kpi__card, .mv, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .cert, .why__item, .careers-portal, .esg-col, .safety-col, .safety-cycle__step, .direction';
+let _revealIO;
+function setupReveal() {
+    // 재렌더(언어 전환 등)로 새로 생성된 노드도 매번 다시 관찰한다.
+    // 새 노드가 관찰되지 않으면 opacity:0 상태로 영영 안 보이는 버그가 생긴다.
+    if (!_revealIO) {
+        _revealIO = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in-view');
+                    _revealIO.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }
+    document.querySelectorAll(REVEAL_SELECTOR).forEach(t => {
+        if (!t.hasAttribute('data-revealed')) {
+            t.setAttribute('data-revealed', '');
+            _revealIO.observe(t);
+        }
+    });
 }
 
 async function init() {
@@ -563,6 +590,7 @@ async function init() {
     setupNav();
     setupCeoToggle();
     setupBackTop();
+    setupTickerPause();
 
     const savedLang = localStorage.getItem('samjoo-lang') || 'ko';
     state.lang = savedLang;
@@ -585,7 +613,8 @@ async function init() {
     setLanguage(savedLang);
     setupMailpick();
     setupReveal();
-    setupCountUp();
+    setupTimelineProgress();
+    observeCounts();
     hideLoading();
     // 데이터 렌더 + 로딩 오버레이 종료 후에도 한 번 더 최상단 강제 (이미지/폰트 reflow 대응)
     requestAnimationFrame(() => window.scrollTo(0, 0));

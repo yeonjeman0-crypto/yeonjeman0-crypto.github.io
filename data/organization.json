@@ -14,6 +14,12 @@
   ],
   "teams": [
     {
+      "id": "CMT",
+      "name": { "ko": "해상인사팀", "en": "Crew Management Team" },
+      "division": "smd",
+      "location": { "ko": "부산 사무소", "en": "Busan Office" }
+    },
+    {
       "id": "SQT",
       "name": { "ko": "안전품질팀", "en": "Safety & Quality Team" },
       "division": "smd",
@@ -24,12 +30,6 @@
       "name": { "ko": "공무팀", "en": "Marine Technical Team" },
       "division": "smd",
       "location": { "ko": "서울 본사", "en": "Seoul Headquarters" }
-    },
-    {
-      "id": "CMT",
-      "name": { "ko": "해상인사팀", "en": "Crew Management Team" },
-      "division": "smd",
-      "location": { "ko": "부산 사무소", "en": "Busan Office" }
     },
     {
       "id": "BST",
