@@ -314,7 +314,8 @@ function renderDirections() {
     };
     grid.innerHTML = state.company.offices.map(o => {
         const addr = L(o.address);
-        const q = encodeURIComponent(addr);
+        // mapQuery(도로명+건물명) 우선 — 서울/부산 지도 핀 정확도 (사용자 라이브 수정 반영)
+        const q = encodeURIComponent(o.mapQuery || addr);
         const embed = `https://www.google.com/maps?q=${q}&hl=${state.lang}&z=17&output=embed`;
         const link  = `https://www.google.com/maps/search/?api=1&query=${q}`;
         const emails = o.emails || (o.email ? [o.email] : []);
