@@ -78,7 +78,7 @@ window.I18N = {
         'cert.lead': 'ISM Code DOC (DNV·KR) · ISO 통합 인증 · 외부 검사 대응',
 
         'careers.eyebrow': '12 · Crew Recruitment', 'careers.title': '해상직원 채용정보',
-        'careers.lead': '당사와 함께할 항해사·기관사 등 해상직원을 모집합니다. 아래 채용 플랫폼에서 진행 중인 공고를 확인하세요.',
+        'careers.lead': '현재 채용 공고는 아래 사이트에서 확인해 주세요.',
         'careers.portal.badge': '채용중',
         'careers.portal.viewBtn': '현재 채용중인 공고 확인하기',
         'careers.seanet.title': 'Seanet',
@@ -180,7 +180,7 @@ window.I18N = {
         'cert.lead': 'ISM Code DOC (DNV·KR) · Integrated ISO certifications · External inspection readiness',
 
         'careers.eyebrow': '12 · Crew Recruitment', 'careers.title': 'Maritime Crew Recruitment',
-        'careers.lead': 'We are recruiting deck officers, engineers, and crew. Check active openings on the platforms below.',
+        'careers.lead': 'View current openings on the sites below.',
         'careers.portal.badge': 'Hiring',
         'careers.portal.viewBtn': 'View current openings',
         'careers.seanet.title': 'Seanet',
