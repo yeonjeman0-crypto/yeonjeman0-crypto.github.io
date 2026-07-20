@@ -65,7 +65,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260711g">
+    <link rel="stylesheet" href="css/style.css?v=20260720a">
     <style>
         /* 인라인 로딩 — 외부 CSS 의존 없음 */
         #loading { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg,#0F2B43,#0D5965,#167B85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity .5s ease, visibility .5s ease; }
@@ -218,6 +218,7 @@
                         <div class="nav__mega-col is-focus">
                             <strong data-i18n="nav.group.connect">채용·문의</strong>
                             <a href="#careers" data-i18n="nav.careers">채용정보</a>
+                            <a href="#application" data-i18n="nav.application">입사지원서 다운로드</a>
                             <a href="#contact" data-i18n="nav.contact">문의</a>
                             <a href="#directions" data-i18n="nav.directions">오시는 길</a>
                         </div>
@@ -628,9 +629,22 @@
             <div class="section__head">
                 <span class="eyebrow" data-i18n="careers.eyebrow">12 · Crew Recruitment</span>
                 <h2 data-i18n="careers.title">해상직원 채용정보</h2>
-                <p class="lead" data-i18n="careers.lead">당사와 함께할 항해사·기관사 등 해상직원을 모집합니다. 아래 채용 플랫폼에서 진행 중인 공고를 확인하세요.</p>
+                <p class="lead" data-i18n="careers.lead">입사지원서를 내려받아 작성하고, 아래 채용 플랫폼에서 진행 중인 공고를 확인하세요.</p>
             </div>
             <div class="careers-portals">
+                <a class="careers-portal careers-portal--download" id="application" href="downloads/samjoo-sm-maritime-crew-application.xlsx" download>
+                    <span class="careers-portal__no">00</span>
+                    <span class="careers-portal__code">APPLICATION</span>
+                    <span class="careers-portal__body">
+                        <h3 data-i18n="careers.application.title">해상직원 입사지원서</h3>
+                        <p data-i18n="careers.application.desc">입사지원서, 자기소개서, 개인정보 동의서가 한 파일에 포함되어 있습니다.</p>
+                    </span>
+                    <span class="careers-portal__badge careers-portal__badge--file">XLSX</span>
+                    <span class="careers-portal__cta">
+                        <span data-i18n="careers.application.download">입사지원서 다운로드</span>
+                        <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
+                    </span>
+                </a>
                 <a class="careers-portal" href="https://www.seanet.co.kr/job/job_view.html?to_id=129819" target="_blank" rel="noopener">
                     <span class="careers-portal__no">01</span>
                     <span class="careers-portal__code">SEANET</span>
@@ -755,7 +769,7 @@
     </button>
 
     <script src="js/icons.js?v=20260711g"></script>
-    <script src="js/i18n.js?v=20260711g"></script>
+    <script src="js/i18n.js?v=20260720a"></script>
     <script src="js/data.js?v=20260711g"></script>
     <script src="js/api.js?v=20260711g"></script>
     <script src="js/main.js?v=20260711g"></script>

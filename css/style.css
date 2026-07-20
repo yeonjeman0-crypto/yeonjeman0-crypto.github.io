@@ -1959,6 +1959,24 @@ body.lang-en .hero__title span { white-space: normal; }
     transition: background var(--t);
 }
 .careers-portal:hover { background: rgba(22, 123, 133, 0.035); }
+.careers-portal--download {
+    scroll-margin-top: calc(var(--nav-h) + 20px);
+    border-left: 3px solid var(--teal);
+    background: linear-gradient(90deg, rgba(22, 123, 133, 0.075), rgba(22, 123, 133, 0.015) 38%, #fff 72%);
+}
+.careers-portal--download:hover {
+    background: linear-gradient(90deg, rgba(22, 123, 133, 0.12), rgba(22, 123, 133, 0.035) 42%, #fff 78%);
+}
+.careers-portal--download .careers-portal__badge {
+    border-color: var(--teal);
+    color: var(--teal-deep);
+}
+.careers-portal--download .careers-portal__badge::before {
+    background: var(--teal);
+    animation: none;
+}
+.careers-portal--download .careers-portal__cta { color: var(--navy); }
+.careers-portal--download:hover .careers-portal__cta { color: var(--teal-deep); }
 .careers-portal__no {
     font-family: var(--font-mono);
     font-size: 0.78rem;

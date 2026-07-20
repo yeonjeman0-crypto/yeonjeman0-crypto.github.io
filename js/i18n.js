@@ -5,7 +5,7 @@ window.I18N = {
     ko: {
         'nav.group.company': '회사', 'nav.group.business': '사업', 'nav.group.shqe': '안전·인증', 'nav.group.connect': '채용·문의',
         'nav.about': '회사소개', 'nav.why': '핵심 역량', 'nav.fleet': '선대현황', 'nav.services': '주요 서비스',
-        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '채용정보', 'nav.contact': '문의', 'nav.directions': '오시는 길',
+        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '채용정보', 'nav.application': '입사지원서 다운로드', 'nav.contact': '문의', 'nav.directions': '오시는 길',
         'nav.ceo': '대표이사 인사말', 'nav.org': '조직도', 'nav.history': '연혁', 'nav.cert': '규약 준수 및 인증', 'nav.commitment': '운영 관리 체계',
 
         'why.eyebrow': '03 · Core Strengths', 'why.title': '핵심 역량',
@@ -78,7 +78,10 @@ window.I18N = {
         'cert.lead': 'ISM Code DOC (DNV·KR) · ISO 통합 인증 · 외부 검사 대응',
 
         'careers.eyebrow': '12 · Crew Recruitment', 'careers.title': '해상직원 채용정보',
-        'careers.lead': '당사와 함께할 항해사·기관사 등 해상직원을 모집합니다. 아래 채용 플랫폼에서 진행 중인 공고를 확인하세요.',
+        'careers.lead': '입사지원서를 내려받아 작성하고, 아래 채용 플랫폼에서 진행 중인 공고를 확인하세요.',
+        'careers.application.title': '해상직원 입사지원서',
+        'careers.application.desc': '입사지원서, 자기소개서, 개인정보 동의서가 한 파일에 포함되어 있습니다.',
+        'careers.application.download': '입사지원서 다운로드',
         'careers.portal.badge': '채용중',
         'careers.portal.viewBtn': '현재 채용중인 공고 확인하기',
         'careers.seanet.title': 'Seanet',
@@ -103,7 +106,7 @@ window.I18N = {
     en: {
         'nav.group.company': 'Company', 'nav.group.business': 'Business', 'nav.group.shqe': 'Safety · Cert.', 'nav.group.connect': 'Careers · Contact',
         'nav.about': 'About', 'nav.why': 'Core Strengths', 'nav.fleet': 'Fleet', 'nav.services': 'Our Services',
-        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Careers', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
+        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Careers', 'nav.application': 'Application Form', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
         'nav.ceo': 'CEO Message', 'nav.org': 'Organization', 'nav.history': 'History', 'nav.cert': 'Compliance & Certifications', 'nav.commitment': 'Operation Framework',
 
         'why.eyebrow': '03 · Core Strengths', 'why.title': 'Core Strengths',
@@ -176,7 +179,10 @@ window.I18N = {
         'cert.lead': 'ISM Code DOC (DNV·KR) · Integrated ISO certifications · External inspection readiness',
 
         'careers.eyebrow': '12 · Crew Recruitment', 'careers.title': 'Maritime Crew Recruitment',
-        'careers.lead': 'We are recruiting deck officers, engineers, and crew. Check active openings on the platforms below.',
+        'careers.lead': 'Download the application form and review current openings on the recruitment platforms below.',
+        'careers.application.title': 'Maritime Crew Application Form',
+        'careers.application.desc': 'The Korean XLSX file includes the application form, personal statement, and privacy consent form.',
+        'careers.application.download': 'Download application form',
         'careers.portal.badge': 'Hiring',
         'careers.portal.viewBtn': 'View current openings',
         'careers.seanet.title': 'Seanet',
