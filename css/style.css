@@ -1959,24 +1959,6 @@ body.lang-en .hero__title span { white-space: normal; }
     transition: background var(--t);
 }
 .careers-portal:hover { background: rgba(22, 123, 133, 0.035); }
-.careers-portal--download {
-    scroll-margin-top: calc(var(--nav-h) + 20px);
-    border-left: 3px solid var(--teal);
-    background: linear-gradient(90deg, rgba(22, 123, 133, 0.075), rgba(22, 123, 133, 0.015) 38%, #fff 72%);
-}
-.careers-portal--download:hover {
-    background: linear-gradient(90deg, rgba(22, 123, 133, 0.12), rgba(22, 123, 133, 0.035) 42%, #fff 78%);
-}
-.careers-portal--download .careers-portal__badge {
-    border-color: var(--teal);
-    color: var(--teal-deep);
-}
-.careers-portal--download .careers-portal__badge::before {
-    background: var(--teal);
-    animation: none;
-}
-.careers-portal--download .careers-portal__cta { color: var(--navy); }
-.careers-portal--download:hover .careers-portal__cta { color: var(--teal-deep); }
 .careers-portal__no {
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -2034,6 +2016,55 @@ body.lang-en .hero__title span { white-space: normal; }
 .contact-panel {
     border-top: 1px solid var(--rule-strong);
     padding-top: 2.2rem;
+}
+.contact-application {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.2rem;
+    padding: 1.35rem 1.5rem;
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--teal);
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(22, 123, 133, 0.075), rgba(22, 123, 133, 0.015) 52%, #fff 82%);
+    scroll-margin-top: calc(var(--nav-h) + 20px);
+}
+.contact-application__copy { min-width: 0; }
+.contact-application__eyebrow {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+}
+.contact-application h3 { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.015em; }
+.contact-application p { margin-top: 0.15rem; color: var(--gray); font-size: 0.86rem; line-height: 1.55; }
+.contact-application__download {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 48px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    background: var(--teal-deep);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background var(--t), transform var(--t), box-shadow var(--t);
+}
+.contact-application__download:hover { background: var(--navy); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.contact-application__download:focus-visible { outline: 3px solid rgba(255, 116, 56, 0.4); outline-offset: 3px; }
+.contact-application__download .i { width: 18px; height: 18px; }
+@media (max-width: 768px) {
+    .contact-application { align-items: flex-start; flex-direction: column; gap: 1rem; padding: 1.25rem; }
+    .contact-application__download { width: 100%; }
 }
 .contact-panel__addr {
     display: flex;
