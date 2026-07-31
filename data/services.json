@@ -25,7 +25,8 @@
         "Dry-docking & emergency repair",
         "Performance monitoring & optimization"
       ]
-    }
+    },
+    "image": "services/technical.webp"
   },
   {
     "id": "crew",
@@ -53,7 +54,8 @@
         "Welfare & payroll",
         "Medical & emergency support"
       ]
-    }
+    },
+    "image": "services/crew_management.webp"
   },
   {
     "id": "shqe",
@@ -81,7 +83,8 @@
         "Corrective action management",
         "Vessel-specific safety & environmental training"
       ]
-    }
+    },
+    "image": "services/vetting.webp"
   },
   {
     "id": "newbuilding",
@@ -109,6 +112,7 @@
         "Pre-delivery inspection",
         "Warranty technical support"
       ]
-    }
+    },
+    "image": "services/new_building.webp"
   }
 ]

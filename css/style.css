@@ -1001,10 +1001,31 @@ body.lang-en .mv__tag { display: none; }
     padding: clamp(2rem, 4vw, 3.8rem);
 }
 .ceo__aside { align-self: start; }
-/* 회사 기록 스탬프 — 해도 주기(chart annotation) 어법, 사진 없이 성립 */
+.ceo__media {
+    margin: 2.2rem 0 0;
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-card);
+    background: linear-gradient(160deg, #f6fafb 0%, #eaf3f5 100%);
+    padding: 1rem 1rem 0.6rem;
+}
+.ceo__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+}
+.ceo__media figcaption {
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    color: var(--gray);
+    text-align: center;
+}
+
+/* 회사 기록 스탬프 — 도판 아래 원장 카드 */
 .ceo__stamp {
     position: relative;
-    margin: 2.2rem 0 0;
+    margin: 1.2rem 0 0;
     border: 1px solid var(--hairline);
     border-radius: var(--r-card);
     background: var(--bg-alt);
@@ -1344,12 +1365,11 @@ body.lang-en .mv__tag { display: none; }
 .fleet__cat-media { position: relative; overflow: hidden; border-bottom: 1px solid var(--hairline); }
 .fleet__cat-media img {
     width: 100%;
-    /* 여백 잘라낸 실제 컷아웃 비율 — 16:9 레터박스 43% 제거, 배는 더 크게 */
-    aspect-ratio: var(--ar, 4);
+    aspect-ratio: 16 / 9;
     height: auto;
     object-fit: contain;
     background: #fff;
-    padding: 1rem 1.3rem;
+    padding: 1.2rem 1.5rem;
     transition: transform 0.7s var(--ease);
 }
 .fleet__cat:hover .fleet__cat-media img { transform: scale(1.045); }
@@ -1546,7 +1566,7 @@ body.lang-en .mv__tag { display: none; }
 .nb__media img {
     width: 100%; height: 100%;
     /* 1컬럼 스택 시 height:100%가 auto로 풀리므로 비율로 자리 확보 — 지연 로딩 레이아웃 시프트 방지 */
-    aspect-ratio: 1917 / 432;
+    aspect-ratio: 2172 / 724;
     object-fit: contain;
     padding: 1.2rem 1.4rem;
     box-sizing: border-box;
@@ -1650,7 +1670,7 @@ body.lang-en .mv__tag { display: none; }
 .services { border-top: 1px solid var(--rule-strong); }
 .service {
     display: grid;
-    grid-template-columns: minmax(70px, 96px) 1.05fr 1fr;
+    grid-template-columns: minmax(70px, 96px) 230px 1.05fr 1fr;
     align-items: center;
     gap: clamp(1.2rem, 2.5vw, 3rem);
     padding: clamp(2.2rem, 4vh, 3.4rem) 0.2rem;
@@ -1658,7 +1678,29 @@ body.lang-en .mv__tag { display: none; }
     transition: background var(--t);
 }
 .service:hover { background: rgba(255, 255, 255, 0.75); }
-/* 준거 기준 칩 — 삽화 자리를 실제 표준 라벨이 대신함 */
+/* 도판(FIG.) 프레임 — 기술 매뉴얼 삽화 스타일 */
+.service__media {
+    margin: 0;
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-card);
+    background: linear-gradient(160deg, #f6fafb 0%, #eaf3f5 100%);
+    padding: 0.9rem 0.9rem 0.55rem;
+}
+.service__media img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+}
+.service__media figcaption {
+    margin-top: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    color: var(--gray);
+    text-align: center;
+}
+
+/* 준거 기준 칩 — 도판 아래 실제 표준 라벨 */
 .service__standards {
     display: flex;
     flex-wrap: wrap;
@@ -2871,6 +2913,7 @@ body.lang-en .mv__tag { display: none; }
     .cert p { grid-area: label; }
     .cert__cat { grid-area: cat; }
     .service { grid-template-columns: 1fr; gap: 1rem; }
+    .service__media { max-width: 300px; }
     .service__features { grid-column: 1; }
     .mailpick { grid-template-columns: 1fr; }
     .stats-dark__grid { grid-template-columns: 1fr; border-bottom: 0; }

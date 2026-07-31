@@ -219,11 +219,8 @@ function renderFleet() {
         const op = operatorByCat[c.id];
         return `
         <div class="fleet__cat fleet__cat--${c.id}">
-            <div class="fleet__cat-media" style="--ar: ${c.imageRatio || 4}">
-                <img src="images/${c.image}-1080.webp"
-                     srcset="images/${c.image}-720.webp 720w, images/${c.image}-1080.webp 1080w, images/${c.image}-1300.webp 1300w"
-                     sizes="(max-width: 900px) 92vw, 560px"
-                     alt="${L(c.name)}" loading="lazy" decoding="async">
+            <div class="fleet__cat-media">
+                <img src="images/${c.image}" alt="${L(c.name)}" loading="lazy">
                 ${op ? `<span class="fleet__cat-badge fleet__cat-badge--${c.id}">${op}</span>` : ''}
             </div>
             <div class="fleet__cat-body">
@@ -272,6 +269,10 @@ function renderServices() {
             <div class="service__index">
                 <span class="service__num">${num}</span>
             </div>
+            <figure class="service__media">
+                <img src="images/${s.image}" alt="${L(s.name)}" loading="lazy">
+                <figcaption>FIG. ${num}</figcaption>
+            </figure>
             <div class="service__body">
                 <h3>${L(s.name)}</h3>
                 <p class="service__standards">${(SERVICE_STANDARDS[s.id] || []).map(c => `<span>${c}</span>`).join('')}</p>

@@ -13,7 +13,7 @@
         "ko": "벌크선 관리",
         "en": "Bulk Carrier Management"
       },
-      "image": "fleet/bulk_capesize",
+      "image": "fleet/bulk_capesize.png",
       "description": {
         "ko": "대형 Cape급 벌크선부터 Handy급 벌크선까지, 선종별 운항 특성과 화물 특성을 고려한 안정적인 선박관리 서비스를 제공합니다.",
         "en": "From large Cape-class to Handy-class bulk carriers, we provide stable ship management services tailored to each vessel's operational and cargo characteristics."
@@ -35,8 +35,7 @@
           "Port stay optimization & operational efficiency",
           "PSC, RightShip & Class inspection readiness"
         ]
-      },
-      "imageRatio": 4.85
+      }
     },
     {
       "id": "pctc",
@@ -44,7 +43,7 @@
         "ko": "자동차운반선 관리",
         "en": "PCC / PCTC Management"
       },
-      "image": "fleet/car_carrier_green",
+      "image": "fleet/car_carrier_green.png",
       "description": {
         "ko": "자동차운반선의 화물 특성, 램프 운용, 고박 안전, 전기차 화재 리스크를 반영한 전문 관리체계를 운영합니다.",
         "en": "We operate a specialized management system for car carriers, addressing cargo characteristics, ramp operation, lashing safety, and EV fire risks."
@@ -66,8 +65,7 @@
           "Deck height, Ramp SWL & cargo flow pre-review",
           "PSC, Flag, Class & Vetting compliance management"
         ]
-      },
-      "imageRatio": 3.967
+      }
     }
   ],
   "vessels": [
