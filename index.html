@@ -65,7 +65,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260720d">
+    <link rel="stylesheet" href="css/style.css?v=20260731a">
     <style>
         /* 인라인 로딩 — 외부 CSS 의존 없음 */
         #loading { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg,#0F2B43,#0D5965,#167B85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity .5s ease, visibility .5s ease; }
@@ -471,6 +471,24 @@
                 </table>
             </div>
 
+            <!-- Newbuilding -->
+            <div class="nb" id="newbuilding">
+                <div class="nb__media" aria-hidden="true">
+                    <img src="images/fleet/bulk_newbuilding_crane.png" alt="" loading="lazy" width="2172" height="724" decoding="async">
+                    <span class="nb__badge"><span class="nb__dot"></span>NEWBUILDING</span>
+                </div>
+                <div class="nb__body">
+                    <h3 data-i18n="nb.title">신조 벌크선 3척 건조 진행 중</h3>
+                    <p data-i18n="nb.desc">현재 신조 벌크선 3척의 건조를 진행하고 있습니다. 건조 초기 단계부터 감리와 기술관리를 직접 수행하여, 인도 즉시 안전관리와 운항관리 체계를 갖춘 선박으로 선대에 편입될 수 있도록 준비하고 있습니다.</p>
+                    <div class="nb__specs">
+                        <div><span data-i18n="nb.k1">선종</span><strong>BULK CARRIER</strong></div>
+                        <div><span data-i18n="nb.k2">척수</span><strong data-i18n="nb.v2">3척</strong></div>
+                        <div><span data-i18n="nb.k3">관리</span><strong data-i18n="nb.v3">신조 감리 수행</strong></div>
+                        <div><span data-i18n="nb.k4">인도 예정</span><strong data-i18n="nb.v4">2026년</strong></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Owners -->
             <div class="owners">
                 <h3 data-i18n="owners.title">선주사</h3>
@@ -767,9 +785,9 @@
     </button>
 
     <script src="js/icons.js?v=20260711g"></script>
-    <script src="js/i18n.js?v=20260720d"></script>
+    <script src="js/i18n.js?v=20260731a"></script>
     <script src="js/data.js?v=20260711g"></script>
     <script src="js/api.js?v=20260711g"></script>
-    <script src="js/main.js?v=20260711g"></script>
+    <script src="js/main.js?v=20260731a"></script>
 </body>
 </html>

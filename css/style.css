@@ -296,6 +296,10 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 .nav__mega-col:hover,
 .nav__mega-col:focus-within { background: rgba(22, 123, 133, 0.05); }
+/* 각 메뉴는 자기 그룹 항목만 표시 — 4그룹 중복 패널 제거 */
+.nav__mega { grid-template-columns: 1fr; }
+.nav__mega-col:not(.is-focus) { display: none; }
+.nav__mega-col strong { display: none; }
 .nav__dropdown a {
     display: flex;
     align-items: center;
@@ -317,11 +321,18 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 
 @media (min-width: 1025px) {
+    .nav__item--has-menu { position: relative; }
+    /* 열린 메뉴가 항상 위 — 이웃 항목의 호버 브릿지에 가려지지 않게 */
+    .nav__item--has-menu:hover,
+    .nav__item--has-menu:focus-within,
+    .nav__item--has-menu.is-expanded { z-index: 3; }
     .nav__dropdown {
-        position: fixed;
-        top: calc(var(--nav-h) - 1px);
+        position: absolute;
+        top: calc(100% + 10px);
         left: 50%;
         transform: translate(-50%, 0);
+        width: 236px;
+        z-index: 2;
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -457,6 +468,17 @@ body.lang-en .nav__lang .lang-other { opacity: 1; }
     text-align: left;
 }
 .hero__content { max-width: min(800px, 100%); }
+/* 진입 시 순차 등장 — eyebrow → 타이틀 → 리드 → CTA → 퀵링크 */
+@keyframes heroRise {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: none; }
+}
+.hero__eyebrow { animation: heroRise 0.65s var(--ease) both 0.1s; }
+.hero__title span:first-child { animation: heroRise 0.75s var(--ease) both 0.24s; }
+.hero__title .accent { animation: heroRise 0.75s var(--ease) both 0.38s; }
+.hero__lead { animation: heroRise 0.75s var(--ease) both 0.52s; }
+.hero__cta { animation: heroRise 0.75s var(--ease) both 0.64s; }
+.hero__dock { animation: heroRise 0.85s var(--ease) both 0.78s; }
 .hero__eyebrow {
     display: inline-flex;
     align-items: center;
@@ -514,7 +536,20 @@ body.lang-en .hero__title span { white-space: normal; }
     background: var(--coral);
     color: #fff;
     box-shadow: 0 14px 30px -14px rgba(233, 107, 48, 0.6);
+    position: relative;
+    overflow: hidden;
 }
+/* 호버 시 광택 스윙 */
+.btn--primary::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -130%;
+    width: 55%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.55s var(--ease);
+}
+.btn--primary:hover::after { left: 150%; }
 .btn--primary:hover { background: #D55A20; transform: translateY(-2px); box-shadow: 0 20px 40px -16px rgba(213, 90, 32, 0.65); }
 .btn--ghost {
     border-color: rgba(255, 255, 255, 0.45);
@@ -685,6 +720,7 @@ body.lang-en .hero__title span { white-space: normal; }
     50% { opacity: 0.45; }
 }
 .ticker__viewport { flex: 1 1 auto; overflow: hidden; display: flex; align-items: center; }
+.ticker:hover .ticker__track { animation-play-state: paused; }
 .ticker__track {
     display: flex;
     align-items: center;
@@ -1375,6 +1411,82 @@ body.lang-en .hero__title span { white-space: normal; }
     object-fit: cover;
     border-radius: 2px;
     box-shadow: 0 0 0 1px rgba(15, 36, 41, 0.1);
+}
+
+/* 신조 — NEWBUILDING 하이라이트 */
+.nb {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) 1.1fr;
+    margin-top: 2rem;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg, 16px);
+    overflow: hidden;
+    transition: border-color var(--t), box-shadow var(--t), transform var(--t);
+}
+.nb:hover { border-color: rgba(22, 123, 133, 0.45); transform: translateY(-3px); }
+.nb__media { position: relative; background: linear-gradient(180deg, #eef3f5, #e3ebee); border-right: 1px solid var(--hairline); }
+.nb__media img {
+    width: 100%; height: 100%;
+    /* 1컬럼 스택 시 height:100%가 auto로 풀리므로 비율로 자리 확보 — 지연 로딩 레이아웃 시프트 방지 */
+    aspect-ratio: 3 / 1;
+    object-fit: contain;
+    padding: 1.2rem 1.4rem;
+    box-sizing: border-box;
+    mix-blend-mode: multiply;
+}
+.nb__badge {
+    position: absolute;
+    top: 0.9rem; left: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.34rem 0.8rem;
+    border-radius: 999px;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+.nb__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--coral);
+    box-shadow: 0 0 0 0 rgba(255, 116, 56, 0.55);
+    animation: nbPulse 2.2s ease-out infinite;
+}
+@keyframes nbPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 116, 56, 0.5); }
+    70% { box-shadow: 0 0 0 7px rgba(255, 116, 56, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 116, 56, 0); }
+}
+.nb__body { padding: 1.7rem 1.9rem; }
+.nb__body h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.6rem; }
+.nb__body > p { color: var(--gray); font-size: 0.95rem; line-height: 1.75; word-break: keep-all; margin-bottom: 1.2rem; }
+.nb__specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.9rem;
+    border-top: 1px solid var(--hairline);
+    padding-top: 1.1rem;
+}
+.nb__specs > div { display: flex; flex-direction: column; gap: 0.25rem; }
+.nb__specs span {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+}
+.nb__specs strong { font-size: 0.93rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+@media (max-width: 860px) {
+    .nb { grid-template-columns: 1fr; }
+    .nb__media { border-right: 0; border-bottom: 1px solid var(--hairline); }
+    .nb__media img { max-height: 220px; }
+    .nb__specs { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* 선주사 — 워드마크 스트립 */
@@ -2589,6 +2701,10 @@ body.lang-en .hero__title span { white-space: normal; }
     .ceo { grid-template-columns: 1fr; }
     .ceo__aside { position: static; }
     .ceo__body { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: 1.6rem; }
+
+    /* 오시는 길 — 좁은 화면에서 정보 클리핑 방지: 일찍 1컬럼 스택 */
+    .direction { grid-template-columns: 1fr; }
+    .direction__map { aspect-ratio: 16 / 9; border-right: 0; border-bottom: 1px solid var(--hairline); }
 }
 
 @media (max-width: 900px) {
@@ -2802,6 +2918,10 @@ body.lang-en .hero__title span { white-space: normal; }
    ------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
+    .nb__dot { animation: none; }
+    .hero__eyebrow, .hero__title span:first-child, .hero__title .accent,
+    .hero__lead, .hero__cta, .hero__dock { animation: none; opacity: 1; transform: none; }
+    .btn--primary::after { display: none; }
     .hero__slide { animation: none; opacity: 1; }
     .hero__slide:nth-child(n+2) { opacity: 0; }
     .hero__indicators span::after { animation: none; }

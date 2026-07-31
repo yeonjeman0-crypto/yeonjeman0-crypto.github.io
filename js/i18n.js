@@ -23,6 +23,11 @@ window.I18N = {
 
         'owners.title': '선주사', 'owners.lead': '신뢰받는 선주사들과 함께 안정적인 선박 관리 서비스를 제공합니다.',
 
+        'nb.title': '신조 벌크선 3척 건조 진행 중',
+        'nb.desc': '현재 신조 벌크선 3척의 건조를 진행하고 있습니다. 건조 초기 단계부터 감리와 기술관리를 직접 수행하여, 인도 즉시 안전관리와 운항관리 체계를 갖춘 선박으로 선대에 편입될 수 있도록 준비하고 있습니다.',
+        'nb.k1': '선종', 'nb.k2': '척수', 'nb.k3': '관리', 'nb.k4': '인도 예정',
+        'nb.v2': '3척', 'nb.v3': '신조 감리 수행', 'nb.v4': '2026년',
+
         'safety.eyebrow': '08 · Safety Management', 'safety.title': '안전 관리',
         'safety.lead': '국제 기준과 내부 절차에 따라 선박 운항과 육상 지원 업무의 안전 리스크를 관리합니다.',
         'safety.s1': 'ISM 안전관리',
@@ -124,6 +129,11 @@ window.I18N = {
         'commit.s3': 'Risk Management', 'commit.s3d': 'Pre-checks for surveys, audits, and operational risks',
 
         'owners.title': 'Ship Owners', 'owners.lead': 'Delivering excellent ship management services together with diverse shipowners.',
+
+        'nb.title': '3 Newbuilding Bulk Carriers Under Construction',
+        'nb.desc': 'Three newbuilding bulk carriers are currently under construction. We carry out supervision and technical management directly from the early construction stage, so each vessel joins our fleet with full safety and operational management systems in place from delivery.',
+        'nb.k1': 'Type', 'nb.k2': 'Vessels', 'nb.k3': 'Management', 'nb.k4': 'Delivery',
+        'nb.v2': '3 ships', 'nb.v3': 'Newbuilding supervision', 'nb.v4': '2026',
 
         'safety.eyebrow': '08 · Safety Management', 'safety.title': 'Safety Management',
         'safety.lead': 'Managing operational and shore-side safety risks through international standards and internal procedures.',

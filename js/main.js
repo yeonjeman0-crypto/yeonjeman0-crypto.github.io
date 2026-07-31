@@ -413,11 +413,14 @@ function setupNav() {
 
     document.querySelectorAll('[data-nav-toggle]').forEach(btn => {
         btn.addEventListener('click', () => {
+            const item = btn.closest('.nav__item');
+            // 데스크톱: 클릭 = 그룹 대표 섹션으로 이동 (드롭다운은 호버로 열림)
             if (!isMobileNav()) {
+                const first = item.querySelector('.nav__mega-col.is-focus a[href^="#"]') || item.querySelector('.nav__dropdown a[href^="#"]');
                 btn.blur();
+                if (first) location.hash = first.getAttribute('href');
                 return;
             }
-            const item = btn.closest('.nav__item');
             const isOpen = item.classList.contains('is-expanded');
             document.querySelectorAll('.nav__item.is-expanded').forEach(openItem => {
                 openItem.classList.remove('is-expanded');
