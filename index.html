@@ -65,7 +65,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260731a">
+    <link rel="stylesheet" href="css/style.css?v=20260731b">
     <style>
         /* 인라인 로딩 — 외부 CSS 의존 없음 */
         #loading { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg,#0F2B43,#0D5965,#167B85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity .5s ease, visibility .5s ease; }
@@ -76,6 +76,7 @@
         // 무조건 1초 후 로딩 사라짐 (외부 JS 실패해도 동작)
         setTimeout(function () {
             var el = document.getElementById('loading');
+            document.body.classList.add('is-ready');
             if (el) { el.classList.add('hidden'); setTimeout(function(){ el.classList.add('gone'); }, 500); }
         }, 1000);
     </script>
@@ -353,16 +354,22 @@
             <div class="section__head">
                 <span class="eyebrow" data-i18n="ceo.eyebrow">02 · CEO Message</span>
                 <h2 data-i18n="ceo.title">대표이사 인사말</h2>
+                <p class="lead" data-i18n="ceo.lead">대표이사가 전하는 운영 방향과 약속</p>
             </div>
             <div class="ceo">
                 <div class="ceo__aside">
                     <blockquote class="ceo__quote" data-d="company.ceo.pullquote">
                         선박을 관리하는 회사를 넘어, 선박의 안전성과 운항 신뢰성을 책임지는 파트너가 되겠습니다.
                     </blockquote>
-                    <figure class="ceo__media">
-                        <img src="images/about/office_building.webp" alt="Seoul Office" loading="lazy">
-                        <figcaption>SEOUL HQ · SOONHWA BLDG. 9F</figcaption>
-                    </figure>
+                    <div class="ceo__stamp">
+                        <span class="ceo__stamp-coord">37°33'N 126°58'E</span>
+                        <dl class="ceo__stamp-rows">
+                            <div><dt>HQ</dt><dd data-i18n="ceo.stamp.hq">서울 본사 · 순화빌딩 9층</dd></div>
+                            <div><dt>BRANCH</dt><dd data-i18n="ceo.stamp.branch">부산 사무소 · 팬오션빌딩 6층</dd></div>
+                            <div><dt>FLEET</dt><dd><span id="ceoStampFleet">12 VESSELS</span></dd></div>
+                            <div><dt>SINCE</dt><dd>2000</dd></div>
+                        </dl>
+                    </div>
                 </div>
                 <div class="ceo__body">
                     <div class="ceo__text expanded" id="ceoMessage"></div>
@@ -382,72 +389,11 @@
         </div>
     </section>
 
-    <!-- WHY US -->
-    <section class="section" id="why">
-        <div class="container">
-            <div class="section__head">
-                <span class="eyebrow" data-i18n="why.eyebrow">03 · Core Strengths</span>
-                <h2 data-i18n="why.title">핵심 역량</h2>
-                <p class="lead" data-i18n="why.lead">안전·기술·선원·품질 중심의 선박관리 역량</p>
-            </div>
-            <div class="why">
-                <article class="why__item">
-                    <div class="why__num">01</div>
-                    <h3 data-i18n="why.1">안전운항 (Safety)</h3>
-                    <p data-i18n="why.1d">ISM Code 기반의 체계적인 안전관리로 안전운항 기반을 강화합니다.</p>
-                </article>
-                <article class="why__item">
-                    <div class="why__num">02</div>
-                    <h3 data-i18n="why.2">기술관리 (Technical)</h3>
-                    <p data-i18n="why.2d">선급 검사·정비·신조선 감리까지 전주기 기술 지원.</p>
-                </article>
-                <article class="why__item">
-                    <div class="why__num">03</div>
-                    <h3 data-i18n="why.3">선원관리 (Crew)</h3>
-                    <p data-i18n="why.3d">STCW·MLC 기준에 맞춘 선원 배승과 교육을 체계적으로 관리합니다.</p>
-                </article>
-                <article class="why__item">
-                    <div class="why__num">04</div>
-                    <h3 data-i18n="why.4">품질경영 (Quality)</h3>
-                    <p data-i18n="why.4d">ISO 9001·14001·45001 통합 품질·환경·안전 인증 운영.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- COMMITMENT STATS (Dark Section) -->
-    <section class="stats-dark" id="commitment">
-        <div class="container">
-            <div class="section__head">
-                <span class="eyebrow" data-i18n="commit.eyebrow">04 · Operation Framework</span>
-                <h2 data-i18n="commit.title">운영 관리 체계</h2>
-                <p class="lead" data-i18n="commit.lead">선박과 육상 조직이 연결된 절차 중심의 선박관리 체계를 운영합니다.</p>
-            </div>
-            <div class="stats-dark__grid">
-                <div class="stats-dark__card">
-                    <div class="stats-dark__num">ISM</div>
-                    <div class="stats-dark__label" data-i18n="commit.s1">안전관리 체계</div>
-                    <div class="stats-dark__desc" data-i18n="commit.s1d">ISM Code 기반 선박·육상 안전관리</div>
-                </div>
-                <div class="stats-dark__card">
-                    <div class="stats-dark__num">24H</div>
-                    <div class="stats-dark__label" data-i18n="commit.s2">비상 대응</div>
-                    <div class="stats-dark__desc" data-i18n="commit.s2d">선박과 육상 조직 간 긴급 연락 체계 운영</div>
-                </div>
-                <div class="stats-dark__card">
-                    <div class="stats-dark__num">Risk</div>
-                    <div class="stats-dark__label" data-i18n="commit.s3">리스크 관리</div>
-                    <div class="stats-dark__desc" data-i18n="commit.s3d">검사·심사·운항 리스크 사전 점검</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FLEET -->
     <section class="section" id="fleet">
         <div class="container">
             <div class="section__head">
-                <span class="eyebrow" data-i18n="fleet.eyebrow">05 · Fleet</span>
+                <span class="eyebrow" data-i18n="fleet.eyebrow">03 · Fleet</span>
                 <h2 data-i18n="fleet.title">선대현황</h2>
                 <p class="lead" data-i18n="fleet.lead">벌크선과 자동차운반선 전문 관리</p>
             </div>
@@ -474,7 +420,10 @@
             <!-- Newbuilding -->
             <div class="nb" id="newbuilding">
                 <div class="nb__media" aria-hidden="true">
-                    <img src="images/fleet/bulk_newbuilding_crane.png" alt="" loading="lazy" width="2172" height="724" decoding="async">
+                    <img src="images/fleet/bulk_newbuilding_crane-1080.webp"
+                         srcset="images/fleet/bulk_newbuilding_crane-720.webp 720w, images/fleet/bulk_newbuilding_crane-1080.webp 1080w, images/fleet/bulk_newbuilding_crane-1300.webp 1300w"
+                         sizes="(max-width: 860px) 92vw, 460px"
+                         alt="" loading="lazy" decoding="async" width="1917" height="432">
                     <span class="nb__badge"><span class="nb__dot"></span>NEWBUILDING</span>
                 </div>
                 <div class="nb__body">
@@ -498,23 +447,99 @@
         </div>
     </section>
 
+    <!-- WHY US -->
+    <section class="section section--alt" id="why">
+        <div class="container">
+            <div class="section__head">
+                <span class="eyebrow" data-i18n="why.eyebrow">04 · Core Strengths</span>
+                <h2 data-i18n="why.title">핵심 역량</h2>
+                <p class="lead" data-i18n="why.lead">안전·기술·선원·품질 중심의 선박관리 역량</p>
+            </div>
+            <div class="why">
+                <article class="why__item">
+                    <div class="why__num">01</div>
+                    <h3 data-i18n="why.1">안전운항 (Safety)</h3>
+                    <p data-i18n="why.1d">ISM Code 기반의 체계적인 안전관리로 안전운항 기반을 강화합니다.</p>
+                    <p class="why__evi" id="evi-1"></p>
+                </article>
+                <article class="why__item">
+                    <div class="why__num">02</div>
+                    <h3 data-i18n="why.2">기술관리 (Technical)</h3>
+                    <p data-i18n="why.2d">선급 검사·정비·신조선 감리까지 전주기 기술 지원.</p>
+                    <p class="why__evi" id="evi-2"></p>
+                </article>
+                <article class="why__item">
+                    <div class="why__num">03</div>
+                    <h3 data-i18n="why.3">선원관리 (Crew)</h3>
+                    <p data-i18n="why.3d">STCW·MLC 기준에 맞춘 선원 배승과 교육을 체계적으로 관리합니다.</p>
+                    <p class="why__evi" id="evi-3"></p>
+                </article>
+                <article class="why__item">
+                    <div class="why__num">04</div>
+                    <h3 data-i18n="why.4">품질경영 (Quality)</h3>
+                    <p data-i18n="why.4d">ISO 9001·14001·45001 통합 품질·환경·안전 인증 운영.</p>
+                    <p class="why__evi" id="evi-4"></p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMITMENT STATS (Dark Section) -->
+    <section class="stats-dark" id="commitment">
+        <div class="container">
+            <div class="section__head">
+                <span class="eyebrow" data-i18n="commit.eyebrow">05 · Operation Framework</span>
+                <h2 data-i18n="commit.title">운영 관리 체계</h2>
+                <p class="lead" data-i18n="commit.lead">선박과 육상 조직이 연결된 절차 중심의 선박관리 체계를 운영합니다.</p>
+            </div>
+            <div class="stats-dark__grid">
+                <div class="stats-dark__card">
+                    <div class="stats-dark__num">ISM</div>
+                    <div class="stats-dark__label" data-i18n="commit.s1">안전관리 체계</div>
+                    <div class="stats-dark__desc" data-i18n="commit.s1d">ISM Code 기반 선박·육상 안전관리</div>
+                    <p class="stats-dark__sub">DOC · DNV / KR</p>
+                </div>
+                <div class="stats-dark__card">
+                    <div class="stats-dark__num">24H</div>
+                    <div class="stats-dark__label" data-i18n="commit.s2">비상 대응</div>
+                    <div class="stats-dark__desc" data-i18n="commit.s2d">선박과 육상 조직 간 긴급 연락 체계 운영</div>
+                    <p class="stats-dark__sub" id="commitHours"></p>
+                </div>
+                <div class="stats-dark__card">
+                    <div class="stats-dark__num">Risk</div>
+                    <div class="stats-dark__label" data-i18n="commit.s3">리스크 관리</div>
+                    <div class="stats-dark__desc" data-i18n="commit.s3d">검사·심사·운항 리스크 사전 점검</div>
+                    <p class="stats-dark__sub">PSC · VETTING · CLASS</p>
+                </div>
+                <div class="stats-dark__card">
+                    <div class="stats-dark__num">DP</div>
+                    <div class="stats-dark__label" data-i18n="commit.s4">지정담당자</div>
+                    <div class="stats-dark__desc" data-i18n="commit.s4d">선박관리본부 지정담당자(DPA) 운영</div>
+                    <p class="stats-dark__sub">DPA · ISM CODE 4</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SERVICES -->
-    <section class="section section--alt" id="services">
+    <section class="section" id="services">
         <div class="container">
             <div class="section__head">
                 <span class="eyebrow" data-i18n="services.eyebrow">06 · Services</span>
                 <h2 data-i18n="services.title">주요 서비스</h2>
+                <p class="lead" data-i18n="services.lead">기술관리 · 선원관리 · SHQE · 신조선 감리</p>
             </div>
             <div class="services" id="servicesGrid"></div>
         </div>
     </section>
 
     <!-- ESG -->
-    <section class="section" id="esg">
+    <section class="section section--alt" id="esg">
         <div class="container">
             <div class="section__head">
                 <span class="eyebrow" data-i18n="esg.eyebrow">07 · ESG</span>
                 <h2 data-i18n="esg.title">환경·사회·지배구조</h2>
+                <p class="lead" data-i18n="esg.lead">환경(E) · 사회(S) · 지배구조(G) 관리 기준</p>
             </div>
             <div class="esg__grid">
                 <article class="esg-col" data-esg="e">
@@ -552,7 +577,7 @@
     </section>
 
     <!-- SAFETY MANAGEMENT -->
-    <section class="section section--alt" id="safety">
+    <section class="section" id="safety">
         <div class="container">
             <div class="section__head">
                 <span class="eyebrow" data-i18n="safety.eyebrow">08 · Safety Management</span>
@@ -607,11 +632,12 @@
     </section>
 
     <!-- ORG -->
-    <section class="section" id="organization">
+    <section class="section section--alt" id="organization">
         <div class="container">
             <div class="section__head">
                 <span class="eyebrow" data-i18n="org.eyebrow">09 · Organization</span>
                 <h2 data-i18n="org.title">조직도</h2>
+                <p class="lead" data-i18n="org.lead">육상 조직과 선박관리 부문 구성</p>
             </div>
             <div class="org" id="orgChart"></div>
         </div>
@@ -623,13 +649,14 @@
             <div class="section__head">
                 <span class="eyebrow" data-i18n="hist.eyebrow">10 · History</span>
                 <h2 data-i18n="hist.title">연혁</h2>
+                <p class="lead" data-i18n="hist.lead">2000년 이후 선박관리 연혁</p>
             </div>
             <div class="timeline" id="timeline"></div>
         </div>
     </section>
 
     <!-- CERTIFICATIONS -->
-    <section class="section section--alt" id="certifications">
+    <section class="section section--plate" id="certifications">
         <div class="container">
             <div class="section__head">
                 <span class="eyebrow" data-i18n="cert.eyebrow">11 · Compliance &amp; Certifications</span>
@@ -641,13 +668,27 @@
     </section>
 
     <!-- CAREERS -->
+    <!-- RECORD — 운항·인증 기록 (news.json) -->
+    <section class="section" id="record">
+        <div class="container">
+            <div class="section__head">
+                <span class="eyebrow" data-i18n="record.eyebrow">12 · Record</span>
+                <h2 data-i18n="record.title">운항·인증 기록</h2>
+                <p class="lead" data-i18n="record.lead">검사·인증·선대 변동 기록</p>
+            </div>
+            <div class="record" id="recordList"></div>
+        </div>
+    </section>
+
     <section class="section section--alt" id="careers">
         <div class="container">
             <div class="section__head">
-                <span class="eyebrow" data-i18n="careers.eyebrow">12 · Crew Recruitment</span>
+                <span class="eyebrow" data-i18n="careers.eyebrow">13 · Crew Recruitment</span>
                 <h2 data-i18n="careers.title">해상직원 채용정보</h2>
-                <p class="lead" data-i18n="careers.lead">현재 채용 공고는 아래 사이트에서 확인해 주세요.</p>
+                <p class="lead" data-i18n="careers.lead">현재 모집 중인 해상·육상 직위</p>
             </div>
+            <div class="openings" id="openingsList"></div>
+            <h3 class="subhead" data-i18n="careers.portals.title">채용 플랫폼</h3>
             <div class="careers-portals">
                 <a class="careers-portal" href="https://www.seanet.co.kr/job/job_view.html?to_id=129819" target="_blank" rel="noopener">
                     <span class="careers-portal__no">01</span>
@@ -676,19 +717,7 @@
                     </span>
                 </a>
             </div>
-        </div>
-    </section>
-
-    <!-- CONTACT — 이메일 서비스 선택 -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="section__head">
-                <span class="eyebrow" data-i18n="contact.eyebrow">13 · Contact</span>
-                <h2 data-i18n="contact.title">문의</h2>
-                <p class="lead" data-i18n="contact.lead">문의하실 이메일 서비스를 선택하시면 작성 화면으로 연결됩니다.</p>
-            </div>
-            <div class="contact-panel">
-                <div class="contact-application" id="application">
+            <div class="contact-application" id="application">
                     <span class="contact-application__file" aria-hidden="true">XLSX</span>
                     <div class="contact-application__copy">
                         <span class="contact-application__eyebrow" data-i18n="application.kicker">해상직원 지원 양식</span>
@@ -699,7 +728,20 @@
                         <span data-i18n="application.download">입사지원서 다운로드</span>
                         <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
                     </a>
-                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT — 이메일 서비스 선택 -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section__head">
+                <span class="eyebrow" data-i18n="contact.eyebrow">14 · Contact</span>
+                <h2 data-i18n="contact.title">문의</h2>
+                <p class="lead" data-i18n="contact.lead">선주·용선 문의 채널 안내</p>
+            </div>
+            <div class="contact-panel">
+                <span class="lane" data-i18n="contact.lane.owner">선주·용선 문의</span>
                 <div class="contact-panel__addr" id="mailpickTo">
                     <a href="mailto:samjoosm@samjoosm.com">samjoosm@samjoosm.com</a>
                     <span class="mailpick__sep">·</span>
@@ -733,7 +775,7 @@
     <section class="section section--alt" id="directions">
         <div class="container">
             <div class="section__head">
-                <span class="eyebrow" data-i18n="directions.eyebrow">14 · Directions</span>
+                <span class="eyebrow" data-i18n="directions.eyebrow">15 · Directions</span>
                 <h2 data-i18n="directions.title">오시는 길</h2>
                 <p class="lead" data-i18n="directions.lead">서울 본사와 부산 사무소 위치 안내입니다.</p>
             </div>
@@ -784,10 +826,10 @@
         <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14.5 6-6 6 6"/></svg>
     </button>
 
-    <script src="js/icons.js?v=20260711g"></script>
-    <script src="js/i18n.js?v=20260731a"></script>
-    <script src="js/data.js?v=20260711g"></script>
-    <script src="js/api.js?v=20260711g"></script>
-    <script src="js/main.js?v=20260731a"></script>
+    <script src="js/icons.js?v=20260731b"></script>
+    <script src="js/i18n.js?v=20260731b"></script>
+    <script src="js/data.js?v=20260731b"></script>
+    <script src="js/api.js?v=20260731b"></script>
+    <script src="js/main.js?v=20260731b"></script>
 </body>
 </html>

@@ -9,7 +9,9 @@ const state = {
     services: null,
     history: null,
     org: null,
-    certs: null
+    certs: null,
+    careers: null,
+    news: null
 };
 
 // ============================================================
@@ -57,23 +59,85 @@ function bindStaticData() {
 // ============================================================
 // Renderers
 // ============================================================
+// 선대 데이터에서 집계 — 어디서든 재사용
+function fleetFacts() {
+    const vs = state.fleet?.vessels || [];
+    const tally = (key) => vs.reduce((m, v) => (m[v[key]] = (m[v[key]] || 0) + 1, m), {});
+    const isBulk = (v) => /BULK/i.test(v.type);
+    const sum = (list) => list.reduce((n, v) => n + (Number(v.dwt) || 0), 0);
+    const rank = (obj) => Object.entries(obj).sort((a, b) => b[1] - a[1]);
+    return {
+        count: vs.length,
+        dwtTotal: sum(vs),
+        dwtBulk: sum(vs.filter(isBulk)),
+        dwtCar: sum(vs.filter(v => !isBulk(v))),
+        owners: rank(tally('owner')),
+        classes: rank(tally('class')),
+        flags: rank(tally('flag')),
+    };
+}
+
+// 짧은 선주사 표기 — CO., LTD. 등 법인 접미어 제거
+function shortOwner(name) {
+    return String(name).replace(/\s*CO\.,?\s*LTD\.?/i, '').replace(/\s+/g, ' ').trim();
+}
+
 function renderKPI() {
-    if (!state.company?.kpi) return;
-    const html = state.company.kpi.map((k, i) => {
-        const num = /^\d+$/.test(k.value)
-            ? `<span data-count="${k.value}">${k.value}</span>`
+    const grid = document.getElementById('kpiGrid');
+    if (!grid || !state.fleet?.vessels) return;
+    const f = fleetFacts();
+    const ko = state.lang === 'ko';
+    const n = (x) => x.toLocaleString('en-US');
+
+    // 등폭 숫자 자리에는 숫자만 — ISM/ISO/DOC 같은 약어는 11 인증 섹션이 담당
+    const cards = [
+        {
+            value: n(f.dwtTotal),
+            label: ko ? '총 재화중량' : 'Total Deadweight',
+            desc: ko
+                ? `벌크 ${n(f.dwtBulk)} · 자동차운반 ${n(f.dwtCar)}`
+                : `Bulk ${n(f.dwtBulk)} · PCC/PCTC ${n(f.dwtCar)}`,
+        },
+        {
+            value: String(f.owners.length),
+            label: ko ? '선주사' : 'Principals',
+            desc: f.owners.map(([o, c]) => `${shortOwner(o)} ${c}`).join(' · '),
+        },
+        {
+            value: String(f.classes.length),
+            label: ko ? '선급' : 'Class Societies',
+            desc: f.classes.map(([c, k]) => `${c} ${k}`).join(' · '),
+        },
+        {
+            value: '3',
+            label: ko ? '신조 벌크선' : 'Newbuildings',
+            desc: ko ? '2026년 인도 예정 · 건조 감리 수행' : 'Delivery 2026 · under supervision',
+        },
+    ];
+
+    grid.innerHTML = cards.map((k, i) => {
+        const plain = k.value.replace(/,/g, '');
+        const num = /^\d+$/.test(plain)
+            ? `<span data-count="${plain}">${k.value}</span>`
             : k.value;
         return `
         <div class="kpi__card">
             <span class="kpi__idx">${String(i + 1).padStart(2, '0')}</span>
             <div class="kpi__num">${num}</div>
-            <div class="kpi__label">${state.lang === 'ko' ? k.labelKo : k.labelEn}</div>
-            <div class="kpi__desc">${state.lang === 'ko' ? k.desc : k.descEn}</div>
+            <div class="kpi__label">${k.label}</div>
+            <div class="kpi__desc">${k.desc}</div>
         </div>`;
     }).join('');
-    document.getElementById('kpiGrid').innerHTML = html;
     observeCounts();
 }
+
+// 서비스별 준거 기준 — 삽화 대신 실제 표준을 라벨로 (FIG 자리 대체)
+const SERVICE_STANDARDS = {
+    technical: ['CLASS', 'DRY DOCK', 'SPARES', 'PMS'],
+    crew: ['STCW', 'MLC', 'FLAG DOC'],
+    shqe: ['ISM', 'ISPS', 'ISO 9001', 'ISO 14001', 'ISO 45001'],
+    newbuilding: ['PLAN REVIEW', 'SEA TRIAL', 'WARRANTY'],
+};
 
 // 선박 명부 티커 — 실제 관리 선박 데이터로 채움
 function renderTicker() {
@@ -93,6 +157,12 @@ function renderCeoMessage() {
     target.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
     target.classList.add('expanded');
     syncCeoToggle(true);
+
+    const stamp = document.getElementById('ceoStampFleet');
+    if (stamp && state.fleet?.vessels) {
+        const f = fleetFacts();
+        stamp.textContent = `${f.count} ${state.lang === 'ko' ? '척' : 'VESSELS'} · ${f.dwtTotal.toLocaleString('en-US')} DWT`;
+    }
 }
 
 function renderFleet() {
@@ -149,8 +219,11 @@ function renderFleet() {
         const op = operatorByCat[c.id];
         return `
         <div class="fleet__cat fleet__cat--${c.id}">
-            <div class="fleet__cat-media">
-                <img src="images/${c.image}" alt="${L(c.name)}" loading="lazy">
+            <div class="fleet__cat-media" style="--ar: ${c.imageRatio || 4}">
+                <img src="images/${c.image}-1080.webp"
+                     srcset="images/${c.image}-720.webp 720w, images/${c.image}-1080.webp 1080w, images/${c.image}-1300.webp 1300w"
+                     sizes="(max-width: 900px) 92vw, 560px"
+                     alt="${L(c.name)}" loading="lazy" decoding="async">
                 ${op ? `<span class="fleet__cat-badge fleet__cat-badge--${c.id}">${op}</span>` : ''}
             </div>
             <div class="fleet__cat-body">
@@ -199,12 +272,9 @@ function renderServices() {
             <div class="service__index">
                 <span class="service__num">${num}</span>
             </div>
-            <figure class="service__media">
-                <img src="images/${s.image}" alt="${L(s.name)}" loading="lazy">
-                <figcaption>FIG. ${num}</figcaption>
-            </figure>
             <div class="service__body">
                 <h3>${L(s.name)}</h3>
+                <p class="service__standards">${(SERVICE_STANDARDS[s.id] || []).map(c => `<span>${c}</span>`).join('')}</p>
                 <p>${L(s.description)}</p>
             </div>
             <ul class="service__features">${L(s.features).map(f => `<li>${f}</li>`).join('')}</ul>
@@ -289,15 +359,100 @@ function renderHistory() {
 function renderCerts() {
     if (!state.certs) return;
     // 증서 기록부(ledger) — 선내 증서 목록처럼 행 단위로
-    document.getElementById('certGrid').innerHTML = state.certs.map((c, i) => `
+    const ko = state.lang === 'ko';
+    document.getElementById('certGrid').innerHTML = state.certs.map((c, i) => {
+        // 증서번호·발행일·만료일은 채워졌을 때만 노출 (미기입 필드는 조용히 생략)
+        const meta = [
+            c.issuer && `${ko ? '발행' : 'Issued by'} ${c.issuer}`,
+            c.certNo && `NO. ${c.certNo}`,
+            c.issued && `${ko ? '발행일' : 'Issued'} ${c.issued}`,
+            c.expires && `${ko ? '만료' : 'Valid to'} ${c.expires}`,
+            L(c.scope),
+        ].filter(Boolean).join('  ·  ');
+        return `
         <div class="cert cert--${c.category}">
             <span class="cert__no">${String(i + 1).padStart(2, '0')}</span>
             <span class="cert__code">${c.code}</span>
             <h3>${c.name}</h3>
-            <p>${state.lang === 'ko' ? c.labelKo : c.labelEn}</p>
+            <p>${ko ? c.labelKo : c.labelEn}</p>
+            ${meta ? `<span class="cert__meta">${meta}</span>` : ''}
             <span class="cert__cat">${c.category.toUpperCase()}</span>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
+}
+
+// 채용 공고 — careers.json (지금까지 데이터만 있고 화면에 없던 것)
+const DEPT_LABEL = {
+    deck: { ko: '항해', en: 'Deck' },
+    engineer: { ko: '기관', en: 'Engine' },
+    shore: { ko: '육상', en: 'Shore' },
+};
+function renderOpenings() {
+    const el = document.getElementById('openingsList');
+    if (!el) return;
+    const list = (state.careers || []).filter(j => j.status === 'open');
+    const ko = state.lang === 'ko';
+    if (!list.length) {
+        el.innerHTML = `<p class="openings__empty">${ko ? '현재 모집 중인 공고가 없습니다.' : 'No open positions at this time.'}</p>`;
+        return;
+    }
+    el.innerHTML = list.map((j, i) => `
+        <article class="opening">
+            <span class="opening__no">${String(i + 1).padStart(2, '0')}</span>
+            <span class="opening__dept">${L(DEPT_LABEL[j.department] || { ko: j.department, en: j.department })}</span>
+            <span class="opening__body">
+                <h4>${j.title}</h4>
+                <p>${j.description}</p>
+            </span>
+            <span class="opening__meta">
+                <span>${j.location}</span>
+                <span>${j.employment}</span>
+            </span>
+            <span class="opening__date">${j.posted_at}</span>
+        </article>`).join('');
+}
+
+// 운항·인증 기록 — news.json (api.js에 있었지만 호출하는 곳이 없었음)
+const RECORD_CAT = {
+    press: { ko: '공지', en: 'Notice' },
+    certification: { ko: '인증', en: 'Certification' },
+    psc: { ko: '검사', en: 'Inspection' },
+};
+function renderRecord() {
+    const el = document.getElementById('recordList');
+    if (!el) return;
+    const list = (state.news || []).filter(n => n.published)
+        .slice().sort((a, b) => String(b.posted_at).localeCompare(String(a.posted_at)));
+    if (!list.length) { el.innerHTML = ''; return; }
+    el.innerHTML = list.map((n, i) => `
+        <article class="record__row">
+            <span class="record__no">${String(i + 1).padStart(2, '0')}</span>
+            <time class="record__date" datetime="${n.posted_at}">${n.posted_at}</time>
+            <span class="record__cat">${L(RECORD_CAT[n.category] || { ko: n.category, en: n.category })}</span>
+            <span class="record__body">
+                <h4>${n.title}</h4>
+                <p>${n.content}</p>
+            </span>
+        </article>`).join('');
+}
+
+// 핵심 역량 4칸의 근거 원장 — 전부 실제 선대/인증 데이터에서 도출
+function renderWhyEvidence() {
+    if (!state.fleet?.vessels) return;
+    const f = fleetFacts();
+    const ko = state.lang === 'ko';
+    const rows = {
+        'evi-1': (ko ? '기국 ' : 'Flag ') + f.flags.map(([k, v]) => `${k} ${v}`).join(' · '),
+        'evi-2': (ko ? '선급 ' : 'Class ') + f.classes.map(([k, v]) => `${k} ${v}`).join(' · '),
+        'evi-3': ko ? 'CMT · 부산 사무소 · STCW / MLC' : 'CMT · Busan office · STCW / MLC',
+        'evi-4': 'ISO 9001 · 14001 · 45001',
+    };
+    Object.entries(rows).forEach(([id, text]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    });
+    const hours = document.getElementById('commitHours');
+    if (hours) hours.textContent = L(state.company?.offices?.[0]?.hours || '');
 }
 
 function renderDirections() {
@@ -394,6 +549,9 @@ function renderAllI18nDependent() {
     renderOrg();
     renderHistory();
     renderCerts();
+    renderWhyEvidence();
+    renderOpenings();
+    renderRecord();
     renderDirections();
     if (typeof window.refreshMailpick === 'function') window.refreshMailpick();
     // 재렌더된 노드들을 reveal 관찰자에 다시 등록 (언어 전환 시 사라짐 방지)
@@ -403,13 +561,36 @@ function renderAllI18nDependent() {
 // ============================================================
 // Interactions
 // ============================================================
+// setupNav 내부에서 채워짐 — 다른 핸들러가 메뉴를 닫을 때 사용
+let closeNav = () => {};
+
 function setupNav() {
     const nav = document.getElementById('nav');
     const isMobileNav = () => window.matchMedia('(max-width: 1024px)').matches;
     document.getElementById('langToggle').addEventListener('click', toggleLang);
+
+    // 메뉴 열린 동안 뒤 페이지 스크롤 잠금 (iOS 사파리는 overflow:hidden만으로 안 잠김)
+    let lockedY = 0;
+    function setNavOpen(open) {
+        const body = document.body;
+        if (open) {
+            lockedY = window.scrollY;
+            nav.classList.add('is-open');
+            body.classList.add('is-nav-open');
+            body.style.top = -lockedY + 'px';
+        } else {
+            nav.classList.remove('is-open');
+            body.classList.remove('is-nav-open');
+            body.style.top = '';
+            window.scrollTo(0, lockedY);
+        }
+    }
+    closeNav = () => { if (nav.classList.contains('is-open')) setNavOpen(false); };
+
     document.getElementById('burger').addEventListener('click', () => {
-        nav.classList.toggle('is-open');
+        setNavOpen(!nav.classList.contains('is-open'));
     });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
 
     document.querySelectorAll('[data-nav-toggle]').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -433,7 +614,7 @@ function setupNav() {
 
     document.querySelectorAll('.nav__menu a').forEach(a => {
         a.addEventListener('click', () => {
-            nav.classList.remove('is-open');
+            closeNav();
             document.querySelectorAll('.nav__item.is-expanded').forEach(item => {
                 item.classList.remove('is-expanded');
                 item.querySelector('[data-nav-toggle]')?.setAttribute('aria-expanded', 'false');
@@ -511,6 +692,8 @@ function setupBackTop() {
 }
 
 function hideLoading() {
+    // 히어로 연출은 커튼이 걷히는 순간부터 — 그 전엔 아무도 못 봄
+    document.body.classList.add('is-ready');
     const loading = document.getElementById('loading');
     if (!loading) return;
     loading.classList.add('hidden');
@@ -518,7 +701,7 @@ function hideLoading() {
 }
 function setupLoading() {
     // 강력 폴백 — 무조건 1.2초 안에 사라짐 (네트워크 에러 무관)
-    setTimeout(hideLoading, 1200);
+    setTimeout(hideLoading, 600);
     // 추가 안전망 — window.load 시점에도 강제
     window.addEventListener('load', () => setTimeout(hideLoading, 400));
 }
@@ -528,16 +711,16 @@ function setupScrollProgress() {
     if (!bar) return;
     window.addEventListener('scroll', () => {
         const h = document.documentElement;
-        const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-        bar.style.width = scrolled + '%';
-    });
+        const p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+        bar.style.transform = 'scaleX(' + Math.min(Math.max(p, 0), 1) + ')';
+    }, { passive: true });
 }
 
 function setupNavScrollShadow() {
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
         nav.classList.toggle('is-scrolled', window.scrollY > 30);
-    });
+    }, { passive: true });
 }
 
 
@@ -607,7 +790,7 @@ function setupTimelineProgress() {
     update();
 }
 
-const REVEAL_SELECTOR = '.section, .kpi__card, .mv, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .cert, .why__item, .careers-portal, .esg-col, .safety-col, .safety-cycle__step, .direction';
+const REVEAL_SELECTOR = '.kpi__card, .mv, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .cert, .why__item, .careers-portal, .esg-col, .safety-col, .safety-cycle__step, .direction';
 let _revealIO;
 function setupReveal() {
     // 재렌더(언어 전환 등)로 새로 생성된 노드도 매번 다시 관찰한다.
@@ -631,9 +814,12 @@ function setupReveal() {
 }
 
 async function init() {
-    // 페이지 진입 시 항상 최상단으로 (브라우저의 스크롤 복원 + 해시 점프 차단)
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
+    // 해시 없이 들어오면 최상단 고정(브라우저 스크롤 복원 차단), 해시가 있으면 그 섹션으로 보냄
+    const entryHash = location.hash;
+    if (!entryHash) {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+    }
 
     setupLoading();
     setupScrollProgress();
@@ -648,9 +834,10 @@ async function init() {
     state.lang = savedLang;
 
     try {
-        const [company, fleet, services, history, org, certs] = await Promise.all([
+        const [company, fleet, services, history, org, certs, careers, news] = await Promise.all([
             API.company(), API.fleet(), API.services(),
-            API.history(), API.organization(), API.certifications()
+            API.history(), API.organization(), API.certifications(),
+            API.careers.list(), API.news.list(20)
         ]);
         state.company = company;
         state.fleet = fleet;
@@ -658,6 +845,8 @@ async function init() {
         state.history = history;
         state.org = org;
         state.certs = certs;
+        state.careers = careers;
+        state.news = news;
     } catch (err) {
         console.error('[INIT] data load failed:', err);
     }
@@ -668,9 +857,20 @@ async function init() {
     setupTimelineProgress();
     observeCounts();
     hideLoading();
-    // 데이터 렌더 + 로딩 오버레이 종료 후에도 한 번 더 최상단 강제 (이미지/폰트 reflow 대응)
-    requestAnimationFrame(() => window.scrollTo(0, 0));
-    window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
+
+    if (entryHash) {
+        // 렌더가 끝난 뒤에 해시 섹션으로 — 13,000px 스무스 스크롤은 부적절하므로 auto
+        const land = () => {
+            const el = document.querySelector(entryHash);
+            if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+        };
+        requestAnimationFrame(land);
+        window.addEventListener('load', () => requestAnimationFrame(land), { once: true });
+    } else {
+        // 데이터 렌더 + 로딩 오버레이 종료 후에도 한 번 더 최상단 강제 (이미지/폰트 reflow 대응)
+        requestAnimationFrame(() => window.scrollTo(0, 0));
+        window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', init);
