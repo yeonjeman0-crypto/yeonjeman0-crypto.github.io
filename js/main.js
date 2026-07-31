@@ -10,7 +10,6 @@ const state = {
     history: null,
     org: null,
     certs: null,
-    careers: null,
     news: null
 };
 
@@ -345,16 +344,28 @@ function renderHistory() {
         .replace(/SAMJOO SM(?!\w)/g,    '<span class="nowrap">SAMJOO SM</span>')
         .replace(/DORIKO LIMITED/g,     '<span class="nowrap">DORIKO LIMITED</span>')
         .replace(/DORIKO LTD\.?/g,      '<span class="nowrap">DORIKO LTD.</span>');
-    document.getElementById('timeline').innerHTML = state.history.map(h => `
-        <div class="timeline__item ${h.highlight ? 'is-highlight' : ''}">
-            <div class="timeline__year">${h.year}</div>
-            <div class="timeline__content">
-                ${h.highlight ? '<span class="timeline__badge">' + (state.lang === 'ko' ? '현재' : 'PRESENT') + '</span>' : ''}
+    const ko = state.lang === 'ko';
+    // 연대 그룹으로 묶어 원장처럼 — 9개 평면 나열 대신 시대 단위로 읽히게
+    const decadeOf = (y) => Math.floor(parseInt(String(y).slice(0, 4), 10) / 10) * 10;
+    let lastDecade = null;
+    const rows = state.history.map((h, i) => {
+        const d = decadeOf(h.year);
+        const marker = d !== lastDecade
+            ? `<div class="tl__era"><span>${d}s</span></div>`
+            : '';
+        lastDecade = d;
+        return marker + `
+        <article class="tl__row${h.highlight ? ' is-now' : ''}">
+            <div class="tl__year">${h.year}</div>
+            <div class="tl__rail" aria-hidden="true"><span class="tl__node"></span></div>
+            <div class="tl__body">
                 <h3>${protectBrand(L(h.title))}</h3>
                 <p>${protectBrand(L(h.desc))}</p>
             </div>
-        </div>
-    `).join('');
+            <div class="tl__tag">${h.highlight ? `<span class="tl__now">${ko ? '현재' : 'PRESENT'}</span>` : `<span class="tl__seq">${String(state.history.length - i).padStart(2, '0')}</span>`}</div>
+        </article>`;
+    }).join('');
+    document.getElementById('timeline').innerHTML = rows;
 }
 
 function renderCerts() {
@@ -380,37 +391,6 @@ function renderCerts() {
             <span class="cert__cat">${c.category.toUpperCase()}</span>
         </div>`;
     }).join('');
-}
-
-// 채용 공고 — careers.json (지금까지 데이터만 있고 화면에 없던 것)
-const DEPT_LABEL = {
-    deck: { ko: '항해', en: 'Deck' },
-    engineer: { ko: '기관', en: 'Engine' },
-    shore: { ko: '육상', en: 'Shore' },
-};
-function renderOpenings() {
-    const el = document.getElementById('openingsList');
-    if (!el) return;
-    const list = (state.careers || []).filter(j => j.status === 'open');
-    const ko = state.lang === 'ko';
-    if (!list.length) {
-        el.innerHTML = `<p class="openings__empty">${ko ? '현재 모집 중인 공고가 없습니다.' : 'No open positions at this time.'}</p>`;
-        return;
-    }
-    el.innerHTML = list.map((j, i) => `
-        <article class="opening">
-            <span class="opening__no">${String(i + 1).padStart(2, '0')}</span>
-            <span class="opening__dept">${L(DEPT_LABEL[j.department] || { ko: j.department, en: j.department })}</span>
-            <span class="opening__body">
-                <h4>${j.title}</h4>
-                <p>${j.description}</p>
-            </span>
-            <span class="opening__meta">
-                <span>${j.location}</span>
-                <span>${j.employment}</span>
-            </span>
-            <span class="opening__date">${j.posted_at}</span>
-        </article>`).join('');
 }
 
 // 운항·인증 기록 — news.json (api.js에 있었지만 호출하는 곳이 없었음)
@@ -551,7 +531,6 @@ function renderAllI18nDependent() {
     renderHistory();
     renderCerts();
     renderWhyEvidence();
-    renderOpenings();
     renderRecord();
     renderDirections();
     if (typeof window.refreshMailpick === 'function') window.refreshMailpick();
@@ -785,13 +764,19 @@ function setupTimelineProgress() {
         const passed = (vh * 0.65) - r.top;
         const p = Math.max(0, Math.min(1, passed / Math.max(r.height, 1)));
         tl.style.setProperty('--tl-progress', (p * 100).toFixed(1) + '%');
+        // 레일 x좌표 실측 — 그리드 폭이 바뀌어도 진행선이 따라붙음
+        const rail = tl.querySelector('.tl__rail');
+        if (rail) {
+            const rr = rail.getBoundingClientRect();
+            tl.style.setProperty('--tl-rail-x', Math.round(rr.left - r.left) + 'px');
+        }
     };
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
 }
 
-const REVEAL_SELECTOR = '.kpi__card, .mv, .timeline__item, .org__box, .fleet__cat, .service, .stats-dark__card, .cert, .why__item, .careers-portal, .esg-col, .safety-col, .safety-cycle__step, .direction';
+const REVEAL_SELECTOR = '.kpi__card, .mv, .tl__row, .org__box, .fleet__cat, .service, .stats-dark__card, .cert, .why__item, .careers-portal, .esg-col, .safety-col, .safety-cycle__step, .direction';
 let _revealIO;
 function setupReveal() {
     // 재렌더(언어 전환 등)로 새로 생성된 노드도 매번 다시 관찰한다.
@@ -835,10 +820,10 @@ async function init() {
     state.lang = savedLang;
 
     try {
-        const [company, fleet, services, history, org, certs, careers, news] = await Promise.all([
+        const [company, fleet, services, history, org, certs, news] = await Promise.all([
             API.company(), API.fleet(), API.services(),
             API.history(), API.organization(), API.certifications(),
-            API.careers.list(), API.news.list(20)
+            API.news.list(20)
         ]);
         state.company = company;
         state.fleet = fleet;
@@ -846,7 +831,6 @@ async function init() {
         state.history = history;
         state.org = org;
         state.certs = certs;
-        state.careers = careers;
         state.news = news;
     } catch (err) {
         console.error('[INIT] data load failed:', err);
