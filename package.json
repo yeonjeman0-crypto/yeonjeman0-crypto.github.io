@@ -1,0 +1,19 @@
+{
+  "name": "samjoo-sm-corporate-website",
+  "version": "2.1.0",
+  "description": "SAMJOO SM CO., LTD. and DORIKO LIMITED static corporate website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/content-audit.mjs",
+    "dev": "node scripts/dev-server.mjs",
+    "audit": "node scripts/content-audit.mjs && node scripts/mobile-audit.mjs --serve",
+    "audit:content": "node scripts/content-audit.mjs",
+    "audit:mobile": "node scripts/mobile-audit.mjs --serve"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
