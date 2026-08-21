@@ -3497,30 +3497,47 @@ ul.pol-sub .pol-en { font-size: .8rem; margin-top: .2rem; }
 .pol-grid .pol-ko { font-size: .92rem; font-weight: 600; }
 .pol-grid .pol-en { font-size: .78rem; margin-top: .3rem; }
 
-/* 서명란 */
+/* 서명란 — 원본 문서와 같이 하단 우측에 배치 */
 .pol-sign {
-    margin-top: 2rem; padding-top: 1.6rem; border-top: 2px solid var(--rule-strong);
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.6rem;
+    border-top: 2px solid var(--rule-strong);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
 }
 .pol-sign__date {
-    grid-column: 1 / -1; font-family: var(--font-mono); font-size: .8rem;
-    font-weight: 600; color: var(--gray); letter-spacing: .02em; margin: 0 0 .4rem;
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: .02em;
+    margin: 0 0 1.4rem;
 }
-.pol-sign__co { font-size: 1rem; font-weight: 700; color: var(--ink); margin: 0 0 .3rem; line-height: 1.5; }
-.pol-sign__co .en { display: block; font-family: var(--font-mono); font-size: .8rem; font-weight: 500; color: var(--gray); margin-top: .2rem; letter-spacing: .02em; }
-.pol-sign__ceo { font-size: .9rem; color: var(--text); margin: 0; }
-.pol-sign__ceo .en { font-family: var(--font-mono); font-size: .78rem; color: var(--gray); margin-left: .5rem; }
-
-/* 참고 안내 */
-.pol-note {
-    margin-top: 2.5rem; padding: 1.4rem clamp(1.2rem, 3vw, 1.8rem);
-    background: var(--bg-alt); border-left: 3px solid var(--teal);
-    border-radius: 0 var(--r-card) var(--r-card) 0;
+.pol-sign__parties {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1.6rem clamp(2rem, 5vw, 4.5rem);
 }
-.pol-note h2 { margin: 0 0 .7rem; font-size: var(--t-title); font-weight: 700; color: var(--ink); }
-.pol-note p { margin: 0 0 .6rem; font-size: .88rem; line-height: 1.8; color: var(--text); }
-.pol-note p:last-child { margin-bottom: 0; }
-.pol-note a { color: var(--teal-deep); font-weight: 600; }
+.pol-sign__party { display: flex; flex-direction: column; }
+.pol-sign__co {
+    font-size: 1rem; font-weight: 700; color: var(--ink);
+    line-height: 1.4; margin: 0;
+}
+.pol-sign__co-en {
+    font-family: var(--font-mono); font-size: .78rem; font-weight: 500;
+    color: var(--gray); letter-spacing: .02em; margin: .2rem 0 .9rem;
+}
+.pol-sign__ceo { font-size: .92rem; font-weight: 600; color: var(--text); margin: 0; }
+.pol-sign__ceo-en {
+    font-family: var(--font-mono); font-size: .76rem; font-weight: 500;
+    color: var(--gray); letter-spacing: .02em; margin: .2rem 0 0;
+}
+@media (max-width: 560px) {
+    .pol-sign__parties { flex-direction: column; align-items: flex-end; gap: 1.4rem; }
+}
 
 @media print {
     .pol-doc { break-inside: avoid; box-shadow: none; margin-bottom: 1.5rem; }
