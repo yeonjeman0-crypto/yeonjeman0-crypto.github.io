@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사 방침 Corporate Policies | 삼주에스엠 · 도리코 SAMJOO SM · DORIKO</title>
+    <meta name="description" content="삼주에스엠(주)·(주)도리코의 안전·보건·품질 및 환경보호 방침(SHQE Policy), 윤리경영 방침, 마약 및 알코올 통제 방침. ISO 9001·14001·45001, ISM Code, ISPS Code 기반 통합경영시스템 주 매뉴얼 MM-00 수록 방침 전문.">
+    <meta name="keywords" content="삼주에스엠, SAMJOO SM, 도리코, DORIKO, SHQE Policy, 안전보건방침, 품질방침, 환경방침, 윤리경영방침, 마약 및 알코올 통제 방침, Drug and Alcohol Control Policy, Corporate Policy of Ethical Management, ISO 9001, ISO 14001, ISO 45001, ISM Code, ISPS Code, 선박관리">
+    <meta name="author" content="SAMJOO SM CO., LTD. / DORIKO LIMITED">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.samjoosm-doriko.com/policy.html">
+    <meta property="og:title" content="회사 방침 Corporate Policies — 삼주에스엠 · 도리코">
+    <meta property="og:description" content="SHQE 방침, 윤리경영 방침, 마약 및 알코올 통제 방침 전문. ISO 9001·14001·45001 및 ISM Code 기반.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.samjoosm-doriko.com/policy.html">
+    <meta property="og:image" content="https://www.samjoosm-doriko.com/images/brand/og-image.jpg">
+    <meta property="og:site_name" content="SAMJOO SM CO., LTD. / DORIKO LIMITED">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="회사 방침 Corporate Policies — 삼주에스엠 · 도리코">
+    <meta name="twitter:description" content="SHQE 방침, 윤리경영 방침, 마약 및 알코올 통제 방침 전문.">
+    <meta name="twitter:image" content="https://www.samjoosm-doriko.com/images/brand/og-image.jpg">
+    <link rel="icon" type="image/webp" href="images/brand/company_logo.webp">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=20260731f">
+    <style>
+        /* ── 방침 페이지 전용 — 사이트 토큰만 사용 ───────────────── */
+        .pol-body { background: var(--bg); }
+
+        .pol-bar {
+            position: sticky; top: 0; z-index: 50;
+            display: flex; align-items: center; gap: 1rem;
+            padding: 0 var(--page-pad); height: var(--nav-h);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--hairline);
+        }
+        .pol-bar__logo { display: flex; align-items: center; }
+        .pol-bar__logo img { height: 34px; width: auto; display: block; }
+        .pol-bar__spacer { flex: 1; }
+        .pol-bar__link {
+            font-size: var(--t-meta); font-weight: 600; color: var(--gray);
+            text-decoration: none; transition: color var(--t);
+            display: inline-flex; align-items: center; gap: .4rem;
+        }
+        .pol-bar__link:hover { color: var(--teal); }
+        .pol-lang {
+            font-family: var(--font-mono); font-size: .75rem; font-weight: 600;
+            letter-spacing: .06em; color: var(--navy);
+            background: none; border: 1px solid var(--hairline);
+            border-radius: var(--r-ctl); padding: .4rem .6rem; cursor: pointer;
+            transition: border-color var(--t), color var(--t);
+        }
+        .pol-lang:hover { border-color: var(--teal); color: var(--teal); }
+        .pol-lang .sep { opacity: .35; margin: 0 .25rem; }
+        .pol-lang .on { color: var(--teal); }
+
+        .pol-hero {
+            padding: clamp(3rem, 7vw, 5.5rem) var(--page-pad) clamp(2rem, 4vw, 3rem);
+            background: linear-gradient(135deg, var(--navy), var(--teal-deep) 62%, var(--teal));
+            color: #fff;
+            background-image: var(--plate-grid), linear-gradient(135deg, var(--navy), var(--teal-deep) 62%, var(--teal));
+            background-size: var(--plate-grid-size), auto;
+        }
+        .pol-hero__inner { max-width: 1180px; margin: 0 auto; }
+        .pol-hero .eyebrow {
+            font-family: var(--font-mono); font-size: .72rem; font-weight: 600;
+            letter-spacing: .18em; text-transform: uppercase;
+            color: var(--teal-glow); display: block; margin-bottom: .9rem;
+        }
+        .pol-hero h1 {
+            font-size: clamp(1.9rem, 3.4vw, 2.9rem); font-weight: 700;
+            line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 .9rem;
+        }
+        .pol-hero h1 .en {
+            display: block; font-family: var(--font-mono); font-weight: 500;
+            font-size: clamp(.85rem, 1.3vw, 1.05rem); letter-spacing: .04em;
+            color: var(--teal-glow); margin-top: .5rem;
+        }
+        .pol-hero p { max-width: 62ch; font-size: var(--t-body); line-height: 1.75; color: rgba(255,255,255,.8); margin: 0; }
+
+        .pol-main { max-width: 1180px; margin: 0 auto; padding: 0 var(--page-pad) clamp(3rem, 6vw, 5rem); }
+
+        /* 문서 정보 스트립 */
+        .pol-meta {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1px; background: var(--hairline);
+            border: 1px solid var(--hairline); border-radius: var(--r-card);
+            overflow: hidden; margin: -2rem 0 2.5rem; box-shadow: var(--shadow-md);
+        }
+        .pol-meta > div { background: #fff; padding: 1rem 1.15rem; }
+        .pol-meta dt {
+            font-family: var(--font-mono); font-size: .68rem; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: var(--gray-light); margin: 0 0 .4rem;
+        }
+        .pol-meta dd { margin: 0; font-size: .9rem; font-weight: 600; color: var(--ink); line-height: 1.45; }
+        .pol-meta dd small { display: block; font-weight: 500; color: var(--gray); font-size: .78rem; margin-top: .15rem; }
+
+        /* 목차 */
+        .pol-toc { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+        .pol-toc a {
+            font-size: var(--t-meta); font-weight: 600; color: var(--navy);
+            text-decoration: none; padding: .55rem .95rem;
+            border: 1px solid var(--hairline); border-radius: var(--r-ctl);
+            background: #fff; transition: all var(--t);
+        }
+        .pol-toc a:hover { border-color: var(--teal); color: var(--teal); box-shadow: var(--shadow-sm); }
+        .pol-toc a .num { font-family: var(--font-mono); color: var(--teal); margin-right: .5rem; font-size: .78rem; }
+
+        /* 방침 카드 */
+        .pol-doc {
+            background: #fff; border: 1px solid var(--hairline);
+            border-radius: var(--r-card); box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem; overflow: hidden; scroll-margin-top: calc(var(--nav-h) + 1rem);
+        }
+        .pol-doc__head {
+            padding: 1.6rem clamp(1.2rem, 3vw, 2.2rem) 1.3rem;
+            border-bottom: 2px solid var(--rule-strong);
+            display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1rem;
+        }
+        .pol-doc__code {
+            font-family: var(--font-mono); font-size: .7rem; font-weight: 700;
+            letter-spacing: .1em; color: #fff; background: var(--teal-deep);
+            padding: .3rem .55rem; border-radius: var(--r-chip);
+        }
+        .pol-doc__title { margin: 0; font-size: var(--t-deck); font-weight: 700; color: var(--ink); letter-spacing: -0.015em; line-height: 1.3; }
+        .pol-doc__title .en { display: block; font-family: var(--font-mono); font-weight: 500; font-size: .84rem; letter-spacing: .02em; color: var(--gray); margin-top: .35rem; }
+        .pol-doc__body { padding: clamp(1.2rem, 3vw, 2.2rem); }
+
+        .pol-lead { font-size: var(--t-body); line-height: 1.85; color: var(--text); margin: 0 0 .6rem; }
+        .pol-lead + .pol-lead--en { margin-bottom: 1.8rem; }
+        .pol-lead--en { font-size: .86rem; line-height: 1.8; color: var(--gray); }
+
+        ol.pol-list { list-style: none; counter-reset: pol; margin: 0; padding: 0; }
+        ol.pol-list > li {
+            counter-increment: pol; position: relative;
+            padding: 0 0 1.4rem 3rem; margin-bottom: 1.4rem;
+            border-bottom: 1px solid var(--hairline-soft);
+        }
+        ol.pol-list > li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        ol.pol-list > li::before {
+            content: counter(pol, decimal-leading-zero);
+            position: absolute; left: 0; top: .1rem;
+            font-family: var(--font-mono); font-size: .82rem; font-weight: 700;
+            color: var(--teal); letter-spacing: .02em;
+        }
+        .pol-ko { display: block; font-size: var(--t-body); line-height: 1.8; color: var(--text); font-weight: 500; }
+        .pol-en { display: block; font-size: .84rem; line-height: 1.75; color: var(--gray); margin-top: .5rem; }
+
+        ul.pol-sub { list-style: none; margin: .8rem 0 0; padding: 0 0 0 .9rem; border-left: 2px solid var(--hairline); }
+        ul.pol-sub li { margin-bottom: .6rem; }
+        ul.pol-sub li:last-child { margin-bottom: 0; }
+        ul.pol-sub .pol-ko { font-weight: 500; font-size: .9rem; }
+        ul.pol-sub .pol-en { font-size: .8rem; margin-top: .2rem; }
+
+        /* 윤리 6개 행동기준 그리드 */
+        /* 6개 항목 — 3×2 로 떨어지게 고정해 빈 칸이 남지 않도록 한다 */
+        .pol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--r-card); overflow: hidden; margin: 0 0 1.8rem; }
+        @media (max-width: 900px) { .pol-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .pol-grid { grid-template-columns: 1fr; } }
+        .pol-grid > div { background: #fff; padding: 1.1rem 1.25rem; }
+        .pol-grid .num { font-family: var(--font-mono); font-size: .72rem; font-weight: 700; color: var(--teal); display: block; margin-bottom: .5rem; }
+        .pol-grid .pol-ko { font-size: .92rem; font-weight: 600; }
+        .pol-grid .pol-en { font-size: .78rem; margin-top: .3rem; }
+
+        /* 서명란 */
+        .pol-sign {
+            margin-top: 2rem; padding-top: 1.6rem; border-top: 2px solid var(--rule-strong);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+        }
+        .pol-sign__date {
+            grid-column: 1 / -1; font-family: var(--font-mono); font-size: .8rem;
+            font-weight: 600; color: var(--gray); letter-spacing: .02em; margin: 0 0 .4rem;
+        }
+        .pol-sign__co { font-size: 1rem; font-weight: 700; color: var(--ink); margin: 0 0 .3rem; line-height: 1.5; }
+        .pol-sign__co .en { display: block; font-family: var(--font-mono); font-size: .8rem; font-weight: 500; color: var(--gray); margin-top: .2rem; letter-spacing: .02em; }
+        .pol-sign__ceo { font-size: .9rem; color: var(--text); margin: 0; }
+        .pol-sign__ceo .en { font-family: var(--font-mono); font-size: .78rem; color: var(--gray); margin-left: .5rem; }
+
+        /* 참고 안내 */
+        .pol-note {
+            margin-top: 2.5rem; padding: 1.4rem clamp(1.2rem, 3vw, 1.8rem);
+            background: var(--bg-alt); border-left: 3px solid var(--teal);
+            border-radius: 0 var(--r-card) var(--r-card) 0;
+        }
+        .pol-note h2 { margin: 0 0 .7rem; font-size: var(--t-title); font-weight: 700; color: var(--ink); }
+        .pol-note p { margin: 0 0 .6rem; font-size: .88rem; line-height: 1.8; color: var(--text); }
+        .pol-note p:last-child { margin-bottom: 0; }
+        .pol-note a { color: var(--teal-deep); font-weight: 600; }
+
+        @media print {
+            .pol-bar, .pol-toc, .footer, .pol-note { display: none !important; }
+            .pol-hero { background: none !important; color: var(--ink) !important; padding: 0 0 1.5rem; }
+            .pol-hero .eyebrow, .pol-hero h1 .en { color: var(--gray) !important; }
+            .pol-hero h1 { color: var(--ink) !important; }
+            .pol-hero p { color: var(--text) !important; }
+            .pol-doc { break-inside: avoid; box-shadow: none; margin-bottom: 1.5rem; }
+            .pol-meta { box-shadow: none; margin-top: 0; }
+        }
+
+        @media (max-width: 640px) {
+            .pol-bar { gap: .6rem; }
+            .pol-bar__link span { display: none; }
+            ol.pol-list > li { padding-left: 2.3rem; }
+        }
+    </style>
+</head>
+<body class="pol-body is-ready">
+
+    <!-- BAR -->
+    <header class="pol-bar">
+        <a href="index.html" class="pol-bar__logo" aria-label="SAMJOO SM CO., LTD. / DORIKO LIMITED">
+            <img src="images/brand/company_logo.webp" alt="SAMJOO SM CO., LTD. / DORIKO LIMITED">
+        </a>
+        <div class="pol-bar__spacer"></div>
+        <a href="index.html" class="pol-bar__link">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+            <span data-i18n="pol.home">홈으로</span>
+        </a>
+        <button class="pol-lang" type="button" id="polLang" aria-label="Language / 언어">
+            <span class="ko">KO</span><span class="sep">/</span><span class="en">EN</span>
+        </button>
+    </header>
+
+    <!-- HERO -->
+    <section class="pol-hero">
+        <div class="pol-hero__inner">
+            <span class="eyebrow">Corporate Policies</span>
+            <h1>
+                <span data-i18n="pol.title">회사 방침</span>
+                <span class="en">SAMJOO SM CO., LTD. &nbsp;·&nbsp; DORIKO LIMITED</span>
+            </h1>
+            <p data-i18n="pol.lead">삼주에스엠(주)와 (주)도리코는 통합경영시스템 주 매뉴얼(MM-00)에 다음의 방침을 제정하여 육상 및 선박의 전 조직에 적용·유지하고 있습니다. 본 페이지의 방침 전문은 사내 승인 원본과 동일합니다.</p>
+        </div>
+    </section>
+
+    <main class="pol-main">
+
+        <!-- 문서 정보 -->
+        <dl class="pol-meta">
+            <div>
+                <dt>Document No.</dt>
+                <dd>MM-00<small data-i18n="pol.meta.doc">주 매뉴얼 Main Manual</small></dd>
+            </div>
+            <div>
+                <dt>Revision</dt>
+                <dd>Rev. 1.2</dd>
+            </div>
+            <div>
+                <dt data-i18n="pol.meta.date">시행일자 Enforced</dt>
+                <dd>2026-04-15<small>15th Apr. 2026</small></dd>
+            </div>
+            <div>
+                <dt data-i18n="pol.meta.scope">적용범위 Scope</dt>
+                <dd data-i18n="pol.meta.scope.v">육상·선박 전 조직<small>Shore &amp; ship, all levels</small></dd>
+            </div>
+            <div>
+                <dt data-i18n="pol.meta.std">적용표준 Standards</dt>
+                <dd>ISO 9001 · 14001 · 45001<small>ISM Code · ISPS Code</small></dd>
+            </div>
+        </dl>
+
+        <!-- 목차 -->
+        <nav class="pol-toc" aria-label="policies">
+            <a href="#shqe"><span class="num">F-5</span><span data-i18n="pol.toc.shqe">안전·보건·품질 및 환경보호 방침</span></a>
+            <a href="#ethics"><span class="num">F-8</span><span data-i18n="pol.toc.ethics">윤리경영 방침</span></a>
+            <a href="#drug"><span class="num">F-6</span><span data-i18n="pol.toc.drug">마약 및 알코올 통제 방침</span></a>
+        </nav>
+
+        <!-- ─────────────────────────────────────────────────────
+             F-5 SHQE POLICY
+             ───────────────────────────────────────────────────── -->
+        <article class="pol-doc" id="shqe">
+            <div class="pol-doc__head">
+                <span class="pol-doc__code">MM-00 F-5</span>
+                <h2 class="pol-doc__title">
+                    회사의 안전, 보건, 품질 및 환경보호 방침
+                    <span class="en">SHQE Policy of Company</span>
+                </h2>
+            </div>
+            <div class="pol-doc__body">
+                <ol class="pol-list">
+                    <li>
+                        <span class="pol-ko">「중대재해 처벌 등에 관한 법률」을 포함한 국내·국제 안전보건 관련 법령에 따른 경영책임자의 의무를 성실히 이행하고, 안전보건관리체계를 효과적으로 구축·운영한다.</span>
+                        <span class="pol-en">The Company fulfills the CEO's obligations for safety and health in accordance with the Serious Accidents Punishment Act and other applicable safety and health laws, and effectively establishes and operates the safety and health management system.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">ISO 9001, ISO 14001, ISO 45001, ISM Code, ISPS Code 요구사항과 관련 국내·국제 법규 및 규정을 준수하며, 이행 상황을 정기적으로 점검·관리한다.</span>
+                        <span class="pol-en">The Company complies with the requirements of ISO 9001, ISO 14001, ISO 45001, the ISM Code and the ISPS Code, as well as applicable national and international laws and regulations, and regularly monitors and manages its compliance status.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">PSC, 선급(Class), 기국(Flag) 등 대외 검사·평가 요구사항을 충족하기 위하여 결함(Deficiency)·출항정지(Detention) 예방 활동을 수행하고, 반복·중대 결함 근절을 위한 사전 점검, 원인분석, 시정·예방조치를 지속한다.</span>
+                        <span class="pol-en">To meet external inspection and assessment requirements such as PSC, Class and Flag, the Company conducts deficiency and detention prevention activities and continuously implements pre-inspections, root cause analysis and corrective/preventive actions to eliminate repeat and serious deficiencies.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">육·해상 무사고, 무재해, 환경 보호(Zero spill) 및 PSC 출항정지(Detention) Zero를 목표로 관리 기준을 제정하고, 전 직원의 철저한 준수를 통하여 안전보건·품질·환경 경영 시스템 목표를 달성한다.</span>
+                        <span class="pol-en">Management standards are established to achieve zero incidents, zero injuries, environmental protection (zero spill) and Zero Detention both onboard and ashore, and all employees achieve the safety, health, quality and environmental management system objectives through strict compliance.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">외부·내부 이슈, 이해관계자 요구사항, 시스템 적용범위를 고려하여 리스크와 기회를 결정하고 경영 목표를 수립·시행·유지한다.</span>
+                        <span class="pol-en">Considering internal/external issues, stakeholder requirements and the scope of the systems, the Company determines risks and opportunities and establishes, implements and maintains objectives.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">근로자 및 그 대표의 협의와 참여를 보장하며, 시스템의 수립·실행·유지 및 지속적 개선에 필요한 자원, 역량(적격성), 인식, 의사소통을 제공하고 관련 사항을 문서화된 정보로 유지한다.</span>
+                        <span class="pol-en">Consultation and participation of workers and their representatives are ensured, and the resources, competence, awareness and communication necessary for establishing, implementing, maintaining and continually improving the systems are provided and maintained as documented information.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">근로환경 위험요인을 파악·제거하고 안전보건 리스크를 감소시켜 상해 및 사고성 재해 예방 활동을 지속한다.</span>
+                        <span class="pol-en">The Company identifies and eliminates workplace hazards and reduces safety and health risks through continuous activities to prevent injuries and incidents.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">비상 상황에 대비하고 대응하기 위한 프로세스를 수립·실행·유지한다.</span>
+                        <span class="pol-en">A process is established, implemented and maintained for preparing for and responding to emergencies.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">시스템의 적절성·충분성·효과성을 보장하기 위해 계획된 주기로 검토하고 지속적으로 개선한다.</span>
+                        <span class="pol-en">Reviews are conducted at planned intervals to ensure the suitability, adequacy and effectiveness of the systems and to drive continual improvement.</span>
+                    </li>
+                </ol>
+
+                <div class="pol-sign">
+                    <p class="pol-sign__date">시행일자 : 2026년 04월 15일 &nbsp;|&nbsp; Enforced Date : 15th Apr. 2026</p>
+                    <div>
+                        <p class="pol-sign__co">삼주에스엠(주)<span class="en">SAMJOO SM CO., LTD.</span></p>
+                        <p class="pol-sign__ceo">대표이사 정 진 욱<span class="en">CEO J.W. Jeong</span></p>
+                    </div>
+                    <div>
+                        <p class="pol-sign__co">(주)도리코<span class="en">DORIKO LIMITED</span></p>
+                        <p class="pol-sign__ceo">대표이사 정 진 욱<span class="en">CEO J.W. Jeong</span></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ─────────────────────────────────────────────────────
+             F-8 ETHICAL MANAGEMENT
+             ───────────────────────────────────────────────────── -->
+        <article class="pol-doc" id="ethics">
+            <div class="pol-doc__head">
+                <span class="pol-doc__code">MM-00 F-8</span>
+                <h2 class="pol-doc__title">
+                    윤리경영 방침
+                    <span class="en">Corporate Policy of Ethical Management</span>
+                </h2>
+            </div>
+            <div class="pol-doc__body">
+                <p class="pol-lead">당사는 정직성과 투명성을 바탕으로 한 윤리경영을 모든 경영활동의 최우선 가치로 추구한다. 이를 위하여 회사와 임직원이 준수하여야 할 행동의 기준을 정하여 건전하고 올바른 윤리적 판단에 의하여 업무를 수행함으로써 회사의 제반 경영활동이 가장 높은 수준의 윤리성을 유지할 수 있도록 한다.</p>
+                <p class="pol-lead pol-lead--en">The Company pursues ethical management based on honesty and transparency as the highest value in all business activities. To this end, standards of conduct that the Company and its employees shall observe are hereby established to ensure that all business operations maintain the highest level of ethicality through sound and proper ethical judgment:</p>
+
+                <div class="pol-grid">
+                    <div><span class="num">01</span><span class="pol-ko">고객에 대한 책임</span><span class="pol-en">Responsibility to Company clients</span></div>
+                    <div><span class="num">02</span><span class="pol-ko">법규준수 및 공정한 경쟁</span><span class="pol-en">Observation of laws and fair competition</span></div>
+                    <div><span class="num">03</span><span class="pol-ko">협력회사와의 공정한 거래</span><span class="pol-en">Arm's length transaction with sub-contractor</span></div>
+                    <div><span class="num">04</span><span class="pol-ko">국가와 사회에 대한 책임</span><span class="pol-en">Responsibility to the nation and society</span></div>
+                    <div><span class="num">05</span><span class="pol-ko">구성원에 대한 책임</span><span class="pol-en">Responsibility to the Company employees</span></div>
+                    <div><span class="num">06</span><span class="pol-ko">임직원의 기본윤리</span><span class="pol-en">Principle ethics of all the Company employees</span></div>
+                </div>
+
+                <p class="pol-lead">당사는 상기 윤리경영 방침의 준수를 위하여,</p>
+                <p class="pol-lead pol-lead--en">For the observance of the above Corporate Policy, the Company:</p>
+                <ol class="pol-list">
+                    <li>
+                        <span class="pol-ko">윤리경영 지침을 제정/개정한다.</span>
+                        <span class="pol-en">Establish and amend the Guideline for Ethical Management, and</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">윤리경영관련 신고/제보 처리지침을 제정/개정한다.</span>
+                        <span class="pol-en">Establish and amend the Guideline for Report Treatment on the Ethical Management.</span>
+                    </li>
+                </ol>
+
+                <div class="pol-sign">
+                    <p class="pol-sign__date">시행일자 : 2026년 04월 15일 &nbsp;|&nbsp; Enforced Date : 15th Apr. 2026</p>
+                    <div>
+                        <p class="pol-sign__co">삼주에스엠(주)<span class="en">SAMJOO SM CO., LTD.</span></p>
+                        <p class="pol-sign__ceo">대표이사 정 진 욱<span class="en">CEO J.W. Jeong</span></p>
+                    </div>
+                    <div>
+                        <p class="pol-sign__co">(주)도리코<span class="en">DORIKO LIMITED</span></p>
+                        <p class="pol-sign__ceo">대표이사 정 진 욱<span class="en">CEO J.W. Jeong</span></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ─────────────────────────────────────────────────────
+             F-6 DRUG & ALCOHOL
+             ───────────────────────────────────────────────────── -->
+        <article class="pol-doc" id="drug">
+            <div class="pol-doc__head">
+                <span class="pol-doc__code">MM-00 F-6</span>
+                <h2 class="pol-doc__title">
+                    마약 및 알코올 통제 방침
+                    <span class="en">Drug &amp; Alcohol Control Policy</span>
+                </h2>
+            </div>
+            <div class="pol-doc__body">
+                <ol class="pol-list">
+                    <li>
+                        <span class="pol-ko">회사는 상습적인 마약 사용자나 알코올 남용자가 육상 및 해상 경영에 종사하는 것을 엄격히 금지하며, 회사의 어떠한 공식 또는 비공식 업무도 부여하지 않는다.</span>
+                        <span class="pol-en">It is the company's policy that habitual drug users or alcohol abusers are strictly prohibited from engaging in any operations, whether ashore or afloat. Such individuals will not be assigned any scheduled or unscheduled duties for the company.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">이 방침은 회사에서 관리하는 선박에 승선하거나 방문하는 모든 사람에게 적용되며, OCIMF의 선박에서의 마약 및 알코올 관리 지침에 명시된 원칙을 준수한다.</span>
+                        <span class="pol-en">This policy applies to all personnel who sail on or visit company-managed ships. It aligns with the principles outlined in the Oil Companies International Marine Forum (OCIMF) Guidelines for the Control of Drugs and Alcohol Aboard Ships.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">적법하지 않은 마약의 오용 또는 불법적이거나 처방되지 않은 약물의 사용, 소지, 배포, 판매는 승선 중이나 상륙 중에 엄격히 금지된다.</span>
+                        <span class="pol-en">The misuse of legitimate drugs or the use, possession, distribution, or sale of illicit or non-prescribed controlled drugs on board ship or by crew members on shore leave is totally prohibited.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">유효기간이 지난 마약 성분이 포함된 약품은 허가된 육상 기관에 인계되어야 하며, 인계 확인을 위해 서명 및 날짜가 기재된 증빙 서류를 반드시 확보해야 한다.</span>
+                        <span class="pol-en">Expired controlled drugs must be handed over to authorized onshore agencies with appropriate documentation. A signed and dated receipt must be obtained to confirm the transfer.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">선상 혈중 알코올 농도(BAC)는 0.03%를 초과해서는 안 된다. 또한, 아래의 경우에는 음주가 엄격히 금지된다.</span>
+                        <span class="pol-en">The blood alcohol concentration (BAC) level onboard must not exceed 0.03%. Additionally, alcohol consumption is strictly prohibited in the following circumstances.</span>
+                        <ul class="pol-sub">
+                            <li>
+                                <span class="pol-ko">입/출항 4시간 전으로부터 종료 시까지</span>
+                                <span class="pol-en">From 4 hours before entering or leaving port to finish.</span>
+                            </li>
+                            <li>
+                                <span class="pol-ko">항해/정박당직 중</span>
+                                <span class="pol-en">While the watch at sea and in port.</span>
+                            </li>
+                            <li>
+                                <span class="pol-ko">당직 및 작업 4시간 전으로부터 종료 시까지</span>
+                                <span class="pol-en">From 4 hours before watch and/or regular work to finish.</span>
+                            </li>
+                            <li>
+                                <span class="pol-ko">화물작업 및 하역준비작업 중</span>
+                                <span class="pol-en">During the cargo working or preparing for cargo loading and discharging.</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="pol-ko">작업 시간 중 및 계획된 작업 4시간 전 음주는 금지된다. 이는 선원이 작업 전 혈중 알코올 농도가 이론적으로 0임을 유지하도록 보장하기 위함이다.</span>
+                        <span class="pol-en">Alcohol consumption is prohibited during work and within 4 hours prior to any scheduled work period. This ensures that seafarers maintain a theoretical BAC of zero before duty.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">채용 전 알코올 테스트에서 기준을 충족하지 못한 자는 회사가 관리하는 선박에 승선할 수 없다.</span>
+                        <span class="pol-en">Any individual who fails a pre-employment alcohol test must not be permitted to join a company-managed vessel.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">회사는 고용 전 마약 테스트를 통하여 불법적인 마약을 사용하는 자, 또는 이를 최근에 사용한 기록이 있는 자, 또는 처방된 마약을 남용한 자를 식별하여 고용대상에서 제외한다.</span>
+                        <span class="pol-en">Through a pre-employment drug test, the company identifies those who use illegal drugs, have a recent record of using them, or abuse prescribed drugs, and excludes them from employment.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">선박에 승선하는 해상직원은 회사의 마약 및 알코올 통제정책에 동의하고 서명해야 한다.</span>
+                        <span class="pol-en">Everyone who is to sign the company vessels must sign to agree to the company drug and alcohol control policy prior to joining ship.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">이 방침을 위반하거나 회사에서 지시한 마약 또는 알코올 검사를 거부하거나 요구된 샘플 제공을 거부한 선원은 즉시 해고되며, 필요 시 관계 당국에 인계되어 기소될 수 있다.</span>
+                        <span class="pol-en">Any crew member who violates this policy, refuses to take a drug or alcohol test, or declines to provide a required sample as directed by the company will face immediate dismissal. If necessary, they will also be turned over to the appropriate authorities for prosecution.</span>
+                    </li>
+                    <li>
+                        <span class="pol-ko">모든 인원은 불법 마약 소지가 특정 국가에서 사형을 초래할 수 있다는 점을 명심해야 한다.</span>
+                        <span class="pol-en">All personnel are reminded that possession of illegal drugs can lead to severe legal consequences, including the death penalty, in certain jurisdictions.</span>
+                    </li>
+                </ol>
+
+                <div class="pol-sign">
+                    <p class="pol-sign__date">시행일자 : 2026년 04월 15일 &nbsp;|&nbsp; Enforced Date : 15th Apr. 2026</p>
+                    <div>
+                        <p class="pol-sign__co">삼주에스엠(주)<span class="en">SAMJOO SM CO., LTD.</span></p>
+                        <p class="pol-sign__ceo">대표이사 정 진 욱<span class="en">CEO J.W. Jeong</span></p>
+                    </div>
+                    <div>
+                        <p class="pol-sign__co">(주)도리코<span class="en">DORIKO LIMITED</span></p>
+                        <p class="pol-sign__ceo">대표이사 정 진 욱<span class="en">CEO J.W. Jeong</span></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- 안내 -->
+        <div class="pol-note">
+            <h2 data-i18n="pol.note.title">방침 문의 및 사본 요청</h2>
+            <p data-i18n="pol.note.1">본 방침은 통합경영시스템 주 매뉴얼(MM-00)에 수록된 승인 문서이며, 육상 사업장과 관리 선박의 전 조직에 적용됩니다. 개정 시 본 페이지도 함께 갱신됩니다.</p>
+            <p data-i18n="pol.note.2">서명 원본(PDF) 사본이 필요한 이해관계자는 아래로 요청하여 주시기 바랍니다.</p>
+            <p>
+                <a href="mailto:samjoosm@samjoosm.com">samjoosm@samjoosm.com</a> &nbsp;·&nbsp;
+                <a href="mailto:smt@doriko.com">smt@doriko.com</a> &nbsp;·&nbsp;
+                <span data-i18n="pol.note.tel">서울 +82-2-2021-7400 / 부산 +82-51-441-8911</span>
+            </p>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <img src="images/brand/company_logo.webp" alt="SAMJOO SM CO., LTD. / DORIKO LIMITED" class="footer__logo" loading="lazy">
+                <p class="footer__tagline" data-i18n="footer.desc">안전운항, 기술관리, 선원관리, 품질경영을 기반으로 선박관리 서비스를 제공합니다.</p>
+            </div>
+            <div class="footer__bottom">
+                <small>&copy; 2026 SAMJOO SM CO., LTD. (삼주에스엠 · 삼주SM) / DORIKO LIMITED (도리코 · 도리코 리미티드). All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/i18n.js?v=20260731f"></script>
+    <script>
+        (function () {
+            // 방침 페이지 전용 문구 — 공용 사전에 병합
+            var EXTRA = {
+                ko: {
+                    'pol.home': '홈으로',
+                    'pol.title': '회사 방침',
+                    'pol.lead': '삼주에스엠(주)와 (주)도리코는 통합경영시스템 주 매뉴얼(MM-00)에 다음의 방침을 제정하여 육상 및 선박의 전 조직에 적용·유지하고 있습니다. 본 페이지의 방침 전문은 사내 승인 원본과 동일합니다.',
+                    'pol.meta.doc': '주 매뉴얼 Main Manual',
+                    'pol.meta.date': '시행일자 Enforced',
+                    'pol.meta.scope': '적용범위 Scope',
+                    'pol.meta.scope.v': '육상·선박 전 조직',
+                    'pol.meta.std': '적용표준 Standards',
+                    'pol.toc.shqe': '안전·보건·품질 및 환경보호 방침',
+                    'pol.toc.ethics': '윤리경영 방침',
+                    'pol.toc.drug': '마약 및 알코올 통제 방침',
+                    'pol.note.title': '방침 문의 및 사본 요청',
+                    'pol.note.1': '본 방침은 통합경영시스템 주 매뉴얼(MM-00)에 수록된 승인 문서이며, 육상 사업장과 관리 선박의 전 조직에 적용됩니다. 개정 시 본 페이지도 함께 갱신됩니다.',
+                    'pol.note.2': '서명 원본(PDF) 사본이 필요한 이해관계자는 아래로 요청하여 주시기 바랍니다.',
+                    'pol.note.tel': '서울 +82-2-2021-7400 / 부산 +82-51-441-8911'
+                },
+                en: {
+                    'pol.home': 'Home',
+                    'pol.title': 'Corporate Policies',
+                    'pol.lead': 'SAMJOO SM CO., LTD. and DORIKO LIMITED have established the following policies in the Integrated Management System Main Manual (MM-00) and apply and maintain them at all levels of the organization, both shore-based and ship-based. The full text on this page is identical to the approved originals.',
+                    'pol.meta.doc': 'Main Manual',
+                    'pol.meta.date': 'Enforced Date',
+                    'pol.meta.scope': 'Scope',
+                    'pol.meta.scope.v': 'Shore & ship, all levels',
+                    'pol.meta.std': 'Standards',
+                    'pol.toc.shqe': 'SHQE Policy of Company',
+                    'pol.toc.ethics': 'Corporate Policy of Ethical Management',
+                    'pol.toc.drug': 'Drug & Alcohol Control Policy',
+                    'pol.note.title': 'Enquiries and Copy Requests',
+                    'pol.note.1': 'These policies are approved documents contained in the Integrated Management System Main Manual (MM-00) and apply to all levels of the shore organization and managed vessels. This page is updated whenever the policies are revised.',
+                    'pol.note.2': 'Interested parties requiring a copy of the signed original (PDF) are invited to contact us below.',
+                    'pol.note.tel': 'Seoul +82-2-2021-7400 / Busan +82-51-441-8911'
+                }
+            };
+            if (window.I18N) {
+                Object.assign(window.I18N.ko, EXTRA.ko);
+                Object.assign(window.I18N.en, EXTRA.en);
+            }
+
+            var btn = document.getElementById('polLang');
+            var lang = localStorage.getItem('samjoo-lang') === 'en' ? 'en' : 'ko';
+
+            function paint(l) {
+                lang = l;
+                localStorage.setItem('samjoo-lang', l);
+                if (typeof window.applyI18n === 'function') window.applyI18n(l);
+                btn.querySelector('.ko').classList.toggle('on', l === 'ko');
+                btn.querySelector('.en').classList.toggle('on', l === 'en');
+            }
+
+            paint(lang);
+            btn.addEventListener('click', function () { paint(lang === 'ko' ? 'en' : 'ko'); });
+        })();
+    </script>
+</body>
+</html>

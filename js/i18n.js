@@ -7,6 +7,7 @@ window.I18N = {
         'nav.about': '회사소개', 'nav.why': '핵심 역량', 'nav.fleet': '선대현황', 'nav.services': '주요 서비스',
         'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '채용정보', 'nav.application': '입사지원서 다운로드', 'nav.contact': '문의', 'nav.directions': '오시는 길',
         'nav.ceo': '대표이사 인사말', 'nav.org': '조직도', 'nav.history': '연혁', 'nav.cert': '규약 준수 및 인증', 'nav.commitment': '운영 관리 체계',
+        'nav.policy': '회사 방침',
 
         'why.eyebrow': '04 · Core Strengths', 'why.title': '핵심 역량',
         'why.lead': '안전·기술·선원·품질 중심의 선박관리 역량',
@@ -123,6 +124,7 @@ window.I18N = {
         'nav.about': 'About', 'nav.why': 'Core Strengths', 'nav.fleet': 'Fleet', 'nav.services': 'Our Services',
         'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Careers', 'nav.application': 'Application Form', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
         'nav.ceo': 'CEO Message', 'nav.org': 'Organization', 'nav.history': 'History', 'nav.cert': 'Compliance & Certifications', 'nav.commitment': 'Operation Framework',
+        'nav.policy': 'Corporate Policies',
 
         'why.eyebrow': '04 · 핵심 역량', 'why.title': 'Core Strengths',
         'why.lead': 'Ship management capability focused on safety, technical, crew, and quality',

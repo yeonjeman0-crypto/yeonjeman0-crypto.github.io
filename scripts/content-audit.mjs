@@ -107,6 +107,7 @@ async function auditRequiredFiles() {
   const required = [
     'CNAME',
     'index.html',
+    'policy.html',
     'css/style.css',
     'js/api.js',
     'js/data.js',
@@ -163,6 +164,22 @@ try {
   }
 } catch {
   // Missing index.html is already reported by auditRequiredFiles().
+}
+
+// 방침 페이지는 심사·선주 제출용 고정 URL이므로 canonical과 방침 원문 표기를 함께 고정한다.
+try {
+  const policy = await readFile(path.join(ROOT, 'policy.html'), 'utf8');
+  const canonical = `https://${EXPECTED_DOMAIN}/policy.html`;
+  if (!policy.includes(`rel="canonical" href="${canonical}"`)) {
+    issues.push(`policy.html: canonical URL must be ${canonical}`);
+  }
+  for (const marker of ['MM-00 F-5', 'MM-00 F-6', 'MM-00 F-8', 'Rev. 1.2']) {
+    if (!policy.includes(marker)) {
+      issues.push(`policy.html: policy document marker "${marker}" is missing`);
+    }
+  }
+} catch {
+  // Missing policy.html is already reported by auditRequiredFiles().
 }
 
 if (issues.length) {
