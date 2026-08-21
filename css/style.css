@@ -1588,6 +1588,35 @@ body.lang-en .mv__tag { display: none; }
     color: var(--gray-light);
 }
 .nb__specs strong { font-size: 0.93rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+/* 신조 3척 선명 — 4칸 스펙 그리드를 깨지 않도록 아래 전폭 행으로 분리 */
+.nb__names {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.55rem;
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--hairline);
+}
+.nb__names > span {
+    flex-basis: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 0.15rem;
+}
+.nb__names strong {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--teal-deep);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-chip);
+    padding: 0.28rem 0.55rem;
+    white-space: nowrap;
+}
 @media (max-width: 860px) {
     .nb { grid-template-columns: 1fr; }
     .nb__media { border-right: 0; border-bottom: 1px solid var(--hairline); }

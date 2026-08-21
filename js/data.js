@@ -101,7 +101,7 @@ window.SAMJOO_DATA = {
         "mapQuery": "서울 중구 서소문로 89 순화빌딩",
         "tel": "+82-2-2021-7400",
         "fax": "+82-2-757-5642",
-        "emails": ["samjoosm@samjoosm.com", "smt@doriko.com"],
+        "emails": ["samjoosm@samjoosm.com", "smt@doriko.com", "doriko@doriko.com"],
         "hours": {
           "ko": "평일 09:00 - 18:00 · 24시간 응급상황 지원",
           "en": "Weekdays 09:00 - 18:00 · 24/7 Emergency Support"
@@ -125,7 +125,7 @@ window.SAMJOO_DATA = {
         "mapQuery": "부산 중구 중앙대로 102 팬오션빌딩",
         "tel": "+82-51-441-8911",
         "fax": "+82-51-441-8906",
-        "emails": ["samjoosm@samjoosm.com", "smt@doriko.com"],
+        "emails": ["samjoosm@samjoosm.com", "smt@doriko.com", "doriko@doriko.com"],
         "hours": {
           "ko": "평일 09:00 - 18:00 · 24시간 응급상황 지원",
           "en": "Weekdays 09:00 - 18:00 · 24/7 Emergency Support"
