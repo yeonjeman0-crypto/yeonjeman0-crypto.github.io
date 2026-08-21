@@ -9,8 +9,7 @@ const state = {
     services: null,
     history: null,
     org: null,
-    certs: null,
-    news: null
+    certs: null
 };
 
 // ============================================================
@@ -393,30 +392,6 @@ function renderCerts() {
     }).join('');
 }
 
-// 운항·인증 기록 — news.json (api.js에 있었지만 호출하는 곳이 없었음)
-const RECORD_CAT = {
-    press: { ko: '공지', en: 'Notice' },
-    certification: { ko: '인증', en: 'Certification' },
-    psc: { ko: '검사', en: 'Inspection' },
-};
-function renderRecord() {
-    const el = document.getElementById('recordList');
-    if (!el) return;
-    const list = (state.news || []).filter(n => n.published)
-        .slice().sort((a, b) => String(b.posted_at).localeCompare(String(a.posted_at)));
-    if (!list.length) { el.innerHTML = ''; return; }
-    el.innerHTML = list.map((n, i) => `
-        <article class="record__row">
-            <span class="record__no">${String(i + 1).padStart(2, '0')}</span>
-            <time class="record__date" datetime="${n.posted_at}">${n.posted_at}</time>
-            <span class="record__cat">${L(RECORD_CAT[n.category] || { ko: n.category, en: n.category })}</span>
-            <span class="record__body">
-                <h4>${n.title}</h4>
-                <p>${n.content}</p>
-            </span>
-        </article>`).join('');
-}
-
 // 핵심 역량 4칸의 근거 원장 — 전부 실제 선대/인증 데이터에서 도출
 function renderWhyEvidence() {
     if (!state.fleet?.vessels) return;
@@ -531,7 +506,6 @@ function renderAllI18nDependent() {
     renderHistory();
     renderCerts();
     renderWhyEvidence();
-    renderRecord();
     renderDirections();
     if (typeof window.refreshMailpick === 'function') window.refreshMailpick();
     // 재렌더된 노드들을 reveal 관찰자에 다시 등록 (언어 전환 시 사라짐 방지)
@@ -820,10 +794,9 @@ async function init() {
     state.lang = savedLang;
 
     try {
-        const [company, fleet, services, history, org, certs, news] = await Promise.all([
+        const [company, fleet, services, history, org, certs] = await Promise.all([
             API.company(), API.fleet(), API.services(),
-            API.history(), API.organization(), API.certifications(),
-            API.news.list(20)
+            API.history(), API.organization(), API.certifications()
         ]);
         state.company = company;
         state.fleet = fleet;
@@ -831,7 +804,6 @@ async function init() {
         state.history = history;
         state.org = org;
         state.certs = certs;
-        state.news = news;
     } catch (err) {
         console.error('[INIT] data load failed:', err);
     }

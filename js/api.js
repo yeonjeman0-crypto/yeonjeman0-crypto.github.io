@@ -33,14 +33,6 @@ window.API = (function () {
         });
     }
 
-    function getNews(n) {
-        var limit = n || 6;
-        return loadJson(DATA + '/news.json', 'news').then(function (all) {
-            all = all || [];
-            return all.slice(0, limit);
-        });
-    }
-
     function postContact(data) {
         if (!CONTACT_ENDPOINT || CONTACT_ENDPOINT.indexOf('REPLACE_ME') !== -1) {
             var body = encodeURIComponent(
@@ -79,7 +71,6 @@ window.API = (function () {
         organization:   function () { return loadJson(DATA + '/organization.json',   'organization'); },
         certifications: function () { return loadJson(DATA + '/certifications.json', 'certifications'); },
         careers: { list: getCareers },
-        news:    { list: getNews },
         contact: { submit: postContact }
     };
 })();
