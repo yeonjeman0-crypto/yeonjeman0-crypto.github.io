@@ -107,7 +107,6 @@ async function auditRequiredFiles() {
   const required = [
     'CNAME',
     'index.html',
-    'policy.html',
     'css/style.css',
     'js/api.js',
     'js/data.js',
@@ -166,20 +165,38 @@ try {
   // Missing index.html is already reported by auditRequiredFiles().
 }
 
-// 방침 페이지는 심사·선주 제출용 고정 URL이므로 canonical과 방침 원문 표기를 함께 고정한다.
+// 방침은 index.html #policy 섹션에 전문이 실린다. 승인 원본과 어긋나지 않도록
+// 문서번호·개정번호·시행일과 각 방침의 첫 조항을 고정한다.
 try {
-  const policy = await readFile(path.join(ROOT, 'policy.html'), 'utf8');
-  const canonical = `https://${EXPECTED_DOMAIN}/policy.html`;
-  if (!policy.includes(`rel="canonical" href="${canonical}"`)) {
-    issues.push(`policy.html: canonical URL must be ${canonical}`);
+  const index = await readFile(path.join(ROOT, 'index.html'), 'utf8');
+
+  if (!index.includes('id="policy"')) {
+    issues.push('index.html: the #policy section is missing');
   }
-  for (const marker of ['MM-00 F-5', 'MM-00 F-6', 'MM-00 F-8', 'Rev. 1.2']) {
-    if (!policy.includes(marker)) {
-      issues.push(`policy.html: policy document marker "${marker}" is missing`);
+
+  const markers = [
+    'MM-00 F-5',
+    'MM-00 F-6',
+    'MM-00 F-8',
+    'Rev. 1.2',
+    '시행일자 : 2026년 04월 15일',
+    '근로자 및 그 대표의 협의와 참여를 보장하며',      // ISO 45001 5.2 f)
+    '환경 보호(Zero spill)',                          // ISO 14001 5.2 오염방지
+    'ISO 9001, ISO 14001, ISO 45001, ISM Code, ISPS Code',
+  ];
+  for (const marker of markers) {
+    if (!index.includes(marker)) {
+      issues.push(`index.html: policy text marker "${marker}" is missing`);
+    }
+  }
+
+  for (const anchor of ['shqe', 'ethics', 'drug']) {
+    if (!index.includes(`id="${anchor}"`)) {
+      issues.push(`index.html: policy document anchor #${anchor} is missing`);
     }
   }
 } catch {
-  // Missing policy.html is already reported by auditRequiredFiles().
+  // Missing index.html is already reported by auditRequiredFiles().
 }
 
 if (issues.length) {

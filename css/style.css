@@ -3409,3 +3409,148 @@ a, button { -webkit-tap-highlight-color: transparent; }
         transition: none;
     }
 }
+
+/* ------------------------------------------------------------
+   26. 회사 방침 — MM-00 F-5/F-6/F-8 전문 (index.html #policy)
+   승인 원본과 글자 단위로 동일해야 하는 구역. 문구를 다듬지 말 것.
+   ------------------------------------------------------------ */
+/* ── 방침 페이지 전용 — 사이트 토큰만 사용 ───────────────── */
+.pol-meta {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px; background: var(--hairline);
+    border: 1px solid var(--hairline); border-radius: var(--r-card);
+    overflow: hidden; margin: -2rem 0 2.5rem; box-shadow: var(--shadow-md);
+}
+.pol-meta > div { background: #fff; padding: 1rem 1.15rem; }
+.pol-meta dt {
+    font-family: var(--font-mono); font-size: .68rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gray-light); margin: 0 0 .4rem;
+}
+.pol-meta dd { margin: 0; font-size: .9rem; font-weight: 600; color: var(--ink); line-height: 1.45; }
+.pol-meta dd small { display: block; font-weight: 500; color: var(--gray); font-size: .78rem; margin-top: .15rem; }
+
+/* 목차 */
+.pol-toc { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+.pol-toc a {
+    font-size: var(--t-meta); font-weight: 600; color: var(--navy);
+    text-decoration: none; padding: .55rem .95rem;
+    border: 1px solid var(--hairline); border-radius: var(--r-ctl);
+    background: #fff; transition: all var(--t);
+}
+.pol-toc a:hover { border-color: var(--teal); color: var(--teal); box-shadow: var(--shadow-sm); }
+.pol-toc a .num { font-family: var(--font-mono); color: var(--teal); margin-right: .5rem; font-size: .78rem; }
+
+/* 방침 카드 */
+.pol-doc {
+    background: #fff; border: 1px solid var(--hairline);
+    border-radius: var(--r-card); box-shadow: var(--shadow-sm);
+    margin-bottom: 2rem; overflow: hidden; scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+.pol-doc__head {
+    padding: 1.6rem clamp(1.2rem, 3vw, 2.2rem) 1.3rem;
+    border-bottom: 2px solid var(--rule-strong);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1rem;
+}
+.pol-doc__code {
+    font-family: var(--font-mono); font-size: .7rem; font-weight: 700;
+    letter-spacing: .1em; color: #fff; background: var(--teal-deep);
+    padding: .3rem .55rem; border-radius: var(--r-chip);
+}
+.pol-doc__title { margin: 0; font-size: var(--t-deck); font-weight: 700; color: var(--ink); letter-spacing: -0.015em; line-height: 1.3; }
+.pol-doc__title .en { display: block; font-family: var(--font-mono); font-weight: 500; font-size: .84rem; letter-spacing: .02em; color: var(--gray); margin-top: .35rem; }
+.pol-doc__body { padding: clamp(1.2rem, 3vw, 2.2rem); }
+
+.pol-lead { font-size: var(--t-body); line-height: 1.85; color: var(--text); margin: 0 0 .6rem; }
+.pol-lead + .pol-lead--en { margin-bottom: 1.8rem; }
+.pol-lead--en { font-size: .86rem; line-height: 1.8; color: var(--gray); }
+
+ol.pol-list { list-style: none; counter-reset: pol; margin: 0; padding: 0; }
+ol.pol-list > li {
+    counter-increment: pol; position: relative;
+    padding: 0 0 1.4rem 3rem; margin-bottom: 1.4rem;
+    border-bottom: 1px solid var(--hairline-soft);
+}
+ol.pol-list > li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+ol.pol-list > li::before {
+    content: counter(pol, decimal-leading-zero);
+    position: absolute; left: 0; top: .1rem;
+    font-family: var(--font-mono); font-size: .82rem; font-weight: 700;
+    color: var(--teal); letter-spacing: .02em;
+}
+.pol-ko { display: block; font-size: var(--t-body); line-height: 1.8; color: var(--text); font-weight: 500; }
+.pol-en { display: block; font-size: .84rem; line-height: 1.75; color: var(--gray); margin-top: .5rem; }
+
+ul.pol-sub { list-style: none; margin: .8rem 0 0; padding: 0 0 0 .9rem; border-left: 2px solid var(--hairline); }
+ul.pol-sub li { margin-bottom: .6rem; }
+ul.pol-sub li:last-child { margin-bottom: 0; }
+ul.pol-sub .pol-ko { font-weight: 500; font-size: .9rem; }
+ul.pol-sub .pol-en { font-size: .8rem; margin-top: .2rem; }
+
+/* 윤리 6개 행동기준 그리드 */
+/* 6개 항목 — 3×2 로 떨어지게 고정해 빈 칸이 남지 않도록 한다 */
+.pol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: var(--r-card); overflow: hidden; margin: 0 0 1.8rem; }
+@media (max-width: 900px) { .pol-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .pol-grid { grid-template-columns: 1fr; } }
+.pol-grid > div { background: #fff; padding: 1.1rem 1.25rem; }
+.pol-grid .num { font-family: var(--font-mono); font-size: .72rem; font-weight: 700; color: var(--teal); display: block; margin-bottom: .5rem; }
+.pol-grid .pol-ko { font-size: .92rem; font-weight: 600; }
+.pol-grid .pol-en { font-size: .78rem; margin-top: .3rem; }
+
+/* 서명란 */
+.pol-sign {
+    margin-top: 2rem; padding-top: 1.6rem; border-top: 2px solid var(--rule-strong);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+}
+.pol-sign__date {
+    grid-column: 1 / -1; font-family: var(--font-mono); font-size: .8rem;
+    font-weight: 600; color: var(--gray); letter-spacing: .02em; margin: 0 0 .4rem;
+}
+.pol-sign__co { font-size: 1rem; font-weight: 700; color: var(--ink); margin: 0 0 .3rem; line-height: 1.5; }
+.pol-sign__co .en { display: block; font-family: var(--font-mono); font-size: .8rem; font-weight: 500; color: var(--gray); margin-top: .2rem; letter-spacing: .02em; }
+.pol-sign__ceo { font-size: .9rem; color: var(--text); margin: 0; }
+.pol-sign__ceo .en { font-family: var(--font-mono); font-size: .78rem; color: var(--gray); margin-left: .5rem; }
+
+/* 참고 안내 */
+.pol-note {
+    margin-top: 2.5rem; padding: 1.4rem clamp(1.2rem, 3vw, 1.8rem);
+    background: var(--bg-alt); border-left: 3px solid var(--teal);
+    border-radius: 0 var(--r-card) var(--r-card) 0;
+}
+.pol-note h2 { margin: 0 0 .7rem; font-size: var(--t-title); font-weight: 700; color: var(--ink); }
+.pol-note p { margin: 0 0 .6rem; font-size: .88rem; line-height: 1.8; color: var(--text); }
+.pol-note p:last-child { margin-bottom: 0; }
+.pol-note a { color: var(--teal-deep); font-weight: 600; }
+
+@media print {
+    .pol-doc { break-inside: avoid; box-shadow: none; margin-bottom: 1.5rem; }
+    .pol-meta { box-shadow: none; margin-top: 0; }
+}
+
+@media (max-width: 640px) {
+    ol.pol-list > li { padding-left: 2.3rem; }
+}
+
+/* 섹션 안에 들어갈 때의 보정 — 히어로 밑이 아니므로 음수 마진 해제 */
+#policy .pol-meta { margin: 0 0 2.5rem; }
+#policy .pol-doc { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+@media print {
+    /* 방침만 인쇄 — 나머지 섹션은 숨김 */
+    body.print-policy .nav,
+    body.print-policy .section:not(#policy),
+    body.print-policy .stats-dark,
+    body.print-policy .footer,
+    body.print-policy .back-top,
+    body.print-policy #loading,
+    body.print-policy .pol-toc,
+    body.print-policy .pol-print { display: none !important; }
+    body.print-policy #policy { padding: 0 !important; }
+}
+.pol-print { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+.pol-print__btn {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--navy); background: #fff;
+    border: 1px solid var(--hairline); border-radius: var(--r-ctl);
+    padding: 0.5rem 0.85rem; cursor: pointer; transition: all var(--t);
+}
+.pol-print__btn:hover { border-color: var(--teal); color: var(--teal); box-shadow: var(--shadow-sm); }

@@ -467,6 +467,19 @@ function renderDirections() {
     }).join('');
 }
 
+// 방침만 인쇄 — 본문 외 섹션을 숨기는 클래스를 인쇄 동안만 붙인다
+function setupPolicyPrint() {
+    const btn = document.getElementById('policyPrint');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        document.body.classList.add('print-policy');
+        const clear = () => document.body.classList.remove('print-policy');
+        window.addEventListener('afterprint', clear, { once: true });
+        setTimeout(clear, 3000); // afterprint 미지원 브라우저 대비
+        window.print();
+    });
+}
+
 function setupMailpick() {
     const root = document.getElementById('mailpick');
     if (!root) return;
@@ -809,6 +822,7 @@ async function init() {
     }
 
     setLanguage(savedLang);
+    setupPolicyPrint();
     setupMailpick();
     setupReveal();
     setupTimelineProgress();

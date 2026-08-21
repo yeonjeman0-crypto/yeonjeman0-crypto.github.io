@@ -8,7 +8,7 @@
  *   2) Replace REPLACE_ME below with that URL, e.g. https://formspree.io/f/abcd1234
  *
  * If you don't want Formspree, leave REPLACE_ME and the form will fall back
- * to mailto: smt@doriko.com which opens the user's mail client.
+ * to mailto: smt@doriko.com,doriko@doriko.com which opens the user's mail client.
  */
 window.API = (function () {
     var DATA = './data';
@@ -42,7 +42,7 @@ window.API = (function () {
                 'Subject: ' + (data.subject || '') + '\n\n' +
                 (data.message || '')
             );
-            window.location.href = 'mailto:smt@doriko.com?subject=' +
+            window.location.href = 'mailto:smt@doriko.com,doriko@doriko.com?subject=' +
                 encodeURIComponent('[Website] ' + (data.subject || 'Inquiry')) +
                 '&body=' + body;
             return Promise.resolve({ ok: true, fallback: 'mailto' });
