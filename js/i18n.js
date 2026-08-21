@@ -5,7 +5,7 @@ window.I18N = {
     ko: {
         'nav.group.company': '회사', 'nav.group.business': '사업', 'nav.group.shqe': '안전·인증', 'nav.group.connect': '채용·문의',
         'nav.about': '회사소개', 'nav.why': '핵심 역량', 'nav.fleet': '선대현황', 'nav.services': '주요 서비스',
-        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '해상직원 채용정보', 'nav.application': '입사지원서 다운로드', 'nav.contact': '문의', 'nav.directions': '오시는 길',
+        'nav.esg': '환경·사회·지배구조', 'nav.safety': '안전 관리', 'nav.careers': '해상직원 채용정보', 'nav.application': '해상직원 입사지원서', 'nav.contact': '문의', 'nav.directions': '오시는 길',
         'nav.ceo': '대표이사 인사말', 'nav.org': '조직도', 'nav.history': '연혁', 'nav.cert': '규약 준수 및 인증', 'nav.commitment': '운영 관리 체계',
         'nav.policy': '회사 방침',
 
@@ -17,7 +17,7 @@ window.I18N = {
         'why.4': '품질경영 (Quality)', 'why.4d': 'ISO 9001·14001·45001 통합 인증으로 품질·환경·안전을 일관되게 관리합니다.',
 
         'commit.eyebrow': '05 · Operation Framework', 'commit.title': '운영 관리 체계',
-        'commit.lead': '선박과 육상 조직이 연결된 절차 중심의 선박관리 체계를 운영합니다.',
+        'commit.lead': '선박과 육상을 잇는 절차 중심 관리 체계',
         'commit.s1': '안전관리 체계', 'commit.s1d': 'ISM Code 기반 선박·육상 안전관리',
         'commit.s2': '비상 대응', 'commit.s2d': '선박과 육상 조직 간 긴급 연락 체계 운영',
         'commit.s3': '리스크 관리', 'commit.s4': '지정담당자', 'commit.s4d': '선박관리본부 지정담당자(DPA) 운영', 'commit.s3d': '검사·심사·운항 리스크 사전 점검',
@@ -30,7 +30,7 @@ window.I18N = {
         'nb.v2': '3척', 'nb.v3': '신조 감리 수행', 'nb.v4': '2027년',
 
         'safety.eyebrow': '08 · Safety Management', 'safety.title': '안전 관리',
-        'safety.lead': '국제 기준과 내부 절차에 따라 선박 운항과 육상 지원 업무의 안전 리스크를 관리합니다.',
+        'safety.lead': '국제 기준·내부 절차 기반 안전 리스크 관리',
         'safety.s1': 'ISM 안전관리',
         'safety.s1d': 'ISM Code 기반 절차로 선박과 육상 조직 간 보고, 점검, 개선 조치를 체계적으로 관리합니다.',
         'safety.s2': '안전보건 법규 대응',
@@ -131,7 +131,7 @@ window.I18N = {
     en: {
         'nav.group.company': 'Company', 'nav.group.business': 'Business', 'nav.group.shqe': 'Safety · Cert.', 'nav.group.connect': 'Careers · Contact',
         'nav.about': 'About Us', 'nav.why': 'Core Strengths', 'nav.fleet': 'Our Fleet', 'nav.services': 'Our Services',
-        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Maritime Crew Recruitment', 'nav.application': 'Application Form', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
+        'nav.esg': 'Environment · Social · Governance', 'nav.safety': 'Safety Management', 'nav.careers': 'Maritime Crew Recruitment', 'nav.application': 'Maritime Crew Application Form', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
         'nav.ceo': 'CEO Message', 'nav.org': 'Organization', 'nav.history': 'History', 'nav.cert': 'Compliance & Certifications', 'nav.commitment': 'Operation Framework',
         'nav.policy': 'Corporate Policies',
 
@@ -143,7 +143,7 @@ window.I18N = {
         'why.4': 'Quality', 'why.4d': 'Integrated ISO 9001 · 14001 · 45001 quality, environmental & safety system.',
 
         'commit.eyebrow': '05 · 운영 관리 체계', 'commit.title': 'Operation Framework',
-        'commit.lead': 'A procedure-driven ship management framework connecting vessels and shore teams.',
+        'commit.lead': 'Procedure-driven management connecting ship and shore',
         'commit.s1': 'Safety System', 'commit.s1d': 'Ship-to-shore safety management based on ISM Code',
         'commit.s2': 'Emergency Response', 'commit.s2d': 'Emergency contact structure between vessel and shore',
         'commit.s3': 'Risk Management', 'commit.s4': 'Designated Person', 'commit.s4d': 'DPA appointed in the ship management division', 'commit.s3d': 'Pre-checks for surveys, audits, and operational risks',
@@ -156,7 +156,7 @@ window.I18N = {
         'nb.v2': '3 ships', 'nb.v3': 'Newbuilding supervision', 'nb.v4': '2027',
 
         'safety.eyebrow': '08 · 안전 관리', 'safety.title': 'Safety Management',
-        'safety.lead': 'Managing operational and shore-side safety risks through international standards and internal procedures.',
+        'safety.lead': 'Safety risk management under international and internal standards',
         'safety.s1': 'ISM Safety Management',
         'safety.s1d': 'Managing vessel-to-shore reporting, inspections, and corrective actions through ISM Code-based procedures.',
         'safety.s2': 'Safety & Health Compliance',
