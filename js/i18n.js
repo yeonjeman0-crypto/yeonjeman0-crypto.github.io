@@ -5,7 +5,7 @@ window.I18N = {
     ko: {
         'nav.group.company': '회사', 'nav.group.business': '사업', 'nav.group.shqe': '안전·인증', 'nav.group.connect': '채용·문의',
         'nav.about': '회사소개', 'nav.why': '핵심 역량', 'nav.fleet': '선대현황', 'nav.services': '주요 서비스',
-        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '채용정보', 'nav.application': '입사지원서 다운로드', 'nav.contact': '문의', 'nav.directions': '오시는 길',
+        'nav.esg': 'ESG', 'nav.safety': '안전 관리', 'nav.careers': '해상직원 채용정보', 'nav.application': '입사지원서 다운로드', 'nav.contact': '문의', 'nav.directions': '오시는 길',
         'nav.ceo': '대표이사 인사말', 'nav.org': '조직도', 'nav.history': '연혁', 'nav.cert': '규약 준수 및 인증', 'nav.commitment': '운영 관리 체계',
         'nav.policy': '회사 방침',
 
@@ -90,7 +90,7 @@ window.I18N = {
         'cert.eyebrow': '11 · Compliance & Certifications', 'cert.title': '규약 준수 및 인증',
         'cert.lead': 'ISM Code DOC (DNV·KR) · ISO 통합 인증 · 외부 검사 대응',
         'policy.eyebrow': '12 · Corporate Policies', 'policy.title': '회사 방침',
-        'policy.lead': '통합경영시스템 주 매뉴얼(MM-00)에 제정하여 육상·선박 전 조직에 적용하는 방침 전문입니다.',
+        'policy.lead': '주 매뉴얼 MM-00 수록 · 육상·선박 전 조직 적용',
         'policy.print': '방침 인쇄 / PDF 저장',
         'pol.meta.doc': '주 매뉴얼 Main Manual',
         'pol.meta.date': '시행일자 Enforced',
@@ -121,7 +121,7 @@ window.I18N = {
         'contact.body.default': '안녕하세요, SAMJOO SM CO., LTD. / DORIKO LIMITED 담당자님께\n\n[문의 내용을 작성해 주세요]\n\n감사합니다.',
 
         'directions.eyebrow': '15 · Directions', 'directions.title': '오시는 길',
-        'directions.lead': '서울 본사와 부산 사무소 위치 안내입니다.',
+        'directions.lead': '서울 본사 · 부산 사무소 위치',
         'directions.openMap': '큰 지도로 보기',
         'directions.route': '네이버 길찾기',
 
@@ -130,8 +130,8 @@ window.I18N = {
     },
     en: {
         'nav.group.company': 'Company', 'nav.group.business': 'Business', 'nav.group.shqe': 'Safety · Cert.', 'nav.group.connect': 'Careers · Contact',
-        'nav.about': 'About', 'nav.why': 'Core Strengths', 'nav.fleet': 'Fleet', 'nav.services': 'Our Services',
-        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Careers', 'nav.application': 'Application Form', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
+        'nav.about': 'About Us', 'nav.why': 'Core Strengths', 'nav.fleet': 'Our Fleet', 'nav.services': 'Our Services',
+        'nav.esg': 'ESG', 'nav.safety': 'Safety Management', 'nav.careers': 'Maritime Crew Recruitment', 'nav.application': 'Application Form', 'nav.contact': 'Contact', 'nav.directions': 'Directions',
         'nav.ceo': 'CEO Message', 'nav.org': 'Organization', 'nav.history': 'History', 'nav.cert': 'Compliance & Certifications', 'nav.commitment': 'Operation Framework',
         'nav.policy': 'Corporate Policies',
 
@@ -142,7 +142,7 @@ window.I18N = {
         'why.3': 'Crew', 'why.3d': 'Systematic crew assignment and training aligned with STCW and MLC requirements.',
         'why.4': 'Quality', 'why.4d': 'Integrated ISO 9001 · 14001 · 45001 quality, environmental & safety system.',
 
-        'commit.eyebrow': '05 · 운영 관리 체계', 'commit.title': 'Operation Management System',
+        'commit.eyebrow': '05 · 운영 관리 체계', 'commit.title': 'Operation Framework',
         'commit.lead': 'A procedure-driven ship management framework connecting vessels and shore teams.',
         'commit.s1': 'Safety System', 'commit.s1d': 'Ship-to-shore safety management based on ISM Code',
         'commit.s2': 'Emergency Response', 'commit.s2d': 'Emergency contact structure between vessel and shore',
@@ -184,7 +184,7 @@ window.I18N = {
         'about.quote.line2': 'SAMJOO SM CO., LTD. / DORIKO LIMITED focus on these four fundamentals.',
         'about.quote.by': 'SAMJOO SM CO., LTD. / DORIKO LIMITED',
 
-        'ceo.eyebrow': '02 · 대표이사 인사말', 'ceo.title': 'Message from CEO',
+        'ceo.eyebrow': '02 · 대표이사 인사말', 'ceo.title': 'CEO Message',
         'ceo.lead': 'Operating direction and commitments from the CEO',
         'ceo.stamp.hq': 'Seoul HQ · Soonhwa Bldg. 9F',
         'ceo.stamp.branch': 'Busan Office · Pan Ocean Bldg. 6F',
@@ -216,7 +216,7 @@ window.I18N = {
         'cert.eyebrow': '11 · 규약 준수 및 인증', 'cert.title': 'Compliance & Certifications',
         'cert.lead': 'ISM Code DOC (DNV·KR) · Integrated ISO certifications · External inspection readiness',
         'policy.eyebrow': '12 · 회사 방침', 'policy.title': 'Corporate Policies',
-        'policy.lead': 'The full text of the policies established in the Integrated Management System Main Manual (MM-00) and applied across the shore and ship organization.',
+        'policy.lead': 'Main Manual MM-00 · Applied shore-wide and shipboard',
         'policy.print': 'Print / Save as PDF',
         'pol.meta.doc': 'Main Manual',
         'pol.meta.date': 'Enforced Date',
