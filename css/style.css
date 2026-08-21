@@ -3468,7 +3468,8 @@ a, button { -webkit-tap-highlight-color: transparent; }
 ol.pol-list { list-style: none; counter-reset: pol; margin: 0; padding: 0; }
 ol.pol-list > li {
     counter-increment: pol; position: relative;
-    padding: 0 0 1.4rem 3rem; margin-bottom: 1.4rem;
+    /* 법령·방침문은 산문보다 조밀한 편이 읽기 좋다 — 조항 간 여백을 조임 */
+    padding: 0 0 1rem 3rem; margin-bottom: 1rem;
     border-bottom: 1px solid var(--hairline-soft);
 }
 ol.pol-list > li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
