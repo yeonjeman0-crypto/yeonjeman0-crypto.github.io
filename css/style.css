@@ -3515,20 +3515,25 @@ ul.pol-sub .pol-en { font-size: .8rem; margin-top: .2rem; }
     letter-spacing: .02em;
     margin: 0 0 1.4rem;
 }
-.pol-sign__parties {
+/* 양사를 좌우로 대등하게 두고, 겸직 서명자는 구분선 아래 한 번만 받는다 */
+.pol-sign__cos {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 1.6rem clamp(2rem, 5vw, 4.5rem);
+    gap: .8rem clamp(1.6rem, 4vw, 3.2rem);
 }
-.pol-sign__party { display: flex; flex-direction: column; }
+.pol-sign__co-block { display: flex; flex-direction: column; }
 .pol-sign__co {
     font-size: 1rem; font-weight: 700; color: var(--ink);
     line-height: 1.4; margin: 0;
 }
 .pol-sign__co-en {
     font-family: var(--font-mono); font-size: .78rem; font-weight: 500;
-    color: var(--gray); letter-spacing: .02em; margin: .2rem 0 .9rem;
+    color: var(--gray); letter-spacing: .02em; margin: .2rem 0 0;
+}
+.pol-sign__rule {
+    display: block; width: min(320px, 100%); height: 1px;
+    background: var(--hairline); margin: 1.3rem 0 1.1rem;
 }
 .pol-sign__ceo { font-size: .92rem; font-weight: 600; color: var(--text); margin: 0; }
 .pol-sign__ceo-en {
@@ -3536,7 +3541,7 @@ ul.pol-sub .pol-en { font-size: .8rem; margin-top: .2rem; }
     color: var(--gray); letter-spacing: .02em; margin: .2rem 0 0;
 }
 @media (max-width: 560px) {
-    .pol-sign__parties { flex-direction: column; align-items: flex-end; gap: 1.4rem; }
+    .pol-sign__cos { flex-direction: column; align-items: flex-end; gap: 1rem; }
 }
 
 @media print {
