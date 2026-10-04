@@ -429,6 +429,7 @@ body.lang-en .nav__lang .lang-other { opacity: 1; }
     display: none;
     background: transparent;
     border: none;
+    color: inherit;
     /* 44px 최소 탭 타깃 — 음수 마진으로 광학 정렬 유지 */
     width: 44px;
     height: 44px;
@@ -2884,7 +2885,8 @@ body.lang-en .mv__tag { display: none; }
     .nav__lang { padding: 0.4rem 0.65rem; font-size: 0.7rem; }
     .hero__inner { padding-top: calc(var(--nav-h) + 2rem); }
     .hero__title { font-size: clamp(2.1rem, 10vw, 3rem); }
-    .hero__title span { white-space: normal; }
+    .hero__title span,
+    body.lang-en .hero__title span { white-space: normal; }
     .hero__lead { font-size: 0.95rem; margin-bottom: 1.6rem; }
     .hero__cta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; width: 100%; }
     .hero__cta .btn { justify-content: center; padding: 0.85rem 0.6rem; white-space: normal; text-align: center; }
