@@ -623,8 +623,7 @@ function setupTickerPause() {
     tick.addEventListener('click', () => tick.classList.toggle('is-paused'));
 }
 
-// 티커 구동 — CSS 애니메이션 대신 JS 직접 구동.
-// (감속모션 OS설정·구버전 CSS 캐시 등 어떤 환경에서도 확실히 움직이게)
+// Pause the ticker off-screen, in background tabs, and when motion is disabled.
 function setupTickerMotion() {
     const ticker = document.querySelector('.ticker');
     const track = document.getElementById('vesselTicker');
@@ -633,12 +632,16 @@ function setupTickerMotion() {
     let x = 0;
     let last = null;
     let hover = false;
+    let visible = true;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(ticker);
     const SPEED = 60; // px/s
     ticker.addEventListener('mouseenter', () => { hover = true; });
     ticker.addEventListener('mouseleave', () => { hover = false; });
     function frame(now) {
         if (last === null) last = now;
-        if (!hover && !ticker.classList.contains('is-paused')) {
+        if (visible && !document.hidden && !reducedMotion.matches && !window.CompanyMotion?.isPaused()
+            && !hover && !ticker.classList.contains('is-paused')) {
             x -= SPEED * (now - last) / 1000;
             const half = track.scrollWidth / 2;
             if (half > 0 && -x >= half) x += half; // 절반(1세트) 지나면 이어붙여 무한루프
@@ -661,6 +664,7 @@ function setupBackTop() {
 function hideLoading() {
     // 히어로 연출은 커튼이 걷히는 순간부터 — 그 전엔 아무도 못 봄
     document.body.classList.add('is-ready');
+    window.CompanyMotion?.ready();
     const loading = document.getElementById('loading');
     if (!loading) return;
     loading.classList.add('hidden');
@@ -766,6 +770,10 @@ function setupTimelineProgress() {
 const REVEAL_SELECTOR = '.kpi__card, .mv, .tl__row, .org__box, .fleet__cat, .service, .stats-dark__card, .cert, .why__item, .careers-portal, .esg-col, .safety-col, .safety-cycle__step, .direction';
 let _revealIO;
 function setupReveal() {
+    if (window.CompanyMotion) {
+        window.CompanyMotion.refresh(REVEAL_SELECTOR);
+        return;
+    }
     // 재렌더(언어 전환 등)로 새로 생성된 노드도 매번 다시 관찰한다.
     // 새 노드가 관찰되지 않으면 opacity:0 상태로 영영 안 보이는 버그가 생긴다.
     if (!_revealIO) {
