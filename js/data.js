@@ -556,9 +556,32 @@ window.SAMJOO_DATA = {
         "en": "SAMJOO SM Plans to Obtain Integrated ISO Certification"
       },
       "desc": {
-        "ko": "삼주에스엠(주), 2026년 10월 ISO 9001(품질경영)·ISO 14001(환경경영)·ISO 45001(안전보건경영) 인증 취득 예정",
-        "en": "SAMJOO SM CO., LTD. plans to obtain ISO 9001 (quality), ISO 14001 (environmental) and ISO 45001 (occupational health and safety) certification in October 2026"
+        "ko": "삼주에스엠(주), 2026년 10월 인증 취득 예정",
+        "en": "SAMJOO SM CO., LTD. plans to obtain the following certifications in October 2026."
       },
+      "standards": [
+        {
+          "code": "ISO 9001",
+          "name": {
+            "ko": "품질경영",
+            "en": "Quality management"
+          }
+        },
+        {
+          "code": "ISO 14001",
+          "name": {
+            "ko": "환경경영",
+            "en": "Environmental management"
+          }
+        },
+        {
+          "code": "ISO 45001",
+          "name": {
+            "ko": "안전보건경영",
+            "en": "Occupational health and safety management"
+          }
+        }
+      ],
       "planned": true
     },
     {

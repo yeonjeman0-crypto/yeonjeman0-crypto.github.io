@@ -336,13 +336,10 @@ function renderOrg() {
 
 function renderHistory() {
     if (!state.history) return;
-    // 브랜드명 사이 line-break 방지 (SAMJOO MARITIME 등)
-    const protectBrand = (s) => String(s)
-        .replace(/SAMJOO MARITIME/g,    '<span class="nowrap">SAMJOO MARITIME</span>')
-        .replace(/SAMJOO SM CO\., LTD\./g, '<span class="nowrap">SAMJOO SM CO., LTD.</span>')
-        .replace(/SAMJOO SM(?!\w)/g,    '<span class="nowrap">SAMJOO SM</span>')
-        .replace(/DORIKO LIMITED/g,     '<span class="nowrap">DORIKO LIMITED</span>')
-        .replace(/DORIKO LTD\.?/g,      '<span class="nowrap">DORIKO LTD.</span>');
+    // 회사명, ISO 번호, 짧은 상태 문구는 한 묶음으로 읽히게 한다.
+    const protectText = (s) => window._escAndProtectBrand(s)
+        .replace(/\bISO\s+(?:9001|14001|45001)\b/g, '<span class="nowrap">$&</span>')
+        .replace(/취득 예정|개정·시행|준비 중/g, '<span class="nowrap">$&</span>');
     const ko = state.lang === 'ko';
     // 연대 그룹으로 묶어 시대 단위로 읽히게
     const decadeOf = (y) => Math.floor(parseInt(String(y).slice(0, 4), 10) / 10) * 10;
@@ -361,13 +358,18 @@ function renderHistory() {
                 : h.highlight
                     ? `<span class="tl__now">${ko ? '현재' : 'PRESENT'}</span>`
                     : `<span class="tl__seq">${String(state.history.length - i).padStart(2, '0')}</span>`;
+        const standards = h.standards?.length ? `
+            <ul class="tl__standards">${h.standards.map(s => `
+                <li><span class="tl__standard-code">${protectText(s.code)}</span><span>${protectText(L(s.name))}</span></li>
+            `).join('')}</ul>` : '';
         return marker + `
         <article class="tl__row${h.planned ? ' is-planned' : h.highlight ? ' is-now' : ''}">
             <div class="tl__year">${year}</div>
             <div class="tl__rail" aria-hidden="true"><span class="tl__node"></span></div>
             <div class="tl__body">
-                <h3>${protectBrand(L(h.title))}</h3>
-                <p>${protectBrand(L(h.desc))}</p>
+                <h3>${protectText(L(h.title))}</h3>
+                <p>${protectText(L(h.desc))}</p>
+                ${standards}
             </div>
             <div class="tl__tag">${tag}</div>
         </article>`;
