@@ -7,9 +7,10 @@
     "build": "node scripts/content-audit.mjs",
     "dev": "node scripts/dev-server.mjs",
     "motion:vendor": "node scripts/copy-motion-vendor.mjs",
-    "audit": "node scripts/content-audit.mjs && node scripts/mobile-audit.mjs --serve",
+    "audit": "node scripts/content-audit.mjs && node scripts/mobile-audit.mjs --serve && node scripts/motion-audit.mjs --serve",
     "audit:content": "node scripts/content-audit.mjs",
-    "audit:mobile": "node scripts/mobile-audit.mjs --serve"
+    "audit:mobile": "node scripts/mobile-audit.mjs --serve",
+    "audit:motion": "node scripts/motion-audit.mjs --serve"
   },
   "devDependencies": {
     "animejs": "4.5.0",

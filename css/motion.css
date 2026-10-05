@@ -55,6 +55,8 @@
     align-items: center;
     gap: 22px;
 }
+/* Room under the dock for the 44px controls: 16px offset + 44px + 16px gap. */
+.has-company-motion .hero__inner { padding-bottom: 76px; }
 .hero__scenes { display: flex; gap: 12px; align-items: center; }
 .hero__scenes button {
     position: relative;
@@ -101,8 +103,8 @@
 .motion-toggle:hover { background: rgba(15, 70, 80, .65); border-color: var(--teal-glow); }
 .motion-toggle svg { grid-area: 1/1; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; }
 .motion-toggle__play { display: none; }
-.motion-toggle[aria-pressed="true"] .motion-toggle__pause { display: none; }
-.motion-toggle[aria-pressed="true"] .motion-toggle__play { display: block; }
+.motion-toggle.is-paused .motion-toggle__pause { display: none; }
+.motion-toggle.is-paused .motion-toggle__play { display: block; }
 .hero__controls button:focus-visible { outline: 2px solid var(--teal-glow); outline-offset: 3px; }
 
 /* Existing CSS remains the fallback when the local animation bundle is unavailable. */
@@ -162,7 +164,12 @@
     transform: scaleX(var(--flow-draw, 0));
     transform-origin: left;
 }
-.has-company-motion .safety-cycle__num { box-shadow: 0 0 0 calc(var(--step-halo, 0) * 7px) rgba(22, 123, 133, .06); }
+/* Steps paint above the connector line; the number tint is a variable so the hover colors still win. */
+.has-company-motion .safety-cycle__step { z-index: 1; }
+.has-company-motion .safety-cycle__num {
+    background-color: var(--step-bg, var(--bg-alt));
+    box-shadow: 0 0 0 calc(var(--step-halo, 0) * 7px) rgba(22, 123, 133, .06);
+}
 .motion-paused .ticker__tag::before,
 .motion-paused .hero__scroll .i,
 .motion-paused .nb__dot,
@@ -183,7 +190,6 @@
     .hero__atmosphere { display: none !important; }
     .has-company-motion .hero__slide { transform: none !important; }
     .motion-toggle { display: none; }
-    .hero__scenes button[aria-pressed="true"] i { transform: scaleX(1); }
     .motion-image::after, .motion-surface::after { display: none; }
     .has-company-motion .safety-cycle__flow::after { transform: scaleX(1); }
 }

@@ -46,19 +46,40 @@
     const revealObserver = new IntersectionObserver(entries => {
         for (const entry of entries) {
             if (!entry.isIntersecting) continue;
-            const action = pending.get(entry.target);
+            const job = pending.get(entry.target);
             revealObserver.unobserve(entry.target);
             pending.delete(entry.target);
             seen.add(entry.target);
-            if (running()) action?.();
+            job?.release();
+            if (running()) job?.action();
             entry.target.classList.add('in-view');
         }
     }, { threshold: .08, rootMargin: '0px 0px -24px 0px' });
 
-    function once(element, action) {
-        if (!element || seen.has(element) || still()) return;
-        pending.set(element, action);
+    // Puts elements in their reveal start state and returns the function that undoes it.
+    function hold(elements, property, value) {
+        const held = [...elements].map(element => [element, element.style.getPropertyValue(property)]);
+        held.forEach(([element]) => element.style.setProperty(property, value));
+        return () => held.forEach(([element, before]) => {
+            if (before) element.style.setProperty(property, before);
+            else element.style.removeProperty(property);
+        });
+    }
+
+    // Only content still below the fold gets a reveal. It waits in its start state, so nothing
+    // already on screen is hidden again; anything on screen or scrolled past stays as it is.
+    function once(element, action, startState) {
+        if (!element || seen.has(element)) return;
+        if (still() || element.getBoundingClientRect().top < innerHeight) {
+            seen.add(element);
+            return;
+        }
+        pending.set(element, { action, release: startState ? startState() : () => {} });
         revealObserver.observe(element);
+    }
+
+    function releasePending() {
+        pending.forEach(job => job.release());
     }
 
     function syncLabels() {
@@ -66,7 +87,8 @@
         toggle.setAttribute('aria-label', en
             ? (userPaused ? 'Resume motion' : 'Pause motion')
             : (userPaused ? '모션 재생' : '모션 일시정지'));
-        toggle.setAttribute('aria-pressed', String(userPaused));
+        // The name says what pressing it does, so the button carries no pressed state.
+        toggle.classList.toggle('is-paused', userPaused);
         document.querySelector('.hero__scenes').setAttribute('aria-label', en ? 'Choose fleet photograph' : '선박 사진 선택');
         scenes.forEach((button, i) => {
             button.setAttribute('aria-label', en ? `Fleet photograph ${i + 1}` : `선박 사진 ${i + 1}`);
@@ -109,7 +131,10 @@
             slide.style.zIndex = i === index ? '1' : '0';
         });
         syncLabels();
-        scenes.forEach(button => { button.querySelector('i').style.transform = 'scaleX(0)'; });
+        // While the slideshow is not advancing, the selected photo keeps a full line.
+        scenes.forEach((button, i) => {
+            button.querySelector('i').style.transform = still() && i === index ? 'scaleX(1)' : 'scaleX(0)';
+        });
         if (still() || immediate) {
             slides.forEach((slide, i) => { slide.style.opacity = i === index ? '1' : '0'; });
         } else {
@@ -152,7 +177,7 @@
             else if (running()) job.play();
             else job.pause();
         });
-        if (still()) resetPointers();
+        if (still()) { resetPointers(); releasePending(); }
         ambient.forEach(record => record.jobs.forEach(job => running() && record.visible ? job.play() : job.pause()));
         if (running() && heroVisible) scheduleHero(heroRemaining);
         else { freezeHero(); heroJobs.forEach(job => job.pause()); }
@@ -168,18 +193,22 @@
         selector = revealSelector;
         if (!initialized) init();
         syncLabels();
+        releasePending();
         revealObserver.disconnect();
         pending = new Map();
         document.querySelectorAll(selector || '[data-motion-reveal]').forEach(element => once(element, () => {
             play(element, { opacity: [0, 1], y: [22, 0], duration: 820, ease: 'outQuint' });
-        }));
-        document.querySelectorAll('.section__head').forEach(head => once(head, () => {
-            play(head.querySelectorAll('.eyebrow, h2, .lead'), {
-                opacity: [0, 1], y: [24, 0], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'],
-                duration: 900, delay: stagger(90), ease: 'outQuint'
-            });
-            play(head, { '--rule-draw': [0, 1], duration: 1250, ease: 'outCubic' });
-        }));
+        }, () => hold([element], 'opacity', '0')));
+        document.querySelectorAll('.section__head').forEach(head => {
+            const parts = head.querySelectorAll('.eyebrow, h2, .lead');
+            once(head, () => {
+                play(parts, {
+                    opacity: [0, 1], y: [24, 0], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'],
+                    duration: 900, delay: stagger(90), ease: 'outQuint'
+                });
+                play(head, { '--rule-draw': [0, 1], duration: 1250, ease: 'outCubic' });
+            }, () => hold(parts, 'opacity', '0'));
+        });
         document.querySelectorAll('.fleet__cat-media, .service__media, .nb__media').forEach(frame => {
             frame.classList.add('motion-image');
             once(frame, () => {
@@ -187,7 +216,7 @@
                 if (!desktop.matches || frame.matches('.service__media')) {
                     play(frame.querySelector('img'), { scale: [1.06, 1], duration: 1500, ease: 'outQuint' });
                 }
-            });
+            }, () => hold([frame], '--image-cover', '1'));
             if (desktop.matches && !still() && !scrollJobs.has(frame) && !frame.matches('.service__media')) {
                 const scroller = onScroll({ target: frame, enter: 'bottom top', leave: 'top bottom', sync: true });
                 scrollJobs.set(frame, animate(frame.querySelector('img'), {
@@ -200,20 +229,21 @@
         });
         document.querySelectorAll('.service__standards, .owners__grid').forEach(group => once(group, () => {
             play(group.children, { opacity: [0, 1], y: [10, 0], duration: 650, delay: stagger(60), ease: 'outCubic' });
-        }));
+        }, () => hold(group.children, 'opacity', '0')));
         const cycle = document.querySelector('.safety-cycle__flow');
         once(cycle, () => {
             play(cycle, { '--flow-draw': [0, 1], duration: 1800, ease: 'inOutCubic' });
             play(cycle.querySelectorAll('.safety-cycle__num'), {
-                '--step-halo': [0, 1], backgroundColor: ['#ffffff', '#e7f3f3'],
+                '--step-halo': [0, 1], '--step-bg': ['#ffffff', '#e7f3f3'],
                 duration: 700, delay: stagger(300), ease: 'outCubic'
             });
         });
+        const quote = document.querySelectorAll('.about__quote-line, .about__visual cite');
         once(document.querySelector('.about__visual'), () => {
-            play('.about__quote-line, .about__visual cite', {
+            play(quote, {
                 opacity: [0, 1], y: [20, 0], duration: 900, delay: stagger(140), ease: 'outQuint'
             });
-        });
+        }, () => hold(quote, 'opacity', '0'));
         addAmbient(document.querySelector('.about__visual'), () => [
             play('.about__visual', { '--chart-shift': ['0px', '52px'], duration: 30000, loop: true, ease: 'linear' })
         ]);
@@ -316,7 +346,9 @@
         if (!initialized) init();
         if (still()) return;
         const intro = createTimeline({ defaults: { ease: 'outQuint' } });
-        intro.add('.hero__eyebrow', { opacity: [0, 1], y: [12, 0], duration: 700 }, 0)
+        // Hide every target on the first frame; later entries would otherwise show until their turn.
+        intro.set('.hero__eyebrow, .hero__title > span, .hero__lead, .hero__cta, .hero__dock > a', { opacity: 0 }, 0)
+            .add('.hero__eyebrow', { opacity: [0, 1], y: [12, 0], duration: 700 }, 0)
             .add('.hero__title > span', {
                 opacity: [0, 1], y: [42, 0], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 -8% 0)'],
                 duration: 1150, delay: stagger(130)
@@ -327,5 +359,6 @@
         jobs.add(intro);
     }
 
-    window.CompanyMotion = { refresh, ready: startIntro, isPaused: () => still() };
+    // isPaused: the visitor's pause button only, not the OS reduced-motion setting.
+    window.CompanyMotion = { refresh, ready: startIntro, isPaused: () => userPaused };
 })();
