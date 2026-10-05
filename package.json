@@ -6,11 +6,13 @@
   "scripts": {
     "build": "node scripts/content-audit.mjs",
     "dev": "node scripts/dev-server.mjs",
+    "motion:vendor": "node scripts/copy-motion-vendor.mjs",
     "audit": "node scripts/content-audit.mjs && node scripts/mobile-audit.mjs --serve",
     "audit:content": "node scripts/content-audit.mjs",
     "audit:mobile": "node scripts/mobile-audit.mjs --serve"
   },
   "devDependencies": {
+    "animejs": "4.5.0",
     "playwright": "^1.60.0"
   },
   "engines": {

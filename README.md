@@ -62,6 +62,36 @@ npm run audit
 └── package.json
 ```
 
+## 모션 그래픽
+
+`js/motion.js`와 `css/motion.css`가 Anime.js 4.5.0 기반의 장면 전환, 타이틀 마스크,
+SVG 해양 곡선, 빛 이동, 섹션 제목, 이미지 공개·시차, 준거 기준 순차 등장,
+안전관리 연결선, 버튼·카드 포인터 반응을 담당합니다. 한·영 전환으로 생성된
+새 요소에도 모션을 등록합니다.
+
+- 첫 화면의 사진 번호로 장면을 선택하고, 재생 버튼으로 모션을 멈추거나 재개합니다.
+- `prefers-reduced-motion`에서는 자동 재생을 멈추고 콘텐츠를 즉시 표시합니다.
+- 터치 화면에서는 포인터 효과와 스크롤 시차를 생략하고 이미지 이동 폭을 줄입니다.
+- 화면 밖의 반복 효과와 백그라운드 탭의 애니메이션은 정지합니다.
+- 라이브러리는 외부 CDN 대신 `js/vendor/`에서 제공하며 MIT 라이선스를 함께 보관합니다.
+- 버전 파일을 다시 만들 때는 `npm ci && npm run motion:vendor`를 실행합니다.
+- 라이브러리가 로드되지 않으면 기존 CSS 모션과 홈페이지 기능을 사용합니다.
+
+스크롤 연동은 Anime.js의 [공식 반응형 예제](https://github.com/juliangarnier/anime/tree/master/examples/onscroll-responsive-scope)를 참고했습니다.
+
+검토한 프로젝트와 GitHub 스타 수(2026-10-05 확인):
+
+| 프로젝트 | 스타 | 이 사이트에 대한 판단 |
+| --- | ---: | --- |
+| [Anime.js](https://github.com/juliangarnier/anime) | 73,349 | 적용: 일반 JS·SVG·타임라인·스크롤 연동, MIT |
+| [Motion](https://github.com/motiondivision/motion) | 33,827 | 후보: 일반 JS 지원, MIT |
+| [GSAP](https://github.com/greensock/GSAP) | 28,800 | 후보: 풍부한 타임라인·스크롤 도구 |
+| [Lenis](https://github.com/darkroomengineering/lenis) | 16,157 | 후보: 스크롤 보간, 기존 앵커 이동과 겹쳐 추가하지 않음 |
+
+해양 곡선·빛 레이어의 표현은 사내 `onefleet-signage`의 `sea-motion`·`light-scan`을
+참고하고 회사 홈페이지용으로 재작성했습니다. 표시되는 곡선은 장식이며 실제 항로나
+운항 위치를 나타내지 않습니다.
+
 ## 콘텐츠 수정
 
 1. `data/*.json`을 수정합니다.

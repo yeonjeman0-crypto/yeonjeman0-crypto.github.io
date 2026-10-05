@@ -1,0 +1,193 @@
+/* Motion direction: maritime contours, restrained light, precise editorial reveals. */
+.hero__atmosphere { display: none; }
+.has-company-motion .hero__atmosphere {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+.has-company-motion .hero__slide {
+    animation: none;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+.has-company-motion .hero__slide:first-child { opacity: 1; }
+.has-company-motion .hero__veil { z-index: 2; pointer-events: none; }
+.hero__light {
+    position: absolute;
+    inset: -25% -40%;
+    opacity: 0;
+    background: linear-gradient(112deg, transparent 35%, rgba(150, 232, 237, .07) 49%, rgba(255, 255, 255, .10) 51%, transparent 65%);
+    transform: translateX(-24%);
+}
+.hero__sea {
+    position: absolute;
+    width: 100%;
+    height: 42%;
+    right: 0;
+    bottom: 12%;
+    opacity: .42;
+    mask-image: linear-gradient(90deg, transparent 30%, #000 78%);
+}
+.hero__sea path {
+    fill: none;
+    stroke: rgba(170, 232, 235, .52);
+    stroke-width: .8;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 130 45 3 45;
+}
+.hero__sea path:nth-child(2) { opacity: .6; }
+.hero__sea path:nth-child(3) { opacity: .35; }
+.has-company-motion .hero__eyebrow,
+.has-company-motion .hero__title > span,
+.has-company-motion .hero__lead,
+.has-company-motion .hero__cta,
+.has-company-motion .hero__dock { animation: none; }
+.hero__controls { display: none; }
+.has-company-motion .hero__controls {
+    position: absolute;
+    z-index: 4;
+    bottom: 16px;
+    right: var(--page-pad);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+.hero__scenes { display: flex; gap: 12px; align-items: center; }
+.hero__scenes button {
+    position: relative;
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, .5);
+    width: 44px;
+    height: 44px;
+    display: grid;
+    align-content: center;
+    gap: 7px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    transition: color .25s;
+}
+.hero__scenes button::after {
+    content: '';
+    height: 1px;
+    background: rgba(255, 255, 255, .25);
+}
+.hero__scenes button i {
+    position: absolute;
+    bottom: 11px;
+    height: 1px;
+    width: 100%;
+    background: var(--coral-soft);
+    transform-origin: left;
+    transform: scaleX(0);
+}
+.hero__scenes button[aria-pressed="true"] { color: #fff; }
+.motion-toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+    background: rgba(5, 24, 35, .45);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border-color .25s, background .25s;
+}
+.motion-toggle:hover { background: rgba(15, 70, 80, .65); border-color: var(--teal-glow); }
+.motion-toggle svg { grid-area: 1/1; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+.motion-toggle__play { display: none; }
+.motion-toggle[aria-pressed="true"] .motion-toggle__pause { display: none; }
+.motion-toggle[aria-pressed="true"] .motion-toggle__play { display: block; }
+.hero__controls button:focus-visible { outline: 2px solid var(--teal-glow); outline-offset: 3px; }
+
+/* Existing CSS remains the fallback when the local animation bundle is unavailable. */
+.has-company-motion .kpi__card, .has-company-motion .mv,
+.has-company-motion .tl__row, .has-company-motion .org__box,
+.has-company-motion .fleet__cat, .has-company-motion .service,
+.has-company-motion .stats-dark__card, .has-company-motion .cert,
+.has-company-motion .why__item, .has-company-motion .careers-portal,
+.has-company-motion .esg-col, .has-company-motion .safety-col,
+.has-company-motion .safety-cycle__step, .has-company-motion .direction {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+    transition-property: background, border-color, box-shadow;
+}
+.has-company-motion .section__head .eyebrow::after {
+    transform: scaleX(var(--rule-draw, 1));
+    transform-origin: left;
+}
+.motion-image {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.motion-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: var(--navy);
+    transform: scaleX(var(--image-cover, 0));
+    transform-origin: right;
+    pointer-events: none;
+}
+.has-company-motion .fleet__cat-media img { transition: none; }
+.has-company-motion .fleet__cat:hover .fleet__cat-media img { transform: none; }
+.has-company-motion .about__visual { --chart-shift: 0px; }
+.has-company-motion .about__visual::before { background-position: var(--chart-shift) var(--chart-shift); }
+.motion-surface { position: relative; isolation: isolate; }
+.motion-surface::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: var(--surface-light, 0);
+    background: radial-gradient(320px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(22, 123, 133, .07), transparent 72%);
+    pointer-events: none;
+}
+.has-company-motion .safety-cycle__flow::after {
+    content: '';
+    position: absolute;
+    top: 17px;
+    left: 18px;
+    right: 24%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--teal), var(--coral-soft));
+    transform: scaleX(var(--flow-draw, 0));
+    transform-origin: left;
+}
+.has-company-motion .safety-cycle__num { box-shadow: 0 0 0 calc(var(--step-halo, 0) * 7px) rgba(22, 123, 133, .06); }
+.motion-paused .ticker__tag::before,
+.motion-paused .hero__scroll .i,
+.motion-paused .nb__dot,
+.motion-paused .careers-portal__badge::before { animation-play-state: paused; }
+
+@media (max-width: 1024px) {
+    .has-company-motion .safety-cycle__flow::after { display: none; }
+    .hero__sea { height: 28%; opacity: .22; }
+}
+@media (max-width: 640px) {
+    .has-company-motion .hero__inner { padding-bottom: 84px; }
+    .has-company-motion .hero__controls { bottom: 18px; left: var(--page-pad); right: var(--page-pad); justify-content: space-between; gap: 12px; }
+    .hero__scenes { gap: 10px; }
+    .hero__sea { bottom: 35%; mask-image: linear-gradient(90deg, transparent, #000); }
+    .hero__light { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero__atmosphere { display: none !important; }
+    .has-company-motion .hero__slide { transform: none !important; }
+    .motion-toggle { display: none; }
+    .hero__scenes button[aria-pressed="true"] i { transform: scaleX(1); }
+    .motion-image::after, .motion-surface::after { display: none; }
+    .has-company-motion .safety-cycle__flow::after { transform: scaleX(1); }
+}
+@media print {
+    .hero__atmosphere, .hero__controls, .motion-image::after, .motion-surface::after { display: none !important; }
+    .has-company-motion [style] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+}

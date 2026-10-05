@@ -66,6 +66,7 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=20260821h">
+    <link rel="stylesheet" href="css/motion.css?v=20261005a">
     <style>
         /* 인라인 로딩 — 외부 CSS 의존 없음 */
         #loading { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg,#0F2B43,#0D5965,#167B85); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity .5s ease, visibility .5s ease; }
@@ -253,6 +254,14 @@
             <div class="hero__slide hero__slide--pan-right"   style="background-image: url('images/hero/hero_custom_04.webp')"></div>
             <div class="hero__veil"></div>
         </div>
+        <div class="hero__atmosphere" aria-hidden="true">
+            <div class="hero__light"></div>
+            <svg class="hero__sea" viewBox="0 0 1440 420" preserveAspectRatio="none">
+                <path d="M-80 235 C180 90 360 355 650 215 S1080 95 1520 245"/>
+                <path d="M-80 280 C190 150 410 365 710 265 S1150 145 1520 285"/>
+                <path d="M-80 325 C260 210 480 400 790 305 S1220 220 1520 330"/>
+            </svg>
+        </div>
         <div class="hero__inner">
             <div class="hero__content">
                 <p class="hero__eyebrow">
@@ -289,8 +298,17 @@
                 </a>
             </div>
         </div>
-        <div class="hero__indicators" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
+        <div class="hero__controls">
+            <div class="hero__scenes" role="group" aria-label="선박 사진 선택">
+                <button type="button" data-scene="0" aria-label="선박 사진 1" aria-pressed="true"><span>01</span><i></i></button>
+                <button type="button" data-scene="1" aria-label="선박 사진 2" aria-pressed="false"><span>02</span><i></i></button>
+                <button type="button" data-scene="2" aria-label="선박 사진 3" aria-pressed="false"><span>03</span><i></i></button>
+                <button type="button" data-scene="3" aria-label="선박 사진 4" aria-pressed="false"><span>04</span><i></i></button>
+            </div>
+            <button class="motion-toggle" id="motionToggle" type="button" aria-label="모션 일시정지" aria-pressed="false">
+                <svg class="motion-toggle__pause" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg>
+                <svg class="motion-toggle__play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z"/></svg>
+            </button>
         </div>
 
         <a href="#about" class="hero__scroll" aria-label="Scroll down">
@@ -1094,6 +1112,8 @@
     <script src="js/i18n.js?v=20260821h"></script>
     <script src="js/data.js?v=20260821h"></script>
     <script src="js/api.js?v=20260821h"></script>
-    <script src="js/main.js?v=20260821h"></script>
+    <script src="js/vendor/animejs-4.5.0.min.js"></script>
+    <script src="js/motion.js?v=20261005a"></script>
+    <script src="js/main.js?v=20261005a"></script>
 </body>
 </html>
