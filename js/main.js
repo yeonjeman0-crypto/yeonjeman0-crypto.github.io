@@ -623,7 +623,8 @@ function setupTickerPause() {
     tick.addEventListener('click', () => tick.classList.toggle('is-paused'));
 }
 
-// Pause the ticker off-screen, in background tabs, and when motion is disabled.
+// 티커 구동 — CSS 애니메이션 대신 JS 직접 구동.
+// 감속모션 OS설정과 무관하게 움직인다(2026-07-11 결정). 화면 밖·백그라운드 탭·모션 일시정지 버튼에서만 멈춘다.
 function setupTickerMotion() {
     const ticker = document.querySelector('.ticker');
     const track = document.getElementById('vesselTicker');
@@ -633,14 +634,13 @@ function setupTickerMotion() {
     let last = null;
     let hover = false;
     let visible = true;
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(ticker);
     const SPEED = 60; // px/s
     ticker.addEventListener('mouseenter', () => { hover = true; });
     ticker.addEventListener('mouseleave', () => { hover = false; });
     function frame(now) {
         if (last === null) last = now;
-        if (visible && !document.hidden && !reducedMotion.matches && !window.CompanyMotion?.isPaused()
+        if (visible && !document.hidden && !window.CompanyMotion?.isPaused()
             && !hover && !ticker.classList.contains('is-paused')) {
             x -= SPEED * (now - last) / 1000;
             const half = track.scrollWidth / 2;

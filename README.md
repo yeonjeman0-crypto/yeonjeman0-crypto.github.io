@@ -33,6 +33,11 @@ npm run build
 # 360/390/768px 화면과 모바일 메뉴 점검
 npm run audit:mobile
 
+# 모션 점검: 히어로 컨트롤 겹침, 안전관리 단계 번호, 첫 화면·스크롤 등장 깜빡임,
+# 숨은 채 남는 요소(일시정지·감속 모션·언어 전환·인쇄), 티커
+npm run audit:motion
+# 한 항목만: npm run audit:motion -- --only=ticker
+
 # 전체 점검
 npm run audit
 ```
@@ -45,9 +50,13 @@ npm run audit
 .
 ├── CNAME                 # 운영 도메인 — 삭제/변경 금지
 ├── index.html            # 운영 페이지
-├── css/style.css
+├── css/
+│   ├── style.css
+│   └── motion.css        # 모션 그래픽 스타일
 ├── js/
 │   ├── main.js
+│   ├── motion.js         # 모션 그래픽(Anime.js)
+│   ├── vendor/           # Anime.js 4.5.0 + MIT 라이선스
 │   ├── i18n.js
 │   ├── api.js
 │   ├── icons.js
@@ -58,7 +67,9 @@ npm run audit
 ├── scripts/
 │   ├── dev-server.mjs
 │   ├── content-audit.mjs
-│   └── mobile-audit.mjs
+│   ├── mobile-audit.mjs
+│   ├── motion-audit.mjs
+│   └── copy-motion-vendor.mjs
 └── package.json
 ```
 
@@ -71,6 +82,10 @@ SVG 해양 곡선, 빛 이동, 섹션 제목, 이미지 공개·시차, 준거 �
 
 - 첫 화면의 사진 번호로 장면을 선택하고, 재생 버튼으로 모션을 멈추거나 재개합니다.
 - `prefers-reduced-motion`에서는 자동 재생을 멈추고 콘텐츠를 즉시 표시합니다.
+  단, 선박 명부 티커는 2026-07-11 결정에 따라 이 설정과 관계없이 움직이며,
+  모션 일시정지 버튼·티커 클릭·마우스 올림으로 멈춥니다.
+- 스크롤 등장은 아직 화면 아래에 있는 콘텐츠에만 적용합니다. 이미 화면에 있거나
+  지나간 콘텐츠는 다시 숨기지 않습니다.
 - 터치 화면에서는 포인터 효과와 스크롤 시차를 생략하고 이미지 이동 폭을 줄입니다.
 - 화면 밖의 반복 효과와 백그라운드 탭의 애니메이션은 정지합니다.
 - 라이브러리는 외부 CDN 대신 `js/vendor/`에서 제공하며 MIT 라이선스를 함께 보관합니다.

@@ -55,6 +55,8 @@
     align-items: center;
     gap: 22px;
 }
+/* Room under the dock for the 44px controls: 16px offset + 44px + 16px gap. */
+.has-company-motion .hero__inner { padding-bottom: 76px; }
 .hero__scenes { display: flex; gap: 12px; align-items: center; }
 .hero__scenes button {
     position: relative;
@@ -162,7 +164,12 @@
     transform: scaleX(var(--flow-draw, 0));
     transform-origin: left;
 }
-.has-company-motion .safety-cycle__num { box-shadow: 0 0 0 calc(var(--step-halo, 0) * 7px) rgba(22, 123, 133, .06); }
+/* Steps paint above the connector line; the number tint is a variable so the hover colors still win. */
+.has-company-motion .safety-cycle__step { z-index: 1; }
+.has-company-motion .safety-cycle__num {
+    background-color: var(--step-bg, var(--bg-alt));
+    box-shadow: 0 0 0 calc(var(--step-halo, 0) * 7px) rgba(22, 123, 133, .06);
+}
 .motion-paused .ticker__tag::before,
 .motion-paused .hero__scroll .i,
 .motion-paused .nb__dot,
