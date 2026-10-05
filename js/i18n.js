@@ -20,7 +20,7 @@ window.I18N = {
         'commit.lead': '선박과 육상을 잇는 절차 중심 관리 체계',
         'commit.s1': '안전관리 체계', 'commit.s1d': 'ISM Code 기반 선박·육상 안전관리',
         'commit.s2': '비상 대응', 'commit.s2d': '선박과 육상 조직 간 긴급 연락 체계 운영',
-        'commit.s3': '리스크 관리', 'commit.s4': '지정담당자', 'commit.s4d': '선박관리본부 지정담당자(DPA) 운영', 'commit.s3d': '검사·심사·운항 리스크 사전 점검',
+        'commit.s3': '리스크 관리', 'commit.s4': '지정담당자', 'commit.s4d': '선박관리본부 지정담당자(DP) 운영', 'commit.s3d': '검사·심사·운항 리스크 사전 점검',
 
         'owners.title': '선주사', 'owners.lead': '신뢰받는 선주사들과 함께 안정적인 선박 관리 서비스를 제공합니다.',
 
@@ -146,7 +146,7 @@ window.I18N = {
         'commit.lead': 'Procedure-driven management connecting ship and shore',
         'commit.s1': 'Safety System', 'commit.s1d': 'Ship-to-shore safety management based on ISM Code',
         'commit.s2': 'Emergency Response', 'commit.s2d': 'Emergency contact structure between vessel and shore',
-        'commit.s3': 'Risk Management', 'commit.s4': 'Designated Person', 'commit.s4d': 'DPA appointed in the ship management division', 'commit.s3d': 'Pre-checks for surveys, audits, and operational risks',
+        'commit.s3': 'Risk Management', 'commit.s4': 'Designated Person', 'commit.s4d': 'DP appointed in the ship management division', 'commit.s3d': 'Pre-checks for surveys, audits, and operational risks',
 
         'owners.title': 'Ship Owners', 'owners.lead': 'Delivering excellent ship management services together with diverse shipowners.',
 
