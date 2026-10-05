@@ -45,7 +45,11 @@
     "issuer": "",
     "certNo": "",
     "issued": "",
-    "expires": ""
+    "expires": "",
+    "status": {
+      "ko": "삼주에스엠 · 2026년 10월 취득 예정",
+      "en": "SAMJOO SM · Certification planned for October 2026"
+    }
   },
   {
     "code": "ISO14001",
@@ -61,7 +65,11 @@
     "issuer": "",
     "certNo": "",
     "issued": "",
-    "expires": ""
+    "expires": "",
+    "status": {
+      "ko": "삼주에스엠 · 2026년 10월 취득 예정",
+      "en": "SAMJOO SM · Certification planned for October 2026"
+    }
   },
   {
     "code": "ISO45001",
@@ -77,6 +85,10 @@
     "issuer": "",
     "certNo": "",
     "issued": "",
-    "expires": ""
+    "expires": "",
+    "status": {
+      "ko": "삼주에스엠 · 2026년 10월 취득 예정",
+      "en": "SAMJOO SM · Certification planned for October 2026"
+    }
   }
 ]

@@ -33,7 +33,7 @@
 }
 .hero__sea path {
     fill: none;
-    stroke: rgba(170, 232, 235, .52);
+    stroke: rgba(22, 123, 133, .3);
     stroke-width: .8;
     vector-effect: non-scaling-stroke;
     stroke-dasharray: 130 45 3 45;
@@ -60,7 +60,7 @@
     position: relative;
     border: 0;
     background: transparent;
-    color: rgba(255, 255, 255, .5);
+    color: var(--gray);
     width: 44px;
     height: 44px;
     display: grid;
@@ -74,7 +74,7 @@
 .hero__scenes button::after {
     content: '';
     height: 1px;
-    background: rgba(255, 255, 255, .25);
+    background: var(--hairline);
 }
 .hero__scenes button i {
     position: absolute;
@@ -85,25 +85,25 @@
     transform-origin: left;
     transform: scaleX(0);
 }
-.hero__scenes button[aria-pressed="true"] { color: #fff; }
+.hero__scenes button[aria-pressed="true"] { color: var(--teal-deep); }
 .motion-toggle {
     display: grid;
     place-items: center;
     width: 44px;
     height: 44px;
-    color: #fff;
-    background: rgba(5, 24, 35, .45);
-    border: 1px solid rgba(255, 255, 255, .25);
+    color: var(--teal-deep);
+    background: rgba(255, 255, 255, .82);
+    border: 1px solid var(--hairline);
     border-radius: 50%;
     cursor: pointer;
     transition: border-color .25s, background .25s;
 }
-.motion-toggle:hover { background: rgba(15, 70, 80, .65); border-color: var(--teal-glow); }
+.motion-toggle:hover { background: #fff; border-color: var(--teal-deep); }
 .motion-toggle svg { grid-area: 1/1; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; }
 .motion-toggle__play { display: none; }
 .motion-toggle[aria-pressed="true"] .motion-toggle__pause { display: none; }
 .motion-toggle[aria-pressed="true"] .motion-toggle__play { display: block; }
-.hero__controls button:focus-visible { outline: 2px solid var(--teal-glow); outline-offset: 3px; }
+.hero__controls button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
 /* Existing CSS remains the fallback when the local animation bundle is unavailable. */
 .has-company-motion .kpi__card, .has-company-motion .mv,
@@ -132,7 +132,7 @@
     position: absolute;
     inset: 0;
     z-index: 3;
-    background: var(--navy);
+    background: var(--bg-alt);
     transform: scaleX(var(--image-cover, 0));
     transform-origin: right;
     pointer-events: none;

@@ -1,5 +1,41 @@
 [
   {
+    "year": { "ko": "현재", "en": "PRESENT" },
+    "title": { "ko": "전 관리 선박 스타링크 설치 완료", "en": "Starlink Installation Completed Across the Managed Fleet" },
+    "desc": {
+      "ko": "선내 인터넷 이용을 위한 스타링크(Starlink)를 전 관리 선박에 설치 완료",
+      "en": "Completed installation of Starlink across all managed vessels to support onboard internet access"
+    },
+    "completed": true,
+    "highlight": true
+  },
+  {
+    "year": "2027",
+    "title": { "ko": "신조 벌크선 3척 인도 예정", "en": "Delivery of Three New Bulk Carriers Planned" },
+    "desc": {
+      "ko": "SJ DUET, SJ EVER, SJ FORTUNE의 2027년 인도 예정. 현재 건조 감리 및 기술관리를 수행하며 선대 편입을 준비 중",
+      "en": "SJ DUET, SJ EVER and SJ FORTUNE are scheduled for delivery in 2027. Construction supervision and technical management are underway in preparation for fleet entry"
+    },
+    "planned": true
+  },
+  {
+    "year": "2026.10",
+    "title": { "ko": "삼주에스엠 ISO 통합인증 취득 예정", "en": "SAMJOO SM Plans to Obtain Integrated ISO Certification" },
+    "desc": {
+      "ko": "삼주에스엠(주), 2026년 10월 ISO 9001(품질경영)·ISO 14001(환경경영)·ISO 45001(안전보건경영) 인증 취득 예정",
+      "en": "SAMJOO SM CO., LTD. plans to obtain ISO 9001 (quality), ISO 14001 (environmental) and ISO 45001 (occupational health and safety) certification in October 2026"
+    },
+    "planned": true
+  },
+  {
+    "year": "2026.04.15",
+    "title": { "ko": "통합경영시스템 회사 방침 개정·시행", "en": "Revised Integrated Management Policies Implemented" },
+    "desc": {
+      "ko": "주 매뉴얼 MM-00 Rev. 1.2에 따른 안전·보건·품질·환경보호, 마약·알코올 통제 및 윤리경영 방침 개정·시행",
+      "en": "Implemented revised safety, health, quality and environmental protection, drug and alcohol control, and ethical management policies under Main Manual MM-00 Rev. 1.2"
+    }
+  },
+  {
     "year": "2026.04",
     "title": { "ko": "SAMJOO MARITIME 자회사 편입", "en": "Incorporated as Subsidiary of SAMJOO MARITIME" },
     "desc": {

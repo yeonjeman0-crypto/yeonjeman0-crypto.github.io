@@ -344,24 +344,32 @@ function renderHistory() {
         .replace(/DORIKO LIMITED/g,     '<span class="nowrap">DORIKO LIMITED</span>')
         .replace(/DORIKO LTD\.?/g,      '<span class="nowrap">DORIKO LTD.</span>');
     const ko = state.lang === 'ko';
-    // 연대 그룹으로 묶어 원장처럼 — 9개 평면 나열 대신 시대 단위로 읽히게
+    // 연대 그룹으로 묶어 시대 단위로 읽히게
     const decadeOf = (y) => Math.floor(parseInt(String(y).slice(0, 4), 10) / 10) * 10;
     let lastDecade = null;
     const rows = state.history.map((h, i) => {
-        const d = decadeOf(h.year);
-        const marker = d !== lastDecade
+        const year = L(h.year);
+        const d = decadeOf(year);
+        const marker = Number.isFinite(d) && d !== lastDecade
             ? `<div class="tl__era"><span>${d}s</span></div>`
             : '';
-        lastDecade = d;
+        if (Number.isFinite(d)) lastDecade = d;
+        const tag = h.planned
+            ? `<span class="tl__planned">${ko ? '예정' : 'PLANNED'}</span>`
+            : h.completed
+                ? `<span class="tl__now">${ko ? '완료' : 'COMPLETED'}</span>`
+                : h.highlight
+                    ? `<span class="tl__now">${ko ? '현재' : 'PRESENT'}</span>`
+                    : `<span class="tl__seq">${String(state.history.length - i).padStart(2, '0')}</span>`;
         return marker + `
-        <article class="tl__row${h.highlight ? ' is-now' : ''}">
-            <div class="tl__year">${h.year}</div>
+        <article class="tl__row${h.planned ? ' is-planned' : h.highlight ? ' is-now' : ''}">
+            <div class="tl__year">${year}</div>
             <div class="tl__rail" aria-hidden="true"><span class="tl__node"></span></div>
             <div class="tl__body">
                 <h3>${protectBrand(L(h.title))}</h3>
                 <p>${protectBrand(L(h.desc))}</p>
             </div>
-            <div class="tl__tag">${h.highlight ? `<span class="tl__now">${ko ? '현재' : 'PRESENT'}</span>` : `<span class="tl__seq">${String(state.history.length - i).padStart(2, '0')}</span>`}</div>
+            <div class="tl__tag">${tag}</div>
         </article>`;
     }).join('');
     document.getElementById('timeline').innerHTML = rows;
@@ -374,6 +382,7 @@ function renderCerts() {
     document.getElementById('certGrid').innerHTML = state.certs.map((c, i) => {
         // 증서번호·발행일·만료일은 채워졌을 때만 노출 (미기입 필드는 조용히 생략)
         const meta = [
+            L(c.status),
             c.issuer && `${ko ? '발행' : 'Issued by'} ${c.issuer}`,
             c.certNo && `NO. ${c.certNo}`,
             c.issued && `${ko ? '발행일' : 'Issued'} ${c.issued}`,
