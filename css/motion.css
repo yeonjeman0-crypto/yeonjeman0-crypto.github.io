@@ -103,8 +103,8 @@
 .motion-toggle:hover { background: rgba(15, 70, 80, .65); border-color: var(--teal-glow); }
 .motion-toggle svg { grid-area: 1/1; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; }
 .motion-toggle__play { display: none; }
-.motion-toggle[aria-pressed="true"] .motion-toggle__pause { display: none; }
-.motion-toggle[aria-pressed="true"] .motion-toggle__play { display: block; }
+.motion-toggle.is-paused .motion-toggle__pause { display: none; }
+.motion-toggle.is-paused .motion-toggle__play { display: block; }
 .hero__controls button:focus-visible { outline: 2px solid var(--teal-glow); outline-offset: 3px; }
 
 /* Existing CSS remains the fallback when the local animation bundle is unavailable. */
@@ -190,7 +190,6 @@
     .hero__atmosphere { display: none !important; }
     .has-company-motion .hero__slide { transform: none !important; }
     .motion-toggle { display: none; }
-    .hero__scenes button[aria-pressed="true"] i { transform: scaleX(1); }
     .motion-image::after, .motion-surface::after { display: none; }
     .has-company-motion .safety-cycle__flow::after { transform: scaleX(1); }
 }

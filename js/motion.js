@@ -87,7 +87,8 @@
         toggle.setAttribute('aria-label', en
             ? (userPaused ? 'Resume motion' : 'Pause motion')
             : (userPaused ? '모션 재생' : '모션 일시정지'));
-        toggle.setAttribute('aria-pressed', String(userPaused));
+        // The name says what pressing it does, so the button carries no pressed state.
+        toggle.classList.toggle('is-paused', userPaused);
         document.querySelector('.hero__scenes').setAttribute('aria-label', en ? 'Choose fleet photograph' : '선박 사진 선택');
         scenes.forEach((button, i) => {
             button.setAttribute('aria-label', en ? `Fleet photograph ${i + 1}` : `선박 사진 ${i + 1}`);
@@ -130,7 +131,10 @@
             slide.style.zIndex = i === index ? '1' : '0';
         });
         syncLabels();
-        scenes.forEach(button => { button.querySelector('i').style.transform = 'scaleX(0)'; });
+        // While the slideshow is not advancing, the selected photo keeps a full line.
+        scenes.forEach((button, i) => {
+            button.querySelector('i').style.transform = still() && i === index ? 'scaleX(1)' : 'scaleX(0)';
+        });
         if (still() || immediate) {
             slides.forEach((slide, i) => { slide.style.opacity = i === index ? '1' : '0'; });
         } else {

@@ -183,6 +183,59 @@ async function checkHeroControls() {
   return issues;
 }
 
+async function checkHeroControlStates() {
+  const issues = [];
+  const photoLines = page => page.evaluate(() => [...document.querySelectorAll('[data-scene]')].map(button => ({
+    selected: button.getAttribute('aria-pressed') === 'true',
+    scale: new DOMMatrix(getComputedStyle(button.querySelector('i')).transform).a,
+  })));
+  const toggleState = page => page.evaluate(() => {
+    const toggle = document.getElementById('motionToggle');
+    const shown = selector => getComputedStyle(toggle.querySelector(selector)).display !== 'none';
+    return {
+      label: toggle.getAttribute('aria-label'),
+      pressed: toggle.getAttribute('aria-pressed'),
+      pauseIcon: shown('.motion-toggle__pause'),
+      playIcon: shown('.motion-toggle__play'),
+    };
+  });
+
+  // The selected photo keeps a full line whenever the slideshow is not advancing.
+  let page = await openPage({ reducedMotion: 'reduce' });
+  await page.waitForTimeout(800);
+  const selectedLine = (await photoLines(page)).find(line => line.selected);
+  if (!selectedLine || selectedLine.scale < 0.99) issues.push('reduced motion | selected photo line is not shown');
+  await page.close();
+
+  // The pause button says what pressing it does; it is not also a pressed/unpressed toggle.
+  page = await openPage();
+  await page.waitForTimeout(800);
+  const expectToggle = async (when, expected) => {
+    const state = await toggleState(page);
+    for (const [key, value] of Object.entries(expected)) {
+      if (state[key] !== value) issues.push(`pause button ${when} | ${key} is ${JSON.stringify(state[key])}, expected ${JSON.stringify(value)}`);
+    }
+  };
+  await expectToggle('before pausing', { label: '모션 일시정지', pressed: null, pauseIcon: true, playIcon: false });
+  await page.click('#motionToggle');
+  await expectToggle('while paused', { label: '모션 재생', pressed: null, pauseIcon: false, playIcon: true });
+
+  await page.click('[data-scene="2"]');
+  await page.waitForTimeout(600);
+  const lines = await photoLines(page);
+  const selected = lines.findIndex(line => line.selected);
+  if (selected !== 2) issues.push(`motion paused | photo 3 was not selected (photo ${selected + 1} is)`);
+  else if (lines[2].scale < 0.99) issues.push('motion paused | selected photo line is not shown after choosing a photo');
+
+  await page.click('#langToggle');
+  await page.waitForTimeout(600);
+  await expectToggle('while paused in English', { label: 'Resume motion', pressed: null, pauseIcon: false, playIcon: true });
+  await page.click('#motionToggle');
+  await expectToggle('after resuming in English', { label: 'Pause motion', pressed: null, pauseIcon: true, playIcon: false });
+  await page.close();
+  return issues;
+}
+
 async function checkSafetyCycle() {
   const issues = [];
   const page = await openPage();
@@ -385,6 +438,7 @@ async function checkTicker() {
 const CHECKS = [
   ['motion loaded', checkMotionLoaded],
   ['hero controls clear the dock', checkHeroControls],
+  ['hero control states', checkHeroControlStates],
   ['safety cycle numbers', checkSafetyCycle],
   ['hero intro', checkHeroIntro],
   ['reveal keeps shown content', checkRevealKeepsShownContent],
