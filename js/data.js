@@ -101,7 +101,11 @@ window.SAMJOO_DATA = {
         "mapQuery": "서울 중구 서소문로 89 순화빌딩",
         "tel": "+82-2-2021-7400",
         "fax": "+82-2-757-5642",
-        "emails": ["samjoosm@samjoosm.com", "smt@doriko.com", "doriko@doriko.com"],
+        "emails": [
+          "samjoosm@samjoosm.com",
+          "smt@doriko.com",
+          "doriko@doriko.com"
+        ],
         "hours": {
           "ko": "평일 09:00 - 18:00 · 24시간 응급상황 지원",
           "en": "Weekdays 09:00 - 18:00 · 24/7 Emergency Support"
@@ -125,7 +129,11 @@ window.SAMJOO_DATA = {
         "mapQuery": "부산 중구 중앙대로 102 팬오션빌딩",
         "tel": "+82-51-441-8911",
         "fax": "+82-51-441-8906",
-        "emails": ["samjoosm@samjoosm.com", "smt@doriko.com", "doriko@doriko.com"],
+        "emails": [
+          "samjoosm@samjoosm.com",
+          "smt@doriko.com",
+          "doriko@doriko.com"
+        ],
         "hours": {
           "ko": "평일 09:00 - 18:00 · 24시간 응급상황 지원",
           "en": "Weekdays 09:00 - 18:00 · 24/7 Emergency Support"
@@ -514,6 +522,22 @@ window.SAMJOO_DATA = {
   },
   "history": [
     {
+      "year": {
+        "ko": "현재",
+        "en": "PRESENT"
+      },
+      "title": {
+        "ko": "전 관리 선박 스타링크 설치 완료",
+        "en": "Starlink Installation Completed Across the Managed Fleet"
+      },
+      "desc": {
+        "ko": "선내 인터넷 이용을 위한 스타링크(Starlink)를 전 관리 선박에 설치 완료",
+        "en": "Completed installation of Starlink across all managed vessels to support onboard internet access"
+      },
+      "completed": true,
+      "highlight": true
+    },
+    {
       "year": "2027",
       "title": {
         "ko": "신조 벌크선 3척 인도 예정",
@@ -522,6 +546,18 @@ window.SAMJOO_DATA = {
       "desc": {
         "ko": "SJ DUET, SJ EVER, SJ FORTUNE의 2027년 인도 예정. 현재 건조 감리 및 기술관리를 수행하며 선대 편입을 준비 중",
         "en": "SJ DUET, SJ EVER and SJ FORTUNE are scheduled for delivery in 2027. Construction supervision and technical management are underway in preparation for fleet entry"
+      },
+      "planned": true
+    },
+    {
+      "year": "2026.10",
+      "title": {
+        "ko": "삼주에스엠 ISO 통합인증 취득 예정",
+        "en": "SAMJOO SM Plans to Obtain Integrated ISO Certification"
+      },
+      "desc": {
+        "ko": "삼주에스엠(주), 2026년 10월 ISO 9001(품질경영)·ISO 14001(환경경영)·ISO 45001(안전보건경영) 인증 취득 예정",
+        "en": "SAMJOO SM CO., LTD. plans to obtain ISO 9001 (quality), ISO 14001 (environmental) and ISO 45001 (occupational health and safety) certification in October 2026"
       },
       "planned": true
     },
@@ -644,7 +680,15 @@ window.SAMJOO_DATA = {
       "labelKo": "ISM Code 적합증서 — DNV 발행",
       "labelEn": "Document of Compliance — issued by DNV",
       "icon": "file-shield",
-      "category": "doc"
+      "category": "doc",
+      "scope": {
+        "ko": "BULK CARRIER · VEHICLE CARRIER",
+        "en": "BULK CARRIER · VEHICLE CARRIER"
+      },
+      "issuer": "DNV",
+      "certNo": "",
+      "issued": "",
+      "expires": ""
     },
     {
       "code": "DOC-KR",
@@ -652,7 +696,15 @@ window.SAMJOO_DATA = {
       "labelKo": "ISM Code 적합증서 — KR 발행",
       "labelEn": "Document of Compliance — issued by KR",
       "icon": "file-shield",
-      "category": "doc"
+      "category": "doc",
+      "scope": {
+        "ko": "BULK CARRIER · VEHICLE CARRIER",
+        "en": "BULK CARRIER · VEHICLE CARRIER"
+      },
+      "issuer": "KR",
+      "certNo": "",
+      "issued": "",
+      "expires": ""
     },
     {
       "code": "ISO9001",
@@ -660,7 +712,19 @@ window.SAMJOO_DATA = {
       "labelKo": "품질경영시스템",
       "labelEn": "Quality Management System",
       "icon": "award",
-      "category": "iso"
+      "category": "iso",
+      "scope": {
+        "ko": "선박관리 · 선원관리",
+        "en": "Ship management · Crew management"
+      },
+      "issuer": "",
+      "certNo": "",
+      "issued": "",
+      "expires": "",
+      "status": {
+        "ko": "삼주에스엠 · 2026년 10월 취득 예정",
+        "en": "SAMJOO SM · Certification planned for October 2026"
+      }
     },
     {
       "code": "ISO14001",
@@ -668,7 +732,19 @@ window.SAMJOO_DATA = {
       "labelKo": "환경경영시스템",
       "labelEn": "Environmental Management System",
       "icon": "leaf",
-      "category": "iso"
+      "category": "iso",
+      "scope": {
+        "ko": "선박관리 · 선원관리",
+        "en": "Ship management · Crew management"
+      },
+      "issuer": "",
+      "certNo": "",
+      "issued": "",
+      "expires": "",
+      "status": {
+        "ko": "삼주에스엠 · 2026년 10월 취득 예정",
+        "en": "SAMJOO SM · Certification planned for October 2026"
+      }
     },
     {
       "code": "ISO45001",
@@ -676,7 +752,19 @@ window.SAMJOO_DATA = {
       "labelKo": "안전보건경영시스템",
       "labelEn": "Occupational Health & Safety",
       "icon": "hard-hat",
-      "category": "iso"
+      "category": "iso",
+      "scope": {
+        "ko": "선박관리 · 선원관리",
+        "en": "Ship management · Crew management"
+      },
+      "issuer": "",
+      "certNo": "",
+      "issued": "",
+      "expires": "",
+      "status": {
+        "ko": "삼주에스엠 · 2026년 10월 취득 예정",
+        "en": "SAMJOO SM · Certification planned for October 2026"
+      }
     }
   ]
 };
