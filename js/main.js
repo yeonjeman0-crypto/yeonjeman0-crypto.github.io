@@ -337,9 +337,7 @@ function renderOrg() {
 function renderHistory() {
     if (!state.history) return;
     // 회사명, ISO 번호, 짧은 상태 문구는 한 묶음으로 읽히게 한다.
-    const protectText = (s) => window._escAndProtectBrand(s)
-        .replace(/\bISO\s+(?:9001|14001|45001)\b/g, '<span class="nowrap">$&</span>')
-        .replace(/취득 예정|개정·시행|준비 중/g, '<span class="nowrap">$&</span>');
+    const protectText = window._escAndProtectBrand;
     const ko = state.lang === 'ko';
     // 연대 그룹으로 묶어 시대 단위로 읽히게
     const decadeOf = (y) => Math.floor(parseInt(String(y).slice(0, 4), 10) / 10) * 10;
@@ -384,20 +382,23 @@ function renderCerts() {
     document.getElementById('certGrid').innerHTML = state.certs.map((c, i) => {
         // 증서번호·발행일·만료일은 채워졌을 때만 노출 (미기입 필드는 조용히 생략)
         const meta = [
-            L(c.status),
             c.issuer && `${ko ? '발행' : 'Issued by'} ${c.issuer}`,
             c.certNo && `NO. ${c.certNo}`,
             c.issued && `${ko ? '발행일' : 'Issued'} ${c.issued}`,
             c.expires && `${ko ? '만료' : 'Valid to'} ${c.expires}`,
-            L(c.scope),
-        ].filter(Boolean).join('  ·  ');
+            ...L(c.scope).split(' · '),
+        ].filter(Boolean);
+        const status = L(c.status);
         return `
         <div class="cert cert--${c.category}">
             <span class="cert__no">${String(i + 1).padStart(2, '0')}</span>
             <span class="cert__code">${c.code}</span>
             <h3>${c.name}</h3>
             <p>${ko ? c.labelKo : c.labelEn}</p>
-            ${meta ? `<span class="cert__meta">${meta}</span>` : ''}
+            ${status || meta.length ? `<div class="cert__meta">
+                ${status ? `<span class="cert__status">${window._escAndProtectBrand(status)}</span>` : ''}
+                ${meta.length ? `<div class="cert__details">${meta.map(text => `<span>${window._escAndProtectBrand(text)}</span>`).join('')}</div>` : ''}
+            </div>` : ''}
             <span class="cert__cat">${c.category.toUpperCase()}</span>
         </div>`;
     }).join('');
@@ -408,15 +409,16 @@ function renderWhyEvidence() {
     if (!state.fleet?.vessels) return;
     const f = fleetFacts();
     const ko = state.lang === 'ko';
+    const grouped = pairs => pairs.map(([name, count]) => `<span class="nowrap">${window._escAndProtectBrand(`${name} ${count}`)}</span>`).join(' · ');
     const rows = {
-        'evi-1': (ko ? '기국 ' : 'Flag ') + f.flags.map(([k, v]) => `${k} ${v}`).join(' · '),
-        'evi-2': (ko ? '선급 ' : 'Class ') + f.classes.map(([k, v]) => `${k} ${v}`).join(' · '),
-        'evi-3': ko ? 'CMT · 부산 사무소 · STCW / MLC' : 'CMT · Busan office · STCW / MLC',
-        'evi-4': 'ISO 9001 · 14001 · 45001',
+        'evi-1': (ko ? '기국 ' : 'Flag ') + grouped(f.flags),
+        'evi-2': (ko ? '선급 ' : 'Class ') + grouped(f.classes),
+        'evi-3': window._escAndProtectBrand(ko ? 'CMT · 부산 사무소 · STCW / MLC' : 'CMT · Busan office · STCW / MLC'),
+        'evi-4': window._escAndProtectBrand('ISO 9001 · 14001 · 45001'),
     };
     Object.entries(rows).forEach(([id, text]) => {
         const el = document.getElementById(id);
-        if (el) el.textContent = text;
+        if (el) el.innerHTML = text;
     });
     const hours = document.getElementById('commitHours');
     if (hours) hours.textContent = L(state.company?.offices?.[0]?.hours || '');
@@ -480,6 +482,18 @@ function renderDirections() {
 
 // 방침만 인쇄 — 본문 외 섹션을 숨기는 클래스를 인쇄 동안만 붙인다
 function setupPolicyPrint() {
+    // 방침 원문과 강조 태그를 유지하면서 인증명·규약명 안의 줄바꿈만 막는다.
+    document.querySelectorAll('#policy .pol-ko, #policy .pol-en, #policy .pol-lead').forEach(root => {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(node => {
+            if (!/ISO\s+(?:9001|14001|45001)|ISM Code|ISPS Code|MM-00/.test(node.textContent)) return;
+            const template = document.createElement('template');
+            template.innerHTML = window._escAndProtectBrand(node.textContent);
+            node.replaceWith(template.content);
+        });
+    });
     const btn = document.getElementById('policyPrint');
     if (!btn) return;
     btn.addEventListener('click', () => {

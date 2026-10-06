@@ -261,12 +261,8 @@ window._escAndProtectBrand = function (s) {
     var esc = String(s).replace(/[&<>"']/g, function (c) {
         return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
     });
-    return esc
-        .replace(/SAMJOO MARITIME/g,         '<span class="nowrap">SAMJOO MARITIME</span>')
-        .replace(/SAMJOO SM CO\., LTD\./g,   '<span class="nowrap">SAMJOO SM CO., LTD.</span>')
-        .replace(/SAMJOO SM(?!\w)/g,         '<span class="nowrap">SAMJOO SM</span>')
-        .replace(/DORIKO LIMITED/g,          '<span class="nowrap">DORIKO LIMITED</span>')
-        .replace(/DORIKO LTD\.?/g,           '<span class="nowrap">DORIKO LTD.</span>');
+    return esc.replace(/SAMJOO SM CO\., LTD\.|SAMJOO MARITIME|SAMJOO SM(?!\w)|DORIKO LIMITED|DORIKO LTD\.?|\bISO\s+(?:9001|14001|45001)(?::\d{4})?\b|ISM Code|ISPS Code|STCW \/ MLC|MM-00(?: Rev\. \d+\.\d+)?|\d{4}년 \d{1,2}월|취득 예정|설치 완료|개정·시행|준비 중/g,
+        '<span class="nowrap">$&</span>');
 };
 
 window.applyI18n = function (lang) {
@@ -277,7 +273,6 @@ window.applyI18n = function (lang) {
         var key = el.getAttribute('data-i18n');
         if (dict[key] === undefined) return;
         var val = dict[key];
-        if (/SAMJOO|DORIKO/.test(val)) el.innerHTML = window._escAndProtectBrand(val);
-        else el.textContent = val;
+        el.innerHTML = window._escAndProtectBrand(val);
     });
 };

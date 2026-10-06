@@ -167,7 +167,9 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     color: var(--teal-deep);
     text-transform: uppercase;
     margin-bottom: 1.4rem;
-    white-space: nowrap;
+    white-space: normal;
+    line-height: 1.6;
+    text-wrap: balance;
 }
 .eyebrow::before {
     content: '';
@@ -181,6 +183,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     flex: 1 1 auto;
     height: 1px;
     background: var(--hairline);
+    min-width: 1rem;
 }
 .section__head h2 {
     font-size: var(--t-display);
@@ -189,6 +192,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     color: var(--ink);
     line-height: 1.12;
     margin-bottom: 0.9rem;
+    text-wrap: balance;
 }
 /* 데크 — 디스플레이와 본문 사이의 빠진 층 */
 .lead {
@@ -199,7 +203,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     max-width: 44ch;
     margin: 0;
     word-break: keep-all;
+    text-wrap: balance;
 }
+
+p, li { text-wrap: pretty; }
+h3 { text-wrap: balance; }
 
 /* 카드 제목군 — 본문 행간 1.7을 상속하던 것을 1.3으로 분리 */
 .why__item h3,
@@ -408,6 +416,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
     gap: 0.4rem;
     padding: 0.55rem 0.75rem;
     min-height: 44px;
+    flex-shrink: 0;
     border: 1px solid var(--hairline);
     border-radius: var(--r-ctl);
     background: transparent;
@@ -434,6 +443,7 @@ body.lang-en .nav__lang .lang-other { opacity: 1; }
     /* 44px 최소 탭 타깃 — 음수 마진으로 광학 정렬 유지 */
     width: 44px;
     height: 44px;
+    flex: 0 0 44px;
     margin-right: -4px;
     flex-direction: column;
     justify-content: space-around;
@@ -1523,7 +1533,7 @@ body.lang-en .mv__tag { display: none; }
 /* 신조 — NEWBUILDING 하이라이트 */
 .nb {
     display: grid;
-    grid-template-columns: minmax(280px, 0.9fr) 1.1fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     margin-top: 2rem;
     background: #fff;
     border: 1px solid var(--hairline);
@@ -1570,6 +1580,7 @@ body.lang-en .mv__tag { display: none; }
     100% { box-shadow: 0 0 0 0 rgba(255, 116, 56, 0); }
 }
 .nb__body { padding: 1.7rem 1.9rem; }
+.nb__media, .nb__body, .nb__specs > div { min-width: 0; }
 .nb__body h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.6rem; }
 .nb__body > p { color: var(--gray); font-size: 0.95rem; line-height: 1.75; word-break: keep-all; margin-bottom: 1.2rem; }
 .nb__specs {
@@ -1619,7 +1630,7 @@ body.lang-en .mv__tag { display: none; }
     white-space: nowrap;
 }
 @media (max-width: 860px) {
-    .nb { grid-template-columns: 1fr; }
+    .nb { grid-template-columns: minmax(0, 1fr); }
     .nb__media { border-right: 0; border-bottom: 1px solid var(--hairline); }
     .nb__media img { max-height: 220px; }
     .nb__specs { grid-template-columns: repeat(2, 1fr); }
@@ -2127,10 +2138,13 @@ body.lang-en .mv__tag { display: none; }
 .cert__meta {
     grid-area: meta;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
     color: var(--gray);
 }
+.cert__status { display: block; font-family: var(--font-sans); font-size: 0.8rem; line-height: 1.6; margin-bottom: 0.35rem; text-wrap: pretty; }
+.cert__details { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.cert__details > span { white-space: nowrap; }
 .cert:hover { background: rgba(22, 123, 133, 0.035); }
 .cert__no {
     font-family: var(--font-mono);
@@ -2388,7 +2402,7 @@ body.lang-en .mv__tag { display: none; }
 .directions { display: grid; grid-template-columns: 1fr; gap: 1.8rem; }
 .direction {
     display: grid;
-    grid-template-columns: 1.35fr 1fr;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
     background: #fff;
     border: 1px solid var(--hairline);
     border-radius: var(--radius);
@@ -2398,6 +2412,9 @@ body.lang-en .mv__tag { display: none; }
 .direction:hover { border-color: rgba(22, 123, 133, 0.35); box-shadow: var(--shadow-md); }
 .direction__map {
     position: relative;
+    min-width: 0;
+    width: 100%;
+    align-self: stretch;
     aspect-ratio: 16 / 10;
     background: var(--bg-alt);
     border-right: 1px solid var(--hairline);
@@ -2426,6 +2443,7 @@ body.lang-en .mv__tag { display: none; }
     pointer-events: none;
 }
 .direction__info {
+    min-width: 0;
     padding: clamp(1.6rem, 3vw, 2.4rem);
     display: flex;
     flex-direction: column;
@@ -2466,6 +2484,7 @@ body.lang-en .mv__tag { display: none; }
     color: var(--gray-light);
 }
 .direction__row a { color: var(--teal-deep); font-variant-numeric: tabular-nums; }
+.direction .direction__row a, .direction .direction__row span { min-width: 0; overflow-wrap: anywhere; }
 .direction__row a:hover { color: var(--coral); }
 .direction__row span { color: var(--gray); font-variant-numeric: tabular-nums; }
 .direction__hours {
@@ -2769,6 +2788,7 @@ body.lang-en .mv__tag { display: none; }
 }
 
 @media (max-width: 1024px) {
+    .nav__inner { gap: 1rem; }
     .nav__menu--tree { display: none; }
     .nav__burger { display: flex; }
     .nav.is-open .nav__menu--tree {
@@ -2844,15 +2864,18 @@ body.lang-en .mv__tag { display: none; }
     .direction__map { aspect-ratio: 16 / 9; border-right: 0; border-bottom: 1px solid var(--hairline); }
     .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .cert {
-        grid-template-columns: 44px 1fr auto;
-        grid-template-areas: "no code cat" "no name name" "no label label";
-        row-gap: 0.2rem;
+        grid-template-columns: 28px minmax(0, 1fr) auto;
+        grid-template-areas: "no code cat" ". name name" ". label label" ". meta meta";
+        align-items: start;
+        gap: 0.35rem 0.75rem;
     }
     .cert__no { grid-area: no; }
     .cert__code { grid-area: code; }
     .cert h3 { grid-area: name; }
     .cert p { grid-area: label; }
     .cert__cat { grid-area: cat; }
+    .cert__meta { grid-area: meta; min-width: 0; margin-top: 0.25rem; line-height: 1.7; }
+    .cert__code, .cert h3 { white-space: nowrap; }
     .service { grid-template-columns: 1fr; gap: 1rem; }
     .service__media { max-width: 300px; }
     .service__features { grid-column: 1; }
@@ -2868,7 +2891,8 @@ body.lang-en .mv__tag { display: none; }
     .org__box--team::before { display: none; }
     .org__row--ceo::after { display: none; }
     .org__row--ceo { padding-bottom: 1.2rem; }
-    .org__teams { grid-template-columns: repeat(2, 1fr) !important; justify-content: stretch !important; padding-top: 0.9rem; }
+    .org__teams { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; justify-content: stretch !important; padding-top: 0.9rem; }
+    .org__teams[data-teams="1"] { grid-template-columns: minmax(0, 1fr) !important; }
     .org__box--division { width: 100%; }
 }
 
@@ -2896,7 +2920,9 @@ body.lang-en .mv__tag { display: none; }
 @media (max-width: 640px) {
     :root { --page-pad: clamp(1rem, 4.5vw, 1.3rem); --nav-h: 66px; }
     .hero__veil { background: linear-gradient(180deg, rgba(248, 252, 252, 0.95) 0%, rgba(248, 252, 252, 0.82) 50%, rgba(248, 252, 252, 0.95) 100%); }
-    .nav__logo img { height: 36px; max-width: min(190px, calc(100vw - 150px)); }
+    .nav__inner { gap: 0.6rem; }
+    .nav__logo { flex: 1 1 0; min-width: 0; }
+    .nav__logo img { height: 36px; width: min(190px, 100%); max-width: 100%; object-position: left center; }
     .nav__lang { padding: 0.4rem 0.65rem; font-size: 0.7rem; }
     .hero__inner { padding-top: calc(var(--nav-h) + 2rem); }
     .hero__title { font-size: clamp(2.1rem, 10vw, 3rem); }
@@ -2923,6 +2949,10 @@ body.lang-en .mv__tag { display: none; }
     .kpi__card:nth-child(-n+3) { border-bottom: 0; }
     .kpi__card:first-child { border-top: 0; }
     .kpi__idx { margin-bottom: 0.7rem; }
+    .why__item, .esg-col, .safety-col { padding-left: 0.2rem; padding-right: 0.2rem; }
+    .nb__body { padding: 1.25rem; }
+    .direction__info { padding: 1.3rem; }
+    .direction__row { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0.5rem; }
 
     /* 연혁 — 스파인 제거, 풀폭 리스트 */
     .timeline::before { display: none; }
@@ -2946,7 +2976,7 @@ body.lang-en .mv__tag { display: none; }
     /* 7행 풀폭 스택 -> 이름 1행 + 6필드 2열 격자 (카드당 높이 절반) */
     .vessel-table tr {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         column-gap: 0.9rem;
         padding: 0.9rem 1rem;
         background: #fff;
@@ -3473,18 +3503,20 @@ a, button { -webkit-tap-highlight-color: transparent; }
    ------------------------------------------------------------ */
 /* ── 방침 페이지 전용 — 사이트 토큰만 사용 ───────────────── */
 .pol-meta {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1px; background: var(--hairline);
     border: 1px solid var(--hairline); border-radius: var(--r-card);
     overflow: hidden; margin: -2rem 0 2.5rem; box-shadow: var(--shadow-md);
 }
 .pol-meta > div { background: #fff; padding: 1rem 1.15rem; }
+.pol-meta > div:last-child { grid-column: 1 / -1; }
+@media (max-width: 900px) { .pol-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .pol-meta dt {
     font-family: var(--font-mono); font-size: .68rem; font-weight: 600;
     letter-spacing: .1em; text-transform: uppercase;
     color: var(--gray-light); margin: 0 0 .4rem;
 }
-.pol-meta dd { margin: 0; font-size: .9rem; font-weight: 600; color: var(--ink); line-height: 1.45; }
+.pol-meta dd { margin: 0; font-size: .9rem; font-weight: 600; color: var(--ink); line-height: 1.45; text-wrap: balance; }
 .pol-meta dd small { display: block; font-weight: 500; color: var(--gray); font-size: .78rem; margin-top: .15rem; }
 
 /* 목차 */
