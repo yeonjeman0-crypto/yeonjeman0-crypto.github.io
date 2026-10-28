@@ -552,12 +552,12 @@ window.SAMJOO_DATA = {
     {
       "year": "2026.10",
       "title": {
-        "ko": "삼주에스엠 ISO 통합인증 취득 예정",
-        "en": "SAMJOO SM Plans to Obtain Integrated ISO Certification"
+        "ko": "삼주에스엠 ISO 통합인증 취득",
+        "en": "SAMJOO SM Obtains Integrated ISO Certification"
       },
       "desc": {
-        "ko": "삼주에스엠(주), 2026년 10월 인증 취득 예정",
-        "en": "SAMJOO SM CO., LTD. plans to obtain the following certifications in October 2026."
+        "ko": "삼주에스엠(주), 한국선급(KR) 인증 취득(2026.10.26) — 선박관리 및 안전관리 서비스",
+        "en": "SAMJOO SM CO., LTD. obtained the following certifications from Korean Register (KR) on October 26, 2026, for ship management and safety management services."
       },
       "standards": [
         {
@@ -582,7 +582,7 @@ window.SAMJOO_DATA = {
           }
         }
       ],
-      "planned": true
+      "completed": true
     },
     {
       "year": "2026.04.15",
@@ -737,16 +737,16 @@ window.SAMJOO_DATA = {
       "icon": "award",
       "category": "iso",
       "scope": {
-        "ko": "선박관리 · 선원관리",
-        "en": "Ship management · Crew management"
+        "ko": "선박관리 및 안전관리 서비스",
+        "en": "Ship management and safety management services"
       },
-      "issuer": "",
-      "certNo": "",
-      "issued": "",
-      "expires": "",
+      "issuer": "KR",
+      "certNo": "A 1339",
+      "issued": "2026.10.26",
+      "expires": "2029.10.25",
       "status": {
-        "ko": "삼주에스엠 · 2026년 10월 취득 예정",
-        "en": "SAMJOO SM · Certification planned for October 2026"
+        "ko": "삼주에스엠 · 한국선급(KR) 인증",
+        "en": "SAMJOO SM · Certified by Korean Register (KR)"
       }
     },
     {
@@ -757,16 +757,16 @@ window.SAMJOO_DATA = {
       "icon": "leaf",
       "category": "iso",
       "scope": {
-        "ko": "선박관리 · 선원관리",
-        "en": "Ship management · Crew management"
+        "ko": "선박관리 및 안전관리 서비스",
+        "en": "Ship management and safety management services"
       },
-      "issuer": "",
-      "certNo": "",
-      "issued": "",
-      "expires": "",
+      "issuer": "KR",
+      "certNo": "B 1339",
+      "issued": "2026.10.26",
+      "expires": "2029.10.25",
       "status": {
-        "ko": "삼주에스엠 · 2026년 10월 취득 예정",
-        "en": "SAMJOO SM · Certification planned for October 2026"
+        "ko": "삼주에스엠 · 한국선급(KR) 인증",
+        "en": "SAMJOO SM · Certified by Korean Register (KR)"
       }
     },
     {
@@ -777,16 +777,16 @@ window.SAMJOO_DATA = {
       "icon": "hard-hat",
       "category": "iso",
       "scope": {
-        "ko": "선박관리 · 선원관리",
-        "en": "Ship management · Crew management"
+        "ko": "선박관리 및 안전관리 서비스",
+        "en": "Ship management and safety management services"
       },
-      "issuer": "",
-      "certNo": "",
-      "issued": "",
-      "expires": "",
+      "issuer": "KR",
+      "certNo": "C 1339",
+      "issued": "2026.10.26",
+      "expires": "2029.10.25",
       "status": {
-        "ko": "삼주에스엠 · 2026년 10월 취득 예정",
-        "en": "SAMJOO SM · Certification planned for October 2026"
+        "ko": "삼주에스엠 · 한국선급(KR) 인증",
+        "en": "SAMJOO SM · Certified by Korean Register (KR)"
       }
     }
   ]

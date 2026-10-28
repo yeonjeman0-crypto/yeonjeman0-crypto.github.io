@@ -20,17 +20,17 @@
   },
   {
     "year": "2026.10",
-    "title": { "ko": "삼주에스엠 ISO 통합인증 취득 예정", "en": "SAMJOO SM Plans to Obtain Integrated ISO Certification" },
+    "title": { "ko": "삼주에스엠 ISO 통합인증 취득", "en": "SAMJOO SM Obtains Integrated ISO Certification" },
     "desc": {
-      "ko": "삼주에스엠(주), 2026년 10월 인증 취득 예정",
-      "en": "SAMJOO SM CO., LTD. plans to obtain the following certifications in October 2026."
+      "ko": "삼주에스엠(주), 한국선급(KR) 인증 취득(2026.10.26) — 선박관리 및 안전관리 서비스",
+      "en": "SAMJOO SM CO., LTD. obtained the following certifications from Korean Register (KR) on October 26, 2026, for ship management and safety management services."
     },
     "standards": [
       { "code": "ISO 9001", "name": { "ko": "품질경영", "en": "Quality management" } },
       { "code": "ISO 14001", "name": { "ko": "환경경영", "en": "Environmental management" } },
       { "code": "ISO 45001", "name": { "ko": "안전보건경영", "en": "Occupational health and safety management" } }
     ],
-    "planned": true
+    "completed": true
   },
   {
     "year": "2026.04.15",

@@ -39,16 +39,16 @@
     "icon": "award",
     "category": "iso",
     "scope": {
-      "ko": "선박관리 · 선원관리",
-      "en": "Ship management · Crew management"
+      "ko": "선박관리 및 안전관리 서비스",
+      "en": "Ship management and safety management services"
     },
-    "issuer": "",
-    "certNo": "",
-    "issued": "",
-    "expires": "",
+    "issuer": "KR",
+    "certNo": "A 1339",
+    "issued": "2026.10.26",
+    "expires": "2029.10.25",
     "status": {
-      "ko": "삼주에스엠 · 2026년 10월 취득 예정",
-      "en": "SAMJOO SM · Certification planned for October 2026"
+      "ko": "삼주에스엠 · 한국선급(KR) 인증",
+      "en": "SAMJOO SM · Certified by Korean Register (KR)"
     }
   },
   {
@@ -59,16 +59,16 @@
     "icon": "leaf",
     "category": "iso",
     "scope": {
-      "ko": "선박관리 · 선원관리",
-      "en": "Ship management · Crew management"
+      "ko": "선박관리 및 안전관리 서비스",
+      "en": "Ship management and safety management services"
     },
-    "issuer": "",
-    "certNo": "",
-    "issued": "",
-    "expires": "",
+    "issuer": "KR",
+    "certNo": "B 1339",
+    "issued": "2026.10.26",
+    "expires": "2029.10.25",
     "status": {
-      "ko": "삼주에스엠 · 2026년 10월 취득 예정",
-      "en": "SAMJOO SM · Certification planned for October 2026"
+      "ko": "삼주에스엠 · 한국선급(KR) 인증",
+      "en": "SAMJOO SM · Certified by Korean Register (KR)"
     }
   },
   {
@@ -79,16 +79,16 @@
     "icon": "hard-hat",
     "category": "iso",
     "scope": {
-      "ko": "선박관리 · 선원관리",
-      "en": "Ship management · Crew management"
+      "ko": "선박관리 및 안전관리 서비스",
+      "en": "Ship management and safety management services"
     },
-    "issuer": "",
-    "certNo": "",
-    "issued": "",
-    "expires": "",
+    "issuer": "KR",
+    "certNo": "C 1339",
+    "issued": "2026.10.26",
+    "expires": "2029.10.25",
     "status": {
-      "ko": "삼주에스엠 · 2026년 10월 취득 예정",
-      "en": "SAMJOO SM · Certification planned for October 2026"
+      "ko": "삼주에스엠 · 한국선급(KR) 인증",
+      "en": "SAMJOO SM · Certified by Korean Register (KR)"
     }
   }
 ]
